@@ -1,8 +1,8 @@
-"use client";
+'use client'
 
-import Error from "next/error";
+import Error from 'next/error'
 
-export const runtime = "edge";
+export const runtime = 'edge'
 
 export default function GlobalError() {
   return (
@@ -11,5 +11,5 @@ export default function GlobalError() {
         <Error statusCode={500} />
       </body>
     </html>
-  );
+  )
 }

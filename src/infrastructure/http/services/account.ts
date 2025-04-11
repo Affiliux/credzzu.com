@@ -1,16 +1,18 @@
-import type { AxiosError } from "axios";
+import type { AxiosError } from 'axios'
 
 import type {
+  ChangePasswordPayloadProps,
+  ForgotPasswordPayloadProps,
   RefreshTokenProps,
+  ResendEmailVerificationPayloadProps,
   SignInPayloadProps,
   SignUpPayloadProps,
+  UpdateAccountPayloadProps,
+  UpdatePasswordPayloadProps,
   VerifyAccountPayloadProps,
-  ForgotPasswordPayloadProps,
-  ResendEmailVerificationPayloadProps,
-  ChangePasswordPayloadProps,
-} from "@/application/interfaces/account";
+} from '@/application/interfaces/account'
 
-import { api } from "../api";
+import { api } from '../api'
 
 /**
  *
@@ -23,14 +25,12 @@ import { api } from "../api";
  *
  */
 
-export async function sign_in(
-  payload: SignInPayloadProps,
-): Promise<RefreshTokenProps> {
+export async function sign_in(payload: SignInPayloadProps): Promise<RefreshTokenProps> {
   try {
-    const { data: response } = await api.post(`auth/login`, payload);
-    return response;
+    const { data: response } = await api.post(`auth/login`, payload)
+    return response
   } catch (error: AxiosError | any) {
-    throw new Error(error?.response.status);
+    throw new Error(error?.response.status)
   }
 }
 
@@ -47,9 +47,9 @@ export async function sign_in(
 
 export async function sign_up(payload: SignUpPayloadProps): Promise<void> {
   try {
-    await api.post(`user/create`, payload);
+    await api.post(`user/create`, payload)
   } catch (error: AxiosError | any) {
-    throw new Error(error?.response.status);
+    throw new Error(error?.response.status)
   }
 }
 
@@ -64,14 +64,12 @@ export async function sign_up(payload: SignUpPayloadProps): Promise<void> {
  *
  */
 
-export async function verify_account(
-  payload: VerifyAccountPayloadProps,
-): Promise<RefreshTokenProps> {
+export async function verify_account(payload: VerifyAccountPayloadProps): Promise<RefreshTokenProps> {
   try {
-    const { data: response } = await api.patch(`user/active-user`, payload);
-    return response;
+    const { data: response } = await api.patch(`user/active-user`, payload)
+    return response
   } catch (error: AxiosError | any) {
-    throw new Error(error?.response.status);
+    throw new Error(error?.response.status)
   }
 }
 
@@ -86,13 +84,11 @@ export async function verify_account(
  *
  */
 
-export async function resend_email_verification(
-  payload: ResendEmailVerificationPayloadProps,
-): Promise<void> {
+export async function resend_email_verification(payload: ResendEmailVerificationPayloadProps): Promise<void> {
   try {
-    await api.patch(`user/resend-email-verification`, payload);
+    await api.patch(`user/resend-email-verification`, payload)
   } catch (error: AxiosError | any) {
-    throw new Error(error?.response.status);
+    throw new Error(error?.response.status)
   }
 }
 
@@ -107,13 +103,11 @@ export async function resend_email_verification(
  *
  */
 
-export async function forgot_password(
-  payload: ForgotPasswordPayloadProps,
-): Promise<void> {
+export async function forgot_password(payload: ForgotPasswordPayloadProps): Promise<void> {
   try {
-    await api.patch(`user/recover-password/step1`, payload);
+    await api.patch(`user/recover-password/step1`, payload)
   } catch (error: AxiosError | any) {
-    throw new Error(error?.response.status);
+    throw new Error(error?.response.status)
   }
 }
 
@@ -128,17 +122,49 @@ export async function forgot_password(
  *
  */
 
-export async function change_password(
-  payload: ChangePasswordPayloadProps,
-): Promise<RefreshTokenProps> {
+export async function change_password(payload: ChangePasswordPayloadProps): Promise<RefreshTokenProps> {
   try {
-    const { data: response } = await api.patch(
-      `user/recover-password/step2`,
-      payload,
-    );
-
-    return response;
+    const { data: response } = await api.patch(`user/recover-password/step2`, payload)
+    return response
   } catch (error: AxiosError | any) {
-    throw new Error(error?.response.status);
+    throw new Error(error?.response.status)
+  }
+}
+
+/**
+ *
+ * @name update_password
+ * @category Infrastructure - Services - Account - Update Password 
+
+ *
+ * @param {UpdatePasswordPayloadProps} payload - The payload of the request
+ * @return {PromiseLike<RefreshTokenProps>} - The response of the API
+ *
+ */
+
+export async function update_password(payload: UpdatePasswordPayloadProps): Promise<void> {
+  try {
+    await api.patch(`user/change-password`, payload)
+  } catch (error: AxiosError | any) {
+    throw new Error(error?.response.status)
+  }
+}
+
+/**
+ *
+ * @name update_account
+ * @category Infrastructure - Services - Account - Update Account
+
+ *
+ * @param {UpdatePasswordPayloadProps} payload - The payload of the request
+ * @return {PromiseLike<RefreshTokenProps>} - The response of the API
+ *
+ */
+
+export async function update_account(payload: UpdateAccountPayloadProps): Promise<void> {
+  try {
+    await api.patch(`user/update`, payload)
+  } catch (error: AxiosError | any) {
+    throw new Error(error?.response.status)
   }
 }

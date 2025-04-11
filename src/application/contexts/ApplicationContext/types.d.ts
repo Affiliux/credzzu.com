@@ -1,11 +1,11 @@
-import type { ReactNode } from "react";
+import type { ReactNode } from 'react'
 
 export type ApplicationProviderProps = {
-  children: ReactNode;
-};
+  children: ReactNode
+}
 
 export type ApplicationContextType = {
-  plans: PlanProps[];
+  plans: PlanProps[]
   //
-  onGetPlans: () => Promise<void>;
-};
+  onGetPlans: () => Promise<void>
+}

@@ -1,13 +1,13 @@
-"use client";
+'use client'
 
-import React from "react";
+import React from 'react'
 
-export const runtime = "edge";
+export const runtime = 'edge'
 
 export default function Page() {
   return (
-    <main className="container py-8 overflow-hidden">
+    <main className='container overflow-hidden py-8'>
       <></>
     </main>
-  );
+  )
 }
