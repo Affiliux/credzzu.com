@@ -151,8 +151,6 @@ export default function AccountProvider({ children }: AccountProviderProps) {
       const account_decoded = jwtDecode<AccountProps>(token);
 
       set_account(account_decoded);
-    } else if (!pathname.includes("auth")) {
-      onSignOut();
     }
   }, []);
 
