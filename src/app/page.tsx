@@ -2,12 +2,26 @@
 
 import React from 'react'
 
-export const runtime = 'edge'
+import CTA from '@/presentation/components/lp/cta'
+import Features from '@/presentation/components/lp/features'
+import Footer from '@/presentation/components/lp/footer'
+import Header from '@/presentation/components/lp/header'
+import Hero from '@/presentation/components/lp/hero'
+import HowItWorks from '@/presentation/components/lp/howitworks'
+import Pricing from '@/presentation/components/lp/pricing'
 
-export default function Page() {
+export default function LandingPage() {
   return (
-    <main className='container overflow-hidden py-8'>
-      <></>
-    </main>
+    <div className='flex min-h-screen flex-col'>
+      <Header />
+      <main className='flex-1'>
+        <Hero />
+        <Features />
+        <HowItWorks />
+        <Pricing />
+        <CTA />
+      </main>
+      <Footer />
+    </div>
   )
 }
