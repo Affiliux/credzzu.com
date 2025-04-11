@@ -1,48 +1,77 @@
+import React from 'react'
 import { CreditCard, DollarSign, Users } from 'lucide-react'
+import { Badge } from '@/presentation/components/ui/badge'
 
 export default function Features() {
   return (
-    <section id='features' className='bg-muted/40 w-full py-12 md:py-20 lg:py-32'>
-      <div className='container mx-auto px-4 sm:px-6 lg:px-8'>
-        <div className='flex flex-col items-center justify-center space-y-6 text-center'>
-          <div className='space-y-3'>
-            <div className='inline-block rounded-lg bg-emerald-100 px-3 py-1 text-sm text-emerald-700'>Features</div>
-            <h2 className='text-3xl leading-tight font-bold tracking-tight sm:text-4xl md:text-5xl'>
-              Everything you need to manage IOUs
-            </h2>
-            <p className='text-muted-foreground mx-auto max-w-3xl text-base sm:text-lg md:text-xl'>
-              Credzzu makes it easy to track, remind, and collect money owed by friends and family.
-            </p>
-          </div>
+    <section id='features' className='relative w-full overflow-hidden bg-black py-16 md:py-24 lg:py-32'>
+      {/* Background Elements */}
+      <div className='absolute top-0 left-0 h-full w-full'>
+        <div className='absolute -top-40 -left-40 h-80 w-80 rounded-full bg-emerald-500/5 blur-3xl'></div>
+        <div className='absolute -right-20 -bottom-20 h-80 w-80 rounded-full bg-emerald-500/5 blur-3xl'></div>
+
+        {/* Estrelas cintilantes */}
+        <div className='absolute top-20 right-1/4 h-0.5 w-0.5 rounded-full bg-emerald-300 shadow-[0_0_10px_5px_rgba(16,185,129,0.3)]'></div>
+        <div className='absolute top-1/3 left-1/5 h-0.5 w-0.5 rounded-full bg-emerald-300 shadow-[0_0_10px_5px_rgba(16,185,129,0.3)]'></div>
+        <div className='absolute right-1/3 bottom-1/4 h-0.5 w-0.5 rounded-full bg-emerald-300 shadow-[0_0_10px_5px_rgba(16,185,129,0.3)]'></div>
+        <div className='absolute top-1/2 right-24 h-0.5 w-0.5 rounded-full bg-emerald-300 shadow-[0_0_10px_5px_rgba(16,185,129,0.3)]'></div>
+        <div className='absolute bottom-20 left-1/4 h-0.5 w-0.5 rounded-full bg-emerald-300 shadow-[0_0_8px_4px_rgba(16,185,129,0.2)]'></div>
+      </div>
+
+      {/* Gradiente inferior para transição suave */}
+      <div className='absolute bottom-0 left-0 h-24 w-full bg-gradient-to-t from-black to-transparent'></div>
+
+      <div className='relative container mx-auto px-3 sm:px-6'>
+        <div className='mx-auto mb-12 flex max-w-3xl flex-col items-center text-center md:mb-16'>
+          <Badge
+            variant='outline'
+            className='border-emerald-500/30 bg-emerald-500/5 px-4 py-1.5 text-xs font-medium tracking-wider text-emerald-400 uppercase'
+          >
+            Recursos
+          </Badge>
+          <h2 className='mt-5 bg-gradient-to-r from-white to-white/70 bg-clip-text text-3xl font-light tracking-tight text-transparent sm:text-4xl md:mt-6 md:text-5xl lg:text-6xl'>
+            Tudo que você precisa <span className='font-medium'>para gerenciar dívidas</span>
+          </h2>
+          <p className='mt-4 max-w-2xl text-base text-white/60 md:mt-6 md:text-lg'>
+            Credzzu facilita o rastreamento, lembretes e cobrança de dinheiro devido por amigos e familiares.
+          </p>
         </div>
-        <div className='mx-auto grid max-w-5xl gap-6 py-12 sm:grid-cols-2 lg:grid-cols-3'>
+
+        <div className='mx-auto grid max-w-5xl gap-6 sm:grid-cols-2 md:gap-8 lg:grid-cols-3'>
           {[
             {
-              icon: <Users className='h-6 w-6 text-emerald-600' />,
-              title: 'Friend Management',
-              description: 'Easily add friends and track who owes you what, when, and why.',
+              icon: <Users className='h-6 w-6 md:h-8 md:w-8' />,
+              title: 'Gestão de Amigos',
+              description: 'Adicione amigos facilmente e acompanhe quem deve o quê, quando e por quê.',
             },
             {
-              icon: <CreditCard className='h-6 w-6 text-emerald-600' />,
-              title: 'Payment Collection',
-              description: 'Send payment requests and collect money through multiple payment methods.',
+              icon: <CreditCard className='h-6 w-6 md:h-8 md:w-8' />,
+              title: 'Cobrança de Pagamentos',
+              description: 'Envie solicitações de pagamento e receba dinheiro através de múltiplos métodos.',
             },
             {
-              icon: <DollarSign className='h-6 w-6 text-emerald-600' />,
-              title: 'Debt Tracking',
-              description: 'Get a clear overview of all outstanding debts and payment history.',
+              icon: <DollarSign className='h-6 w-6 md:h-8 md:w-8' />,
+              title: 'Controle de Dívidas',
+              description: 'Obtenha uma visão clara de todas as dívidas pendentes e histórico de pagamentos.',
             },
-          ].map(({ icon, title, description }, index) => (
+          ].map((feature, index) => (
             <div
               key={index}
-              className='bg-background flex flex-col justify-center space-y-4 rounded-lg border p-6 text-center shadow-sm sm:text-left'
+              className='group relative overflow-hidden rounded-2xl border border-white/5 bg-gradient-to-b from-white/[0.03] to-transparent p-px transition-all duration-500 hover:border-emerald-500/30 hover:shadow-[0_0_2rem_-0.5rem_rgba(16,185,129,0.2)]'
             >
-              <div className='mx-auto flex h-12 w-12 items-center justify-center rounded-lg bg-emerald-100 sm:mx-0'>
-                {icon}
-              </div>
-              <div className='space-y-2'>
-                <h3 className='text-lg font-bold sm:text-xl'>{title}</h3>
-                <p className='text-muted-foreground text-sm sm:text-base'>{description}</p>
+              <div className='relative h-full rounded-2xl p-6 backdrop-blur-sm md:p-8'>
+                <div className='flex flex-col items-center space-y-4 text-center md:space-y-6'>
+                  <div className='flex h-14 w-14 items-center justify-center rounded-xl bg-emerald-500/10 text-emerald-400 ring-1 ring-emerald-500/20 transition-all duration-300 group-hover:bg-emerald-500/20 group-hover:ring-emerald-500/40 md:h-16 md:w-16'>
+                    {React.cloneElement(feature.icon, { className: 'h-6 w-6 md:h-8 md:w-8 text-emerald-400' })}
+                  </div>
+                  <div className='space-y-2 text-center md:space-y-3'>
+                    <h3 className='text-lg font-light text-white sm:text-xl md:text-2xl'>{feature.title}</h3>
+                    <p className='mx-auto text-sm text-white/60 md:text-base'>{feature.description}</p>
+                  </div>
+                </div>
+
+                {/* Subtle gradient on hover */}
+                <div className='absolute inset-0 -z-10 rounded-2xl bg-gradient-to-b from-emerald-500/0 to-emerald-500/0 opacity-0 transition-all duration-500 group-hover:from-emerald-500/[0.03] group-hover:to-transparent group-hover:opacity-100'></div>
               </div>
             </div>
           ))}
