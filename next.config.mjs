@@ -21,6 +21,7 @@ const nextConfig = {
   },
   env: {
     NEXT_PUBLIC_API_BASE_URL: process.env.API_BASE_URL,
+    NEXT_PUBLIC_STONE_APP_ID: process.env.STONE_APP_ID,
   },
   images: {
     minimumCacheTTL: 60,
