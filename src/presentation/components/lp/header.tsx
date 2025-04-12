@@ -57,7 +57,7 @@ export default function Header() {
             href='/login'
             className='relative text-sm font-medium text-white opacity-80 transition-all duration-300 after:absolute after:bottom-0 after:left-0 after:h-[1px] after:w-0 after:bg-white after:transition-all after:duration-300 hover:opacity-100 hover:after:w-full'
           >
-            Entrar
+            Login
           </Link>
           <Button
             asChild

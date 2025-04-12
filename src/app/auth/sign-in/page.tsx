@@ -18,7 +18,7 @@ export default function Page() {
     <div className='space-y-8'>
       <div className='text-center'>
         <h1 className='text-3xl font-bold text-neutral-100'>Bem-vindo de volta</h1>
-        <p className='text-neutral-400'>Entre com suas credenciais para acessar sua conta</p>
+        <p className='mt-3 text-neutral-400'>Entre com suas credenciais e acesse sua conta</p>
       </div>
 
       <SignInForm onSubmit={onSignIn} />

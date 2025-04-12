@@ -25,13 +25,13 @@ export default function Hero() {
           <div className='flex flex-col justify-center space-y-6 md:space-y-8'>
             <div className='space-y-4 md:space-y-6'>
               <h1 className='text-3xl leading-tight font-light tracking-tight text-white sm:text-4xl md:text-5xl lg:text-7xl'>
-                <span className='font-medium'>Acompanhe quem</span>{' '}
+                <span className='font-medium'>Receba de quem</span>{' '}
                 <FlipWords
-                  words={['te deve dinheiro', 'pegou emprestado', 'precisa te pagar', 'está em dívida com você']}
+                  words={['te deve dinheiro', 'você emprestou', 'precisa te pagar', 'está em dívida com você']}
                   className='font-medium text-emerald-400'
                   duration={2500}
                 />
-                <span className='mt-2 block'>receba com facilidade</span>
+                {/* <span className='mt-2 block'>receba com facilidade</span> */}
               </h1>
               <p className='max-w-xl text-base text-white/80 sm:text-lg md:text-xl lg:text-2xl'>
                 Credzzu ajuda você a rastrear dinheiro devido por amigos e torna a cobrança simples e sem estresse.

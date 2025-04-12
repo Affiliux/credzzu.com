@@ -30,7 +30,7 @@ export default function Page() {
       {currentStep === 1 && (
         <>
           <div className='text-center'>
-            <h1 className='text-3xl font-bold text-neutral-100'>Recuperar senha</h1>
+            <h1 className='text-3xl font-bold text-neutral-100 mb-3'>Recuperar senha</h1>
             <p className='text-neutral-400'>Digite seu email para receber um código de recuperação</p>
           </div>
 

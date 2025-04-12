@@ -15,7 +15,7 @@ export default function Page() {
   return (
     <div className='space-y-8'>
       <div className='text-center'>
-        <h1 className='text-3xl font-bold text-neutral-100'>Verificar sua conta</h1>
+        <h1 className='text-3xl font-bold text-neutral-100 mb-3'>Verificar sua conta</h1>
         <p className='text-neutral-400'>Digite o código de 5 dígitos enviado para o seu email</p>
       </div>
 
