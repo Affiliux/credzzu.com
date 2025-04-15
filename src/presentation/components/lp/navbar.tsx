@@ -34,14 +34,14 @@ export default function Navbar() {
   }, [])
 
   const navItems = [
-    { href: '#how-it-works', label: 'Como Funciona' },
     { href: '#features', label: 'Recursos' },
+    { href: '#how-it-works', label: 'Como Funciona' },
     { href: '#pricing', label: 'Preços' },
     { href: '#faq', label: 'FAQ' },
   ]
 
   return (
-    <nav className='flex w-full flex-col items-center justify-center gap-5 md:w-auto md:flex-row md:gap-12'>
+    <nav className='flex w-full flex-col items-center justify-center gap-5 md:w-auto md:flex-row md:gap-6 lg:gap-12'>
       {navItems.map(item => (
         <Link
           key={item.href}

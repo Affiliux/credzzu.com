@@ -47,21 +47,21 @@ export default function Header() {
         </Link>
 
         {/* Desktop Navbar - Centralized */}
-        <div className='hidden flex-1 items-center justify-center md:flex'>
+        <div className='hidden flex-1 items-center justify-center px-2 md:flex lg:px-4'>
           <Navbar />
         </div>
 
         {/* Right-side actions (desktop) */}
-        <div className='hidden items-center gap-6 md:flex'>
+        <div className='hidden items-center gap-3 md:flex lg:gap-6'>
           <Link
             href='/login'
             className='relative text-sm font-medium text-white opacity-80 transition-all duration-300 after:absolute after:bottom-0 after:left-0 after:h-[1px] after:w-0 after:bg-white after:transition-all after:duration-300 hover:opacity-100 hover:after:w-full'
           >
-            Login
+            Entrar
           </Link>
           <Button
             asChild
-            className='group border border-emerald-500 bg-transparent px-6 py-6 text-sm text-emerald-400 shadow-[0_0_15px_rgba(16,185,129,0.15)] transition-all duration-300 hover:bg-emerald-500/10 hover:shadow-[0_0_25px_rgba(16,185,129,0.25)]'
+            className='group border border-emerald-500 bg-transparent px-4 py-5 text-sm text-emerald-400 shadow-[0_0_15px_rgba(16,185,129,0.15)] transition-all duration-300 hover:bg-emerald-500/10 hover:shadow-[0_0_25px_rgba(16,185,129,0.25)] md:px-4 lg:px-6 lg:py-6'
           >
             <Link href='/signup' className='flex items-center gap-2'>
               <span>Começar Agora</span>
@@ -85,8 +85,8 @@ export default function Header() {
         className={`fixed inset-0 z-40 bg-black/95 backdrop-blur-xl transition-all duration-500 ${isMenuOpen ? 'opacity-100' : 'pointer-events-none opacity-0'}`}
       >
         <div className='flex h-full flex-col justify-center overflow-hidden p-8'>
-          <div className='flex -translate-y-6 flex-col space-y-12'>
-            <nav className='flex flex-col items-center space-y-10'>
+          <div className='flex -translate-y-6 flex-col space-y-16'>
+            <nav className='flex flex-col items-center space-y-10 pt-8'>
               {['Recursos', 'Como Funciona', 'Preços', 'FAQ'].map((item, index) => (
                 <Link
                   key={item}

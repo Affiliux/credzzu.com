@@ -24,10 +24,10 @@ export default function Hero() {
         <div className='grid items-center gap-8 lg:grid-cols-2'>
           <div className='flex flex-col justify-center space-y-6 md:space-y-8'>
             <div className='space-y-4 md:space-y-6'>
-              <h1 className='text-3xl leading-tight font-light tracking-tight text-white sm:text-4xl md:text-5xl lg:text-7xl'>
+              <h1 className='text-3xl leading-tight font-light tracking-tight text-white sm:text-4xl md:text-5xl lg:text-6xl'>
                 <span className='font-medium'>Receba de quem</span>{' '}
                 <FlipWords
-                  words={['te deve dinheiro', 'você emprestou', 'precisa te pagar', 'está em dívida com você']}
+                  words={['te deve dinheiro', 'você emprestou', 'precisa te pagar', 'tem dívida com você']}
                   className='font-medium text-emerald-400'
                   duration={2500}
                 />
