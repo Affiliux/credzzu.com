@@ -39,17 +39,17 @@ export default function HowItWorks() {
             {
               step: '1',
               title: 'Adicionar uma dívida',
-              description: 'Registre quem deve, quanto deve e qual foi o motivo.',
+              description: 'Registre quem deve, quanto deve e quando deve ser pago.',
             },
             {
               step: '2',
-              title: 'Enviar um lembrete',
-              description: 'Envie lembretes amigáveis automaticamente quando os pagamentos estiverem vencidos.',
+              title: 'Enviaremos uma mensagem para o devedor',
+              description: 'Enviaremos uma mensagem para o devedor avisando que você está esperando o pagamento.',
             },
             {
               step: '3',
               title: 'Receber o pagamento',
-              description: 'Receba pagamentos diretamente pelo aplicativo com seu método preferido.',
+              description: 'Receba pagamentos diretamente do devedor.',
             },
           ].map((item, index) => (
             <div

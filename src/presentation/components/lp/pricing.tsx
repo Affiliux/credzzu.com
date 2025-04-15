@@ -35,11 +35,11 @@ export default function Pricing() {
           >
             Preços
           </Badge>
-          <h2 className='mt-5 bg-gradient-to-r from-white to-white/70 bg-clip-text text-3xl font-light tracking-tight text-transparent sm:text-4xl md:mt-6 md:text-5xl lg:text-6xl'>
+          <h2 className='mt-5 text-6xl font-light tracking-tight text-white'>
             Escolha um plano <span className='font-medium'>perfeito para você</span>
           </h2>
           <p className='mt-4 max-w-2xl text-base text-white/60 md:mt-6 md:text-lg'>
-            Comece gratuitamente com nosso plano mensal ou economize com o plano anual premium
+            Comece com nosso plano mensal ou economize com o plano anual
           </p>
         </div>
 
@@ -52,10 +52,10 @@ export default function Pricing() {
                 <div className='mb-6 md:mb-8'>
                   <h3 className='text-lg font-light tracking-wide text-white md:text-xl'>Plano Mensal</h3>
                   <div className='mt-3 flex items-end md:mt-4'>
-                    <span className='text-4xl font-extralight text-white md:text-5xl'>R$0</span>
+                    <span className='text-4xl font-extralight text-white md:text-5xl'>R$100</span>
                     <span className='ml-2 text-base text-white/40 md:text-lg'>/mês</span>
                   </div>
-                  <p className='mt-2 text-xs text-white/50 md:text-sm'>Para necessidades básicas</p>
+                  <p className='mt-2 text-xs text-white/50 md:text-sm'>Para todas as necessidades</p>
                 </div>
 
                 <div className='mb-6 space-y-4 md:mb-8 md:space-y-5'>
@@ -68,19 +68,19 @@ export default function Pricing() {
                     <ul className='space-y-2 text-xs md:space-y-3 md:text-sm'>
                       <li className='flex items-start'>
                         <CheckCircle className='mr-3 h-4 w-4 shrink-0 text-emerald-400 md:h-5 md:w-5' />
-                        <span className='text-white/80'>Acompanhe até 5 amigos</span>
+                        <span className='text-white/80'>Acompanhe credores ilimitados</span>
                       </li>
                       <li className='flex items-start'>
                         <CheckCircle className='mr-3 h-4 w-4 shrink-0 text-emerald-400 md:h-5 md:w-5' />
-                        <span className='text-white/80'>Acompanhamento básico de dívidas</span>
+                        <span className='text-white/80'>Acompanhamento completo de dívidas</span>
                       </li>
                       <li className='flex items-start'>
                         <CheckCircle className='mr-3 h-4 w-4 shrink-0 text-emerald-400 md:h-5 md:w-5' />
                         <span className='text-white/80'>Registro manual de pagamentos</span>
                       </li>
-                      <li className='flex items-start text-white/40'>
-                        <AlertCircle className='mr-3 h-4 w-4 shrink-0 text-white/20 md:h-5 md:w-5' />
-                        <span>Sem lembretes automáticos</span>
+                      <li className='flex items-start'>
+                        <CheckCircle className='mr-3 h-4 w-4 shrink-0 text-emerald-400 md:h-5 md:w-5' />
+                        <span className='text-white/80'>Lembretes automáticos de pagamento</span>
                       </li>
                     </ul>
                   </div>
@@ -117,10 +117,10 @@ export default function Pricing() {
                 <div className='mb-6 md:mb-8'>
                   <h3 className='text-lg font-light tracking-wide text-white md:text-xl'>Plano Anual</h3>
                   <div className='mt-3 flex items-end md:mt-4'>
-                    <span className='text-4xl font-extralight text-white md:text-5xl'>R$5</span>
-                    <span className='ml-2 text-base text-white/40 md:text-lg'>/mês</span>
+                    <span className='text-4xl font-extralight text-white md:text-5xl'>R$1000</span>
+                    <span className='ml-2 text-base text-white/40 md:text-lg'>/uma vez</span>
                   </div>
-                  <p className='mt-2 text-xs text-emerald-400 md:text-sm'>Economize R$10 no pagamento anual</p>
+                  <p className='mt-2 text-xs text-emerald-400 md:text-sm'>Economize R$200 no pagamento anual</p>
                 </div>
 
                 <div className='mb-6 space-y-4 md:mb-8 md:space-y-5'>
@@ -133,19 +133,19 @@ export default function Pricing() {
                     <ul className='space-y-2 text-xs md:space-y-3 md:text-sm'>
                       <li className='flex items-start'>
                         <CheckCircle className='mr-3 h-4 w-4 shrink-0 text-emerald-400 md:h-5 md:w-5' />
-                        <span className='text-white/80'>Amigos ilimitados</span>
-                      </li>
-                      <li className='flex items-start'>
-                        <CheckCircle className='mr-3 h-4 w-4 shrink-0 text-emerald-400 md:h-5 md:w-5' />
-                        <span className='text-white/80'>Lembretes automáticos de pagamento</span>
-                      </li>
-                      <li className='flex items-start'>
-                        <CheckCircle className='mr-3 h-4 w-4 shrink-0 text-emerald-400 md:h-5 md:w-5' />
-                        <span className='text-white/80'>Cobrança direta de pagamentos</span>
+                        <span className='text-white/80'>Suporte Prioritário</span>
                       </li>
                       <li className='flex items-start'>
                         <CheckCircle className='mr-3 h-4 w-4 shrink-0 text-emerald-400 md:h-5 md:w-5' />
                         <span className='text-white/80'>Análises avançadas</span>
+                      </li>
+                      <li className='flex items-start'>
+                        <CheckCircle className='mr-3 h-4 w-4 shrink-0 text-emerald-400 md:h-5 md:w-5' />
+                        <span className='text-white/80'>Desconto na assinatura</span>
+                      </li>
+                      <li className='flex items-start'>
+                        <CheckCircle className='mr-3 h-4 w-4 shrink-0 text-emerald-400 md:h-5 md:w-5' />
+                        <span className='text-white/80'>Cancelamento sem taxas a qualquer momento</span>
                       </li>
                     </ul>
                   </div>
@@ -169,7 +169,7 @@ export default function Pricing() {
 
         <div className='mt-12 flex justify-center md:mt-16'>
           <p className='max-w-md text-center text-xs text-white/40 md:text-sm'>
-            Todos os planos incluem suporte via email e acesso ao sistema.
+            Todos os planos incluem suporte via whatsapp e acesso ao sistema.
             <span className='mx-1.5 inline-block h-1 w-1 rounded-full bg-white/20'></span>
             Cancele a qualquer momento sem taxas adicionais.
           </p>

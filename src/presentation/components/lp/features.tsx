@@ -1,5 +1,7 @@
 import React from 'react'
+
 import { CreditCard, DollarSign, Users } from 'lucide-react'
+
 import { Badge } from '@/presentation/components/ui/badge'
 
 export default function Features() {
@@ -29,11 +31,11 @@ export default function Features() {
           >
             Recursos
           </Badge>
-          <h2 className='mt-5 bg-gradient-to-r from-white to-white/70 bg-clip-text text-3xl font-light tracking-tight text-transparent sm:text-4xl md:mt-6 md:text-5xl lg:text-6xl'>
+          <h2 className='mt-5 text-6xl font-light tracking-tight text-white'>
             Tudo que você precisa <span className='font-medium'>para gerenciar dívidas</span>
           </h2>
           <p className='mt-4 max-w-2xl text-base text-white/60 md:mt-6 md:text-lg'>
-            Credzzu facilita o rastreamento, lembretes e cobrança de dinheiro devido por amigos e familiares.
+            Credzzu facilita o rastreamento, lembretes e cobrança de dinheiro devido por conhecidos, amigos e familiares.
           </p>
         </div>
 

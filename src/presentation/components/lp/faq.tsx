@@ -11,27 +11,27 @@ export default function FAQ() {
     {
       question: 'Como o Credzzu funciona?',
       answer:
-        'O Credzzu permite que você registre dívidas, acompanhe pagamentos e envie lembretes automáticos para seus amigos ou conhecidos que lhe devem dinheiro. Basta adicionar um novo contato, registrar o valor devido e o sistema cuida do resto.',
+        'O Credzzu permite que você registre dívidas, acompanhe pagamentos e receba lembretes de pagamentos vencidos ou próximos de vencer.',
     },
     {
       question: 'É necessário cartão de crédito para começar?',
       answer:
-        'Não, o plano mensal é totalmente gratuito e você pode começar a usar imediatamente após o cadastro, sem necessidade de cartão de crédito. O plano premium anual requer pagamento, mas você pode testar todas as funcionalidades básicas antes de decidir fazer o upgrade.',
+        'Sim, o plano mensal e o anual requerem um cartão de crédito para garantir a qualidade do serviço, oferecendo 3 dias de teste gratuito para ambos os planos.',
     },
     {
-      question: 'Como os lembretes são enviados aos meus amigos?',
+      question: 'Como os lembretes são enviados para mim?',
       answer:
-        'Os lembretes são enviados por email ou SMS, dependendo das informações de contato que você fornecer. Você pode personalizar a frequência e o tom dos lembretes, mantendo-os amigáveis ou mais formais, de acordo com sua preferência e relacionamento.',
+        'Os lembretes são enviados por whatsapp, com uma mensagem amigável e informal.',
     },
     {
       question: 'O Credzzu cobra alguma taxa sobre os pagamentos recuperados?',
       answer:
-        'Não, o Credzzu não cobra nenhuma taxa sobre os valores recuperados. No plano gratuito, você pode registrar manualmente os pagamentos recebidos. No plano premium, oferecemos integração com métodos de pagamento para facilitar a cobrança, mas qualquer taxa é apenas a do próprio processador de pagamento escolhido.',
+        'Não, o Credzzu não cobra nenhuma taxa sobre os valores recuperados.',
     },
     {
       question: 'Posso cancelar minha assinatura a qualquer momento?',
       answer:
-        'Sim, você pode cancelar sua assinatura premium a qualquer momento, sem taxas adicionais ou penalidades. Após o cancelamento, você continuará com acesso ao plano premium até o final do período já pago, e depois será automaticamente transferido para o plano gratuito, mantendo seus dados básicos.',
+        'Sim, você pode cancelar sua assinatura premium a qualquer momento, sem taxas adicionais ou penalidades. Após o cancelamento, você continuará com acesso ao plano até o final do período já pago, e depois será automaticamente transferido para o plano gratuito, mantendo somente a parte visual do seu perfil sem fazer alterações.',
     },
   ]
 

@@ -31,10 +31,9 @@ export default function Hero() {
                   className='font-medium text-emerald-400'
                   duration={2500}
                 />
-                {/* <span className='mt-2 block'>receba com facilidade</span> */}
               </h1>
               <p className='max-w-xl text-base text-white/80 sm:text-lg md:text-xl lg:text-2xl'>
-                Credzzu ajuda você a rastrear dinheiro devido por amigos e torna a cobrança simples e sem estresse.
+                Credzzu ajuda você a rastrear dinheiro devido por amigos, parentes, conhecidos e torna a cobrança simples e sem estresse.
               </p>
             </div>
             <div className='flex flex-col gap-3 sm:flex-row'>

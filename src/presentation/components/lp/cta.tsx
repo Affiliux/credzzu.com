@@ -26,13 +26,13 @@ export default function CTA() {
 
       <div className='relative container mx-auto px-3 sm:px-6'>
         <div className='mx-auto flex max-w-4xl flex-col items-center text-center'>
-          <h2 className='bg-gradient-to-r from-white via-white to-white/80 bg-clip-text text-3xl font-light tracking-tight text-transparent sm:text-4xl md:text-5xl lg:text-6xl'>
-            Pronto para recuperar
+          <h2 className='mt-5 text-6xl font-light tracking-tight text-white'>
+            Pronto para receber
             <span className='block font-medium'>o que é seu?</span>
           </h2>
 
           <p className='mt-4 max-w-2xl text-base text-white/60 md:mt-6 md:text-lg'>
-            Junte-se a milhares de usuários que já recuperaram mais de R$1 milhão em dinheiro devido.
+            Junte-se a centenas de usuários que não esqueceram de receber o que era deles.
           </p>
 
           <div className='relative mt-8 inline-flex md:mt-12'>
@@ -51,9 +51,9 @@ export default function CTA() {
             </Button>
           </div>
 
-          <p className='mt-8 text-xs text-white/40 md:mt-12 md:text-sm'>
+          {/* <p className='mt-8 text-xs text-white/40 md:mt-12 md:text-sm'>
             Sem cartão de crédito necessário • Cancelamento a qualquer momento
-          </p>
+          </p> */}
         </div>
       </div>
     </section>

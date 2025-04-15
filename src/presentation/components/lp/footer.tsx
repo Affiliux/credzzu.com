@@ -27,7 +27,7 @@ export default function Footer() {
             </nav>
 
             <div className='flex space-x-5'>
-              {['Twitter', 'Instagram', 'LinkedIn'].map(social => (
+              {['Twitter', 'Instagram'].map(social => (
                 <a
                   key={social}
                   href='#'
