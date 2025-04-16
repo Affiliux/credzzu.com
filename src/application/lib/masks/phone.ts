@@ -6,15 +6,12 @@
  * @return string
  */
 
-export function phoneMask(value: string) {
-  const numbers = value.replace(/\D/g, '')
-  const limitedNumbers = numbers.slice(0, 11)
+export function phoneMask(value: string): string {
+  const cleaned = value.replace(/\D/g, '')
 
-  if (limitedNumbers.length <= 2) {
-    return limitedNumbers.length ? `(${limitedNumbers}` : ''
-  } else if (limitedNumbers.length <= 6) {
-    return `(${limitedNumbers.slice(0, 2)}) ${limitedNumbers.slice(2)}`
-  } else {
-    return `(${limitedNumbers.slice(0, 2)}) ${limitedNumbers.slice(2, 7)}-${limitedNumbers.slice(7)}`
+  if (cleaned.length <= 10) {
+    return cleaned.replace(/(\d{2})(\d{4})(\d{4})/, '($1) $2-$3')
   }
+
+  return cleaned.replace(/(\d{2})(\d{5})(\d{4})/, '($1) $2-$3')
 }

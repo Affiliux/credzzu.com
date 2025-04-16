@@ -10,9 +10,9 @@ import { useSubscription } from '@/application/contexts/SubscriptionContext'
 
 import { SubscriptionStatusEnum } from '@/application/lib/enums'
 
-import { PlanManager } from '@/presentation/components/dashboard/plan-manager'
-import { UpdateAccountForm } from '@/presentation/components/dashboard/update-account-form'
-import { UpdatePasswordForm } from '@/presentation/components/dashboard/update-password-form'
+import { PlanManager } from '@/presentation/components/dashboard/settings/plan-manager'
+import { UpdateAccountForm } from '@/presentation/components/dashboard/settings/update-account-form'
+import { UpdatePasswordForm } from '@/presentation/components/dashboard/settings/update-password-form'
 import { Alert, AlertDescription, AlertTitle } from '@/presentation/components/ui/alert'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/presentation/components/ui/card'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/presentation/components/ui/tabs'
@@ -59,7 +59,7 @@ export default function Page() {
             </TabsList>
 
             <TabsContent value='plan'>
-              <Card className='mt-6 flex flex-col border-0 p-0'>
+              <Card className='mt-6 flex flex-col border-0 p-0 shadow-none'>
                 <CardHeader className='border-b px-0'>
                   <CardTitle className='text-xl font-semibold text-neutral-100'>Plano</CardTitle>
                   <CardDescription className='text-md -mt-1 text-neutral-400'>
@@ -67,7 +67,7 @@ export default function Page() {
                   </CardDescription>
                 </CardHeader>
 
-                <CardContent className='mt-4 p-0'>
+                <CardContent className='mt-4 p-0 shadow-none'>
                   <div className='max-w-lg'>
                     <PlanManager
                       plans={plans}
@@ -81,7 +81,7 @@ export default function Page() {
               </Card>
             </TabsContent>
             <TabsContent value='account'>
-              <Card className='mt-6 flex flex-col border-0 p-0'>
+              <Card className='mt-6 flex flex-col border-0 p-0 shadow-none'>
                 <CardHeader className='border-b px-0'>
                   <CardTitle className='text-xl font-semibold text-neutral-100'>Dados da conta</CardTitle>
                   <CardDescription className='text-md -mt-1 text-neutral-400'>
@@ -89,7 +89,7 @@ export default function Page() {
                   </CardDescription>
                 </CardHeader>
 
-                <CardContent className='mt-4 p-0'>
+                <CardContent className='mt-4 p-0 shadow-none'>
                   <div className='max-w-lg rounded-md border border-neutral-700 bg-neutral-800 p-4'>
                     <h3 className='text-sm font-semibold text-neutral-100'>Alterar dados</h3>
                     <p className='mb-6 text-sm text-neutral-400'>Altere os dados da sua conta.</p>
@@ -113,7 +113,7 @@ export default function Page() {
               </Card>
             </TabsContent>
             <TabsContent value='security'>
-              <Card className='mt-6 flex flex-col border-0 p-0'>
+              <Card className='mt-6 flex flex-col border-0 p-0 shadow-none'>
                 <CardHeader className='border-b px-0'>
                   <CardTitle className='text-xl font-semibold text-neutral-100'>Segurança</CardTitle>
                   <CardDescription className='text-md -mt-1 text-neutral-400'>
@@ -121,7 +121,7 @@ export default function Page() {
                   </CardDescription>
                 </CardHeader>
 
-                <CardContent className='mt-4 p-0'>
+                <CardContent className='mt-4 p-0 shadow-none'>
                   <div className='max-w-lg rounded-md border border-neutral-700 bg-neutral-800 p-4'>
                     <h3 className='text-sm font-semibold text-neutral-100'>Alterar senha</h3>
                     <p className='mb-6 text-sm text-neutral-400'>Altere sua senha de acesso a conta.</p>

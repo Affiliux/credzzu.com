@@ -5,7 +5,7 @@ import React, { useEffect, useState } from 'react'
 import { format } from 'date-fns'
 import { AlertTriangle, CheckCircle2, CreditCard, GiftIcon, ShieldCheck, Sparkles, Zap } from 'lucide-react'
 
-import { PlanProps } from '@/application/interfaces/application'
+import type { PlanProps } from '@/application/interfaces/application'
 import type {
   CreateSubscriptionPayloadProps,
   SubscriptionProps,
@@ -13,81 +13,12 @@ import type {
 } from '@/application/interfaces/subscription'
 
 import { PlanRecurrenceEnum, SubscriptionStatusEnum } from '@/application/lib/enums'
+import { formatCurrency } from '@/application/lib/formatters/currency'
 
-import { CardFormResult, CardPaymentModal } from '@/presentation/components/payment/card-payment'
+import { Button } from '@/presentation/components/ui/button'
 
-import { Button } from '../ui/button'
-import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle } from '../ui/dialog'
-
-// Cancellation Confirmation Modal Component
-function CancellationModal({
-  isOpen,
-  onClose,
-  onConfirm,
-}: {
-  isOpen: boolean
-  onClose: () => void
-  onConfirm: () => Promise<void>
-}) {
-  const [isLoading, setIsLoading] = useState(false)
-
-  const handleConfirm = async () => {
-    setIsLoading(true)
-    try {
-      await onConfirm()
-      onClose()
-    } catch (error) {
-      console.error('Failed to cancel subscription:', error)
-    } finally {
-      setIsLoading(false)
-    }
-  }
-
-  return (
-    <Dialog open={isOpen} onOpenChange={open => !open && onClose()}>
-      <DialogContent className='rounded-xl border border-neutral-800 bg-neutral-900 p-0 shadow-xl sm:max-w-[400px]'>
-        <DialogHeader className='p-6 pb-2'>
-          <DialogTitle className='text-xl font-medium text-neutral-100'>Cancelar assinatura</DialogTitle>
-          <DialogDescription className='text-sm text-neutral-400'>
-            Tem certeza que deseja cancelar sua assinatura?
-          </DialogDescription>
-        </DialogHeader>
-
-        <div className='px-6 py-4'>
-          <div className='flex items-start rounded-lg bg-amber-900/20 p-4'>
-            <AlertTriangle className='mr-3 h-5 w-5 shrink-0 text-amber-400' />
-            <div className='text-sm text-neutral-300'>
-              <p>Ao cancelar:</p>
-              <ul className='mt-2 ml-5 list-disc space-y-1'>
-                <li>Você perderá acesso aos recursos premium após o término do período atual</li>
-                <li>Você não será cobrado novamente</li>
-                <li>Você pode reativar a qualquer momento</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-
-        <DialogFooter className='flex flex-row gap-2 p-6 pt-2'>
-          <Button
-            variant='outline'
-            className='flex-1 border-neutral-700 bg-neutral-800 text-neutral-300 hover:bg-neutral-700 hover:text-neutral-100'
-            onClick={onClose}
-            disabled={isLoading}
-          >
-            Voltar
-          </Button>
-          <Button
-            className='flex-1 bg-red-600 text-white hover:bg-red-700'
-            onClick={handleConfirm}
-            disabled={isLoading}
-          >
-            {isLoading ? 'Processando...' : 'Confirmar cancelamento'}
-          </Button>
-        </DialogFooter>
-      </DialogContent>
-    </Dialog>
-  )
-}
+import { CardFormResult, CardPaymentModal } from './card-payment'
+import { CancellationModal } from './modal-cancel-plan'
 
 function NoSubscriptionVariant({
   onCreate,
@@ -97,9 +28,9 @@ function NoSubscriptionVariant({
   onCreate: (payload: CreateSubscriptionPayloadProps) => Promise<void>
 }) {
   // states
-  const [is_modal_open, set_is_modal_open] = useState(false)
+  const [modal_open, set_modal_open] = useState<boolean>(false)
 
-  const handleSubmitCardForm = async (formResult: CardFormResult) => {
+  async function handleSubmitCardForm(formResult: CardFormResult) {
     try {
       await onCreate({
         idPlan: formResult.idPlan || selectedPlan?.id || 'pro-plan-id',
@@ -112,7 +43,7 @@ function NoSubscriptionVariant({
 
   return (
     <>
-      <div className='overflow-hidden rounded-xl border border-neutral-800 bg-neutral-900 shadow-lg'>
+      <div className='overflow-hidden rounded-xl border border-neutral-800 bg-neutral-900'>
         {/* Header banner */}
         <div className='bg-gradient-to-r from-amber-600 to-amber-500 px-6 py-3 text-center'>
           <div className='flex items-center justify-center gap-2'>
@@ -148,27 +79,14 @@ function NoSubscriptionVariant({
             ) : (
               <div>
                 <div className='flex items-center justify-center gap-2'>
-                  <span className='text-2xl font-bold text-white'>
-                    {Intl.NumberFormat('pt-BR', {
-                      style: 'currency',
-                      currency: 'BRL',
-                    }).format(selectedPlan.price / 12)}
-                  </span>
+                  <span className='text-2xl font-bold text-white'>{formatCurrency(selectedPlan.price / 12)}</span>
                   <span className='text-sm text-neutral-400'>/mês</span>
                 </div>
                 <div className='mt-1 text-xs text-neutral-400'>
                   <span className='text-green-400'>16% de desconto</span> • Anual:
-                  {Intl.NumberFormat('pt-BR', {
-                    style: 'currency',
-                    currency: 'BRL',
-                  }).format(selectedPlan.price)}
+                  {formatCurrency(selectedPlan.price)}
                   <span className='ml-1 line-through'>
-                    (
-                    {Intl.NumberFormat('pt-BR', {
-                      style: 'currency',
-                      currency: 'BRL',
-                    }).format(selectedPlan.price + selectedPlan.price * 0.16)}
-                    )
+                    ({formatCurrency(selectedPlan.price + selectedPlan.price * 0.16)})
                   </span>
                 </div>
               </div>
@@ -209,15 +127,15 @@ function NoSubscriptionVariant({
             </div>
           </div>
 
-          <Button className='mt-6 h-10 w-full' variant='outline' onClick={() => set_is_modal_open(true)}>
+          <Button className='mt-6 h-10 w-full' variant='outline' onClick={() => set_modal_open(true)}>
             Começar agora
           </Button>
         </div>
       </div>
 
       <CardPaymentModal
-        is_open={is_modal_open}
-        onClose={() => set_is_modal_open(false)}
+        is_open={modal_open}
+        onClose={() => set_modal_open(false)}
         onSubmit={handleSubmitCardForm}
         title='Começar período de teste'
         description='Insira os dados do cartão para iniciar seu período de teste gratuito de 3 dias'
@@ -238,10 +156,10 @@ function ActiveSubscriptionVariant({
   onUpdate: (payload: UpdateSubscriptionPayloadProps) => Promise<void>
 }) {
   // states
-  const [is_update_payment_modal_open, set_is_update_payment_modal_open] = useState(false)
-  const [is_cancel_modal_open, set_is_cancel_modal_open] = useState(false)
+  const [update_payment_modal_open, set_update_payment_modal_open] = useState<boolean>(false)
+  const [cancel_modal_open, set_cancel_modal_open] = useState<boolean>(false)
 
-  const handleSubmitCardForm = async (formResult: CardFormResult) => {
+  async function handleSubmitCardForm(formResult: CardFormResult) {
     try {
       await onUpdate({
         cardToken: formResult.cardToken,
@@ -253,7 +171,7 @@ function ActiveSubscriptionVariant({
 
   return (
     <>
-      <div className='overflow-hidden rounded-xl border border-neutral-800 bg-neutral-900 shadow-lg'>
+      <div className='overflow-hidden rounded-xl border border-neutral-800 bg-neutral-900'>
         {/* Header banner */}
         <div className='bg-gradient-to-r from-green-900 to-green-700 px-6 py-3 text-center'>
           <div className='flex items-center justify-center gap-2'>
@@ -280,22 +198,22 @@ function ActiveSubscriptionVariant({
           <div className='mt-6 grid grid-cols-1 gap-3 sm:grid-cols-2'>
             <div className='rounded-lg bg-neutral-800 p-3'>
               <div className='flex items-center text-sm text-neutral-300'>
-                <CheckCircle2 className='mr-2 h-4 w-4 text-green-500' /> Devedores ilimitados
+                <CheckCircle2 className='mr-2 h-4 w-4 text-amber-500' /> Devedores ilimitados
               </div>
             </div>
             <div className='rounded-lg bg-neutral-800 p-3'>
               <div className='flex items-center text-sm text-neutral-300'>
-                <CheckCircle2 className='mr-2 h-4 w-4 text-green-500' /> Dívidas ilimitadas
+                <CheckCircle2 className='mr-2 h-4 w-4 text-amber-500' /> Dívidas ilimitadas
               </div>
             </div>
             <div className='rounded-lg bg-neutral-800 p-3'>
               <div className='flex items-center text-sm text-neutral-300'>
-                <CheckCircle2 className='mr-2 h-4 w-4 text-green-500' /> Relatórios avançados
+                <CheckCircle2 className='mr-2 h-4 w-4 text-amber-500' /> Relatórios avançados
               </div>
             </div>
             <div className='rounded-lg bg-neutral-800 p-3'>
               <div className='flex items-center text-sm text-neutral-300'>
-                <CheckCircle2 className='mr-2 h-4 w-4 text-green-500' /> Exportação de dados
+                <CheckCircle2 className='mr-2 h-4 w-4 text-amber-500' /> Exportação de dados
               </div>
             </div>
           </div>
@@ -303,15 +221,15 @@ function ActiveSubscriptionVariant({
           <div className='mt-6 flex space-x-2'>
             <Button
               variant='outline'
-              className='flex-1 border-neutral-700 bg-neutral-800 text-neutral-300 hover:bg-neutral-700'
-              onClick={() => set_is_update_payment_modal_open(true)}
+              className='h-10 border-neutral-700 bg-neutral-800 text-neutral-300 hover:bg-neutral-700'
+              onClick={() => set_update_payment_modal_open(true)}
             >
               Atualizar pagamento
             </Button>
             <Button
               variant='outline'
-              className='border-neutral-700 bg-neutral-800 text-red-400 hover:bg-neutral-700 hover:text-red-300'
-              onClick={() => set_is_cancel_modal_open(true)}
+              className='h-10 border-neutral-700 bg-neutral-800 text-red-400 hover:bg-neutral-700 hover:text-red-300'
+              onClick={() => set_cancel_modal_open(true)}
             >
               Cancelar
             </Button>
@@ -321,8 +239,8 @@ function ActiveSubscriptionVariant({
 
       {/* Payment Update Modal */}
       <CardPaymentModal
-        is_open={is_update_payment_modal_open}
-        onClose={() => set_is_update_payment_modal_open(false)}
+        is_open={update_payment_modal_open}
+        onClose={() => set_update_payment_modal_open(false)}
         onSubmit={handleSubmitCardForm}
         title='Atualizar forma de pagamento'
         description='Insira os dados do novo cartão para atualizar sua forma de pagamento'
@@ -330,11 +248,7 @@ function ActiveSubscriptionVariant({
       />
 
       {/* Cancellation Confirmation Modal */}
-      <CancellationModal
-        isOpen={is_cancel_modal_open}
-        onClose={() => set_is_cancel_modal_open(false)}
-        onConfirm={onCancel}
-      />
+      <CancellationModal isOpen={cancel_modal_open} onClose={() => set_cancel_modal_open(false)} onConfirm={onCancel} />
     </>
   )
 }
@@ -349,9 +263,9 @@ function CanceledSubscriptionVariant({
   onCreate: (payload: CreateSubscriptionPayloadProps) => Promise<void>
 }) {
   // states
-  const [is_reactivate_modal_open, set_is_reactivate_modal_open] = useState(false)
+  const [reactivate_modal_open, set_reactivate_modal_open] = useState<boolean>(false)
 
-  const handleSubmitCardForm = async (formResult: CardFormResult) => {
+  async function handleSubmitCardForm(formResult: CardFormResult) {
     try {
       await onCreate({
         idPlan: formResult.idPlan || selectedPlan?.id || subscription.plan.id,
@@ -364,7 +278,7 @@ function CanceledSubscriptionVariant({
 
   return (
     <>
-      <div className='overflow-hidden rounded-xl border border-neutral-800 bg-neutral-900 shadow-lg'>
+      <div className='overflow-hidden rounded-xl border border-neutral-800 bg-neutral-900'>
         {/* Header banner */}
         <div className='bg-gradient-to-r from-red-900 to-red-700 px-6 py-3 text-center'>
           <div className='flex items-center justify-center gap-2'>
@@ -389,38 +303,20 @@ function CanceledSubscriptionVariant({
           <div className='mt-6 rounded-lg bg-neutral-800 p-4 text-center'>
             {selectedPlan.recurrence === PlanRecurrenceEnum.MONTHLY ? (
               <div>
-                <span className='text-2xl font-bold text-white'>
-                  {Intl.NumberFormat('pt-BR', {
-                    style: 'currency',
-                    currency: 'BRL',
-                  }).format(selectedPlan.price)}
-                </span>
+                <span className='text-2xl font-bold text-white'>{formatCurrency(selectedPlan.price)}</span>
                 <span className='text-sm text-neutral-400'>/mês</span>
               </div>
             ) : (
               <div>
                 <div className='flex items-center justify-center gap-2'>
-                  <span className='text-2xl font-bold text-white'>
-                    {Intl.NumberFormat('pt-BR', {
-                      style: 'currency',
-                      currency: 'BRL',
-                    }).format(selectedPlan.price / 12)}
-                  </span>
+                  <span className='text-2xl font-bold text-white'>{formatCurrency(selectedPlan.price / 12)}</span>
                   <span className='text-sm text-neutral-400'>/mês</span>
                 </div>
                 <div className='mt-1 text-xs text-neutral-400'>
                   <span className='text-green-400'>16% de desconto</span> • Anual:
-                  {Intl.NumberFormat('pt-BR', {
-                    style: 'currency',
-                    currency: 'BRL',
-                  }).format(selectedPlan.price)}
+                  {formatCurrency(selectedPlan.price)}
                   <span className='ml-1 line-through'>
-                    (
-                    {Intl.NumberFormat('pt-BR', {
-                      style: 'currency',
-                      currency: 'BRL',
-                    }).format(selectedPlan.price + selectedPlan.price * 0.16)}
-                    )
+                    ({formatCurrency(selectedPlan.price + selectedPlan.price * 0.16)})
                   </span>
                 </div>
               </div>
@@ -431,35 +327,35 @@ function CanceledSubscriptionVariant({
           <div className='mt-6 grid grid-cols-1 gap-3 sm:grid-cols-2'>
             <div className='rounded-lg bg-neutral-800 p-3'>
               <div className='flex items-center text-sm text-neutral-300'>
-                <CheckCircle2 className='mr-2 h-4 w-4 text-green-500' /> Devedores ilimitados
+                <CheckCircle2 className='mr-2 h-4 w-4 text-amber-500' /> Devedores ilimitados
               </div>
             </div>
             <div className='rounded-lg bg-neutral-800 p-3'>
               <div className='flex items-center text-sm text-neutral-300'>
-                <CheckCircle2 className='mr-2 h-4 w-4 text-green-500' /> Dívidas ilimitadas
+                <CheckCircle2 className='mr-2 h-4 w-4 text-amber-500' /> Dívidas ilimitadas
               </div>
             </div>
             <div className='rounded-lg bg-neutral-800 p-3'>
               <div className='flex items-center text-sm text-neutral-300'>
-                <CheckCircle2 className='mr-2 h-4 w-4 text-green-500' /> Relatórios avançados
+                <CheckCircle2 className='mr-2 h-4 w-4 text-amber-500' /> Relatórios avançados
               </div>
             </div>
             <div className='rounded-lg bg-neutral-800 p-3'>
               <div className='flex items-center text-sm text-neutral-300'>
-                <CheckCircle2 className='mr-2 h-4 w-4 text-green-500' /> Exportação de dados
+                <CheckCircle2 className='mr-2 h-4 w-4 text-amber-500' /> Exportação de dados
               </div>
             </div>
           </div>
 
-          <Button className='mt-6 h-10 w-full' variant='outline' onClick={() => set_is_reactivate_modal_open(true)}>
+          <Button className='mt-6 h-10 w-full' variant='outline' onClick={() => set_reactivate_modal_open(true)}>
             Reativar assinatura
           </Button>
         </div>
       </div>
 
       <CardPaymentModal
-        is_open={is_reactivate_modal_open}
-        onClose={() => set_is_reactivate_modal_open(false)}
+        is_open={reactivate_modal_open}
+        onClose={() => set_reactivate_modal_open(false)}
         onSubmit={handleSubmitCardForm}
         title='Reativar assinatura'
         description='Insira os dados do cartão para reativar sua assinatura'
@@ -480,9 +376,9 @@ function ExpiredSubscriptionVariant({
   onCreate: (payload: CreateSubscriptionPayloadProps) => Promise<void>
 }) {
   // states
-  const [is_renew_modal_open, set_is_renew_modal_open] = useState(false)
+  const [renew_modal_open, set_renew_modal_open] = useState<boolean>(false)
 
-  const handleSubmitCardForm = async (formResult: CardFormResult) => {
+  async function handleSubmitCardForm(formResult: CardFormResult) {
     try {
       await onCreate({
         idPlan: formResult.idPlan || selectedPlan?.id || subscription.plan.id,
@@ -495,7 +391,7 @@ function ExpiredSubscriptionVariant({
 
   return (
     <>
-      <div className='overflow-hidden rounded-xl border border-neutral-800 bg-neutral-900 shadow-lg'>
+      <div className='overflow-hidden rounded-xl border border-neutral-800 bg-neutral-900'>
         {/* Header banner */}
         <div className='bg-gradient-to-r from-red-900 to-red-700 px-6 py-3 text-center'>
           <div className='flex items-center justify-center gap-2'>
@@ -520,38 +416,20 @@ function ExpiredSubscriptionVariant({
           <div className='mt-6 rounded-lg bg-neutral-800 p-4 text-center'>
             {selectedPlan.recurrence === PlanRecurrenceEnum.MONTHLY ? (
               <div>
-                <span className='text-2xl font-bold text-white'>
-                  {Intl.NumberFormat('pt-BR', {
-                    style: 'currency',
-                    currency: 'BRL',
-                  }).format(selectedPlan.price)}
-                </span>
+                <span className='text-2xl font-bold text-white'>{formatCurrency(selectedPlan.price)}</span>
                 <span className='text-sm text-neutral-400'>/mês</span>
               </div>
             ) : (
               <div>
                 <div className='flex items-center justify-center gap-2'>
-                  <span className='text-2xl font-bold text-white'>
-                    {Intl.NumberFormat('pt-BR', {
-                      style: 'currency',
-                      currency: 'BRL',
-                    }).format(selectedPlan.price / 12)}
-                  </span>
+                  <span className='text-2xl font-bold text-white'>{formatCurrency(selectedPlan.price / 12)}</span>
                   <span className='text-sm text-neutral-400'>/mês</span>
                 </div>
                 <div className='mt-1 text-xs text-neutral-400'>
                   <span className='text-green-400'>16% de desconto</span> • Anual:
-                  {Intl.NumberFormat('pt-BR', {
-                    style: 'currency',
-                    currency: 'BRL',
-                  }).format(selectedPlan.price)}
+                  {formatCurrency(selectedPlan.price)}
                   <span className='ml-1 line-through'>
-                    (
-                    {Intl.NumberFormat('pt-BR', {
-                      style: 'currency',
-                      currency: 'BRL',
-                    }).format(selectedPlan.price + selectedPlan.price * 0.16)}
-                    )
+                    ({formatCurrency(selectedPlan.price + selectedPlan.price * 0.16)})
                   </span>
                 </div>
               </div>
@@ -562,35 +440,35 @@ function ExpiredSubscriptionVariant({
           <div className='mt-6 grid grid-cols-1 gap-3 sm:grid-cols-2'>
             <div className='rounded-lg bg-neutral-800 p-3'>
               <div className='flex items-center text-sm text-neutral-300'>
-                <CheckCircle2 className='mr-2 h-4 w-4 text-green-500' /> Devedores ilimitados
+                <CheckCircle2 className='mr-2 h-4 w-4 text-amber-500' /> Devedores ilimitados
               </div>
             </div>
             <div className='rounded-lg bg-neutral-800 p-3'>
               <div className='flex items-center text-sm text-neutral-300'>
-                <CheckCircle2 className='mr-2 h-4 w-4 text-green-500' /> Dívidas ilimitadas
+                <CheckCircle2 className='mr-2 h-4 w-4 text-amber-500' /> Dívidas ilimitadas
               </div>
             </div>
             <div className='rounded-lg bg-neutral-800 p-3'>
               <div className='flex items-center text-sm text-neutral-300'>
-                <CheckCircle2 className='mr-2 h-4 w-4 text-green-500' /> Relatórios avançados
+                <CheckCircle2 className='mr-2 h-4 w-4 text-amber-500' /> Relatórios avançados
               </div>
             </div>
             <div className='rounded-lg bg-neutral-800 p-3'>
               <div className='flex items-center text-sm text-neutral-300'>
-                <CheckCircle2 className='mr-2 h-4 w-4 text-green-500' /> Exportação de dados
+                <CheckCircle2 className='mr-2 h-4 w-4 text-amber-500' /> Exportação de dados
               </div>
             </div>
           </div>
 
-          <Button className='mt-6 h-10 w-full' variant='outline' onClick={() => set_is_renew_modal_open(true)}>
+          <Button className='mt-6 h-10 w-full' variant='outline' onClick={() => set_renew_modal_open(true)}>
             Renovar assinatura
           </Button>
         </div>
       </div>
 
       <CardPaymentModal
-        is_open={is_renew_modal_open}
-        onClose={() => set_is_renew_modal_open(false)}
+        is_open={renew_modal_open}
+        onClose={() => set_renew_modal_open(false)}
         onSubmit={handleSubmitCardForm}
         title='Renovar assinatura'
         description='Insira os dados do cartão para renovar sua assinatura'
@@ -624,7 +502,7 @@ export function PlanManager({
     subscription.status === SubscriptionStatusEnum.EXPIRED
 
   useEffect(() => {
-    if (!!plans.length) set_selected_plan(plans[0])
+    if (!!plans?.length) set_selected_plan(plans[0])
   }, [plans])
 
   return selected_plan ? (

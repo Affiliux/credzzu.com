@@ -264,6 +264,10 @@ export function CardPaymentModal({
         })
 
         set_status('success')
+
+        setTimeout(() => {
+          onClose()
+        }, 3000)
       }
     } catch (error) {
       console.error('Error processing payment:', error)

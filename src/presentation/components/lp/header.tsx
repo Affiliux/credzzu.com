@@ -36,14 +36,7 @@ export default function Header() {
       <div className='container mx-auto flex h-20 items-center justify-between px-4 sm:px-6 lg:px-8 xl:max-w-7xl 2xl:max-w-[1400px]'>
         {/* Logo */}
         <Link href='/' className='relative z-50 flex items-center gap-2'>
-          <Image
-            src='/images/Credzzu.png'
-            alt='Logo Credzzu'
-            width={160}
-            height={160}
-            priority
-            className='h-10 w-auto'
-          />
+          <Image src='/logo.png' alt='Logo Credzzu' width={160} height={160} priority className='h-10 w-auto' />
         </Link>
 
         {/* Desktop Navbar - Centralized */}

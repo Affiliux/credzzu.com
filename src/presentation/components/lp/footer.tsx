@@ -7,7 +7,7 @@ export default function Footer() {
       <div className='container mx-auto px-4 md:px-6'>
         <div className='flex flex-col items-start justify-between space-y-4 md:flex-row md:items-center md:space-y-0'>
           <div className='flex items-center gap-2'>
-            <Image src='/images/Credzzu.png' alt='Credzzu Logo' width={120} height={120} className='h-6 w-auto' />
+            <Image src='/logo.png' alt='Credzzu Logo' width={120} height={120} className='h-6 w-auto' />
             <p className='text-sm font-light text-white/80'>
               © {new Date().getFullYear()} Credzzu. Todos os direitos reservados.
             </p>
