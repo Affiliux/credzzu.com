@@ -16,6 +16,7 @@ import {
   Users,
   X,
 } from 'lucide-react'
+import Image from 'next/image'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 
@@ -27,6 +28,7 @@ import { SubscriptionStatusEnum } from '@/application/lib/enums'
 import { Avatar, AvatarFallback } from '../ui/avatar'
 import { Button } from '../ui/button'
 import { Separator } from '../ui/separator'
+import { Badge } from '../ui/badge'
 
 const sidebarLinks = [
   {
@@ -48,6 +50,8 @@ const sidebarLinks = [
     title: 'Relatórios',
     href: '/dashboard/reports',
     icon: BarChart3,
+    disabled: true,
+    badge: 'Em breve',
   },
 ]
 
@@ -74,21 +78,8 @@ export function DashboardSidebar({
       {/* Mobile toggle */}
       <div className='flex items-center justify-between border-b border-neutral-700 px-6 py-4 md:hidden'>
         <div className='flex h-16 items-center'>
-          <Link href='/dashboard' className='flex items-center'>
-            <div className='relative h-8 w-8 overflow-hidden rounded-full bg-neutral-200 p-1'>
-              <svg
-                viewBox='0 0 24 24'
-                fill='none'
-                stroke='currentColor'
-                strokeWidth='2'
-                strokeLinecap='round'
-                strokeLinejoin='round'
-                className='h-full w-full text-neutral-900'
-              >
-                <path d='M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5' />
-              </svg>
-            </div>
-            <span className='ml-3 text-xl font-bold text-neutral-100'>Credzzu</span>
+          <Link href='/' className='flex items-center gap-2'>
+            <Image src='/logo.png' alt='Credzzu Logo' width={160} height={160} priority className='h-10 w-auto' />
           </Link>
         </div>
 
@@ -110,22 +101,9 @@ export function DashboardSidebar({
       >
         <div className='flex h-full flex-col'>
           {/* Logo */}
-          <div className='flex h-16 items-center px-6'>
-            <Link href='/dashboard' className='flex items-center'>
-              <div className='relative h-8 w-8 overflow-hidden rounded-full bg-neutral-200 p-1'>
-                <svg
-                  viewBox='0 0 24 24'
-                  fill='none'
-                  stroke='currentColor'
-                  strokeWidth='2'
-                  strokeLinecap='round'
-                  strokeLinejoin='round'
-                  className='h-full w-full text-neutral-900'
-                >
-                  <path d='M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5' />
-                </svg>
-              </div>
-              <span className='ml-3 text-xl font-bold text-neutral-100'>Credzzu</span>
+          <div className='flex h-16 w-full items-center justify-center px-6'>
+            <Link href='/' className='flex items-center gap-2'>
+              <Image src='/logo.png' alt='Credzzu Logo' width={160} height={160} priority className='h-10 w-auto' />
             </Link>
           </div>
 
@@ -135,18 +113,25 @@ export function DashboardSidebar({
           <nav className='flex-1 space-y-1 px-3 py-4'>
             {sidebarLinks.map(link => {
               const isActive = pathname === link.href
+              const isDisabled = link.disabled
+              const badge = link.badge
+
               return (
                 <Link
                   key={link.href}
                   href={link.href}
                   className={`flex items-center rounded-md px-3 py-2 text-sm font-medium ${
-                    isActive
-                      ? 'bg-neutral-700 text-neutral-100'
-                      : 'text-neutral-400 hover:bg-neutral-700 hover:text-neutral-100'
+                    isDisabled
+                      ? 'cursor-not-allowed opacity-50'
+                      : isActive
+                        ? 'bg-neutral-700 text-neutral-100'
+                        : 'text-neutral-400 hover:bg-neutral-700 hover:text-neutral-100'
                   }`}
                 >
                   <link.icon className='mr-3 h-5 w-5' />
                   {link.title}
+
+                  {isDisabled && <Badge className='ml-auto'>{badge}</Badge>}
                 </Link>
               )
             })}

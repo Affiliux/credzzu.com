@@ -19,10 +19,10 @@ export default function Layout({ children }: { children: ReactNode }) {
     >
       <div className='relative flex min-h-screen flex-col items-center justify-center px-4 py-12'>
         {/* Logo no topo */}
-        <div className='fixed top-4 left-4 z-20 sm:top-8 sm:left-8'>
+        <div className='mb-6'>
           <Link href='/' className='flex items-center'>
             <Image
-              src='/images/Credzzu.png'
+              src='/logo.png'
               alt='Credzzu Logo'
               width={120}
               height={38}

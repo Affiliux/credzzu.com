@@ -11,11 +11,10 @@ import type { UpdatePasswordPayloadProps } from '@/application/interfaces/accoun
 
 import { toast } from '@/application/hooks/use-toast'
 
+import { PasswordStrength } from '@/presentation/components/password-strength'
 import { Button } from '@/presentation/components/ui/button'
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/presentation/components/ui/form'
 import { Input } from '@/presentation/components/ui/input'
-
-import { PasswordStrength } from '../password-strength'
 
 export function UpdatePasswordForm({ onSubmit }: { onSubmit: (payload: UpdatePasswordPayloadProps) => Promise<void> }) {
   // hooks
