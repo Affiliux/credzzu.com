@@ -20,7 +20,7 @@ export default function Hero() {
       speed='slow'
       waveOpacity={0.5}
     >
-      <div className='container mx-auto px-3 sm:px-6 lg:px-8'>
+      <div className='container mx-auto px-3 sm:px-6 md:-mt-20 lg:px-8'>
         <div className='grid items-center gap-8 lg:grid-cols-2'>
           <div className='flex flex-col justify-center space-y-6 md:space-y-8'>
             <div className='space-y-4 md:space-y-6'>
