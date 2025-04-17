@@ -9,6 +9,7 @@ import {
   delete_debtor,
   get_alerts,
   get_dashboard,
+  get_debtor_by_id,
   get_debtors,
   get_debts,
   get_debts_by_debtor,
@@ -27,6 +28,7 @@ import type {
   DebtProps,
   DeleteDebtorPayloadProps,
   DeleteDebtPayloadProps,
+  GetDebtorByIdPayloadProps,
   GetDebtorsPayloadProps,
   GetDebtsByDebtorPayloadProps,
   GetDebtsPayloadProps,
@@ -82,6 +84,15 @@ export default function DashboardProvider({ children }: DashboardProviderProps) 
         set_debtors(response.data.debtors)
         set_pagination(response.meta)
       }
+    } catch (error: any) {
+      console.error(error)
+    }
+  }
+
+  async function onGetDebtorById(payload: GetDebtorByIdPayloadProps) {
+    try {
+      const response = await get_debtor_by_id(payload)
+      if (response) set_debtor(response)
     } catch (error: any) {
       console.error(error)
     }
@@ -218,11 +229,9 @@ export default function DashboardProvider({ children }: DashboardProviderProps) 
     try {
       const response = await update_installment(payload)
 
-      if (response) {
+      if (response.installment) {
         set_installments(
-          installments.map(installment =>
-            installment.id === payload.id ? { ...installment, ...response } : installment,
-          ),
+          installments.map(installment => (installment.id === payload.id ? response.installment : installment)),
         )
       }
     } catch (error: any) {
@@ -252,6 +261,7 @@ export default function DashboardProvider({ children }: DashboardProviderProps) 
         onGetDashboard,
         onGetAlerts,
         onGetDebtors,
+        onGetDebtorById,
         onCreateDebtor,
         onUpdateDebtor,
         onDeleteDebtor,

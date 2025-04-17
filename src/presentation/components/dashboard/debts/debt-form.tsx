@@ -3,17 +3,13 @@
 import React, { useEffect, useState } from 'react'
 
 import { AnimatePresence, motion } from 'framer-motion'
-import { useRouter } from 'next/navigation'
 import { useForm } from 'react-hook-form'
 import * as z from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
 
-import type {
-  CreateDebtPayloadProps,
-  DebtorProps,
-  GetDebtorsPayloadProps,
-  UpdateDebtPayloadProps,
-} from '@/application/interfaces/dashboard'
+import { get_debtors } from '@/infrastructure/http/services/dashboard'
+
+import type { CreateDebtPayloadProps, DebtorProps, UpdateDebtPayloadProps } from '@/application/interfaces/dashboard'
 
 import { DebtFeesTypeEnum } from '@/application/lib/enums'
 import { dateMask, moneyMask } from '@/application/lib/masks'
@@ -31,7 +27,6 @@ import {
   SheetTrigger,
 } from '@/presentation/components/ui/sheet'
 import { SuccessAnimation } from '@/presentation/components/ui/success-animation'
-import { get_debtors } from '@/infrastructure/http/services/dashboard'
 
 const formSchema = z.object({
   idDebtor: z.string().min(1, 'Devedor é obrigatório'),
@@ -49,7 +44,7 @@ const formSchema = z.object({
   feesType: z.nativeEnum(DebtFeesTypeEnum),
   feesMonthlyValue: z.string().min(1, 'Valor da taxa é obrigatório'),
   feeLateType: z.nativeEnum(DebtFeesTypeEnum),
-  feeLateMonthlyValue: z.string().min(1, 'Valor da taxa de atraso é obrigatório'),
+  feeLateValue: z.string().min(1, 'Valor da taxa de atraso é obrigatório'),
   installmentsNumber: z.string().min(1, 'Número de parcelas é obrigatório'),
 })
 
@@ -72,9 +67,6 @@ export function DebtForm({
   initialData,
   is_loading = false,
 }: DebtFormProps) {
-  // hooks
-  const router = useRouter()
-
   // states
   const [is_success, set_is_success] = useState<boolean>(false)
   const [debtors, set_debtors] = useState<DebtorProps[]>([])
@@ -90,7 +82,7 @@ export function DebtForm({
       feesType: initialData?.feesType || DebtFeesTypeEnum.SIMPLE,
       feesMonthlyValue: initialData?.feesMonthlyValue?.toString() || '',
       feeLateType: initialData?.feeLateType || DebtFeesTypeEnum.SIMPLE,
-      feeLateMonthlyValue: initialData?.feeLateMonthlyValue?.toString() || '',
+      feeLateValue: initialData?.feeLateValue?.toString() || '',
       installmentsNumber: initialData?.installmentsNumber?.toString() || '',
     },
   })
@@ -106,7 +98,7 @@ export function DebtForm({
         feesType: values.feesType,
         feesMonthlyValue: Number(values.feesMonthlyValue),
         feeLateType: values.feeLateType,
-        feeLateMonthlyValue: Number(values.feeLateMonthlyValue),
+        feeLateValue: Number(values.feeLateValue),
         installmentsNumber: Number(values.installmentsNumber),
         ...(initialData?.id && { id: initialData.id }),
       } as CreateDebtPayloadProps | UpdateDebtPayloadProps
@@ -118,7 +110,6 @@ export function DebtForm({
         onOpenChange(false)
         set_is_success(false)
         form.reset()
-        router.push(`/dashboard/debts/${data.idDebtor}?debtorId=${data.idDebtor}`)
       }, 2000)
     } catch (error) {
       console.error(error)
@@ -136,7 +127,7 @@ export function DebtForm({
         feesType: initialData?.feesType || DebtFeesTypeEnum.SIMPLE,
         feesMonthlyValue: initialData?.feesMonthlyValue?.toString() || '',
         feeLateType: initialData?.feeLateType || DebtFeesTypeEnum.SIMPLE,
-        feeLateMonthlyValue: initialData?.feeLateMonthlyValue?.toString() || '',
+        feeLateValue: initialData?.feeLateValue?.toString() || '',
         installmentsNumber: initialData?.installmentsNumber?.toString() || '',
       })
     }
@@ -349,7 +340,7 @@ export function DebtForm({
 
                         <FormField
                           control={form.control}
-                          name='feeLateMonthlyValue'
+                          name='feeLateValue'
                           render={({ field }) => (
                             <FormItem>
                               <FormLabel>Valor da Taxa (%)</FormLabel>

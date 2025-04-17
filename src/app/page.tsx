@@ -15,6 +15,7 @@ export default function LandingPage() {
   return (
     <div className='flex min-h-screen flex-col bg-black text-white'>
       <Header />
+
       <main className='flex-1'>
         <Hero />
         <HowItWorks />
@@ -23,6 +24,7 @@ export default function LandingPage() {
         <CTA />
         <FAQ />
       </main>
+
       <Footer />
     </div>
   )

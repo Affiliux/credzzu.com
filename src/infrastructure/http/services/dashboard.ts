@@ -10,6 +10,8 @@ import type {
   DebtorResponseProps,
   DeleteDebtorPayloadProps,
   DeleteDebtPayloadProps,
+  GetDebtorByIdPayloadProps,
+  GetDebtorByIdResponseProps,
   GetDebtorsPayloadProps,
   GetDebtsByDebtorPayloadProps,
   GetDebtsPayloadProps,
@@ -70,6 +72,24 @@ export async function get_alerts(): Promise<AlertsResponseProps[]> {
 export async function get_debtors(payload: GetDebtorsPayloadProps): Promise<DebtorResponseProps> {
   try {
     const { data: response } = await api.get(`debtor/find?page=${payload.page}&limit=${payload.limit}&${payload.query}`)
+    return response
+  } catch (error: AxiosError | any) {
+    throw new Error(error?.response.status)
+  }
+}
+
+/**
+ *
+ * @name get_debtor_by_id
+ * @category Infrastructure - Services - Dashboard - Get Debtor by ID
+ *
+ * @param {GetDebtorByIdPayloadProps} payload - The payload of the API
+ * @return {PromiseLike<GetDebtorByIdResponseProps>} - The response of the API
+ */
+
+export async function get_debtor_by_id(payload: GetDebtorByIdPayloadProps): Promise<GetDebtorByIdResponseProps> {
+  try {
+    const { data: response } = await api.get(`debtor/find-by-id/${payload.id}`)
     return response
   } catch (error: AxiosError | any) {
     throw new Error(error?.response.status)

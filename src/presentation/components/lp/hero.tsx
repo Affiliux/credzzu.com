@@ -11,7 +11,7 @@ import { WavyBackground } from '@/presentation/components/ui/wavy-background'
 export default function Hero() {
   return (
     <WavyBackground
-      containerClassName='w-full py-8 md:py-20 lg:py-32 xl:py-48'
+      containerClassName='w-full py-8'
       className='mx-auto w-full max-w-7xl'
       colors={['rgba(16, 185, 129, 0.4)', 'rgba(16, 185, 129, 0.2)', 'rgba(16, 185, 129, 0.1)']}
       waveWidth={100}
@@ -24,16 +24,17 @@ export default function Hero() {
         <div className='grid items-center gap-8 lg:grid-cols-2'>
           <div className='flex flex-col justify-center space-y-6 md:space-y-8'>
             <div className='space-y-4 md:space-y-6'>
-              <h1 className='text-3xl leading-tight font-light tracking-tight text-white sm:text-4xl md:text-5xl lg:text-6xl'>
-                <span className='font-medium'>Receba de quem</span>{' '}
+              <h1 className='text-4xl leading-tight font-bold tracking-tight text-white md:text-6xl'>
+                <span className='font-light'>Receba de quem</span>{' '}
                 <FlipWords
-                  words={['te deve dinheiro', 'você emprestou', 'precisa te pagar', 'tem dívida com você']}
-                  className='font-medium text-emerald-400'
+                  words={['te deve dinheiro', 'você emprestou', 'precisa te pagar']}
+                  className='-mt-2 font-bold text-emerald-400'
                   duration={2500}
                 />
               </h1>
-              <p className='max-w-xl text-base text-white/80 sm:text-lg md:text-xl lg:text-2xl'>
-                Credzzu ajuda você a rastrear dinheiro devido por amigos, parentes, conhecidos e torna a cobrança simples e sem estresse.
+              <p className='max-w-xl text-lg text-white/80 md:text-xl'>
+                Credzzu ajuda você a rastrear dinheiro devido por amigos, parentes, conhecidos e torna a cobrança
+                simples e sem estresse.
               </p>
             </div>
             <div className='flex flex-col gap-3 sm:flex-row'>

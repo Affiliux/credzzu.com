@@ -3,17 +3,19 @@
 import React, { useEffect, useState } from 'react'
 
 import { Plus } from 'lucide-react'
+import { useRouter } from 'next/navigation'
 import { toast } from 'sonner'
 
 import type {
   CreateDebtPayloadProps,
+  DebtProps,
   DeleteDebtPayloadProps,
   UpdateDebtPayloadProps,
 } from '@/application/interfaces/dashboard'
 
 import { useDashboard } from '@/application/contexts/DashboardContext'
 
-import { useQueryParams } from '@/application/hooks/useQueryParams'
+import { useQueryParams } from '@/application/hooks/use-query-params'
 
 import { DataTable } from '@/presentation/components/dashboard/debts/data-table'
 import { DebtForm } from '@/presentation/components/dashboard/debts/debt-form'
@@ -24,6 +26,7 @@ export const runtime = 'edge'
 export default function Page() {
   // hooks
   const { debtorId } = useQueryParams()
+  const router = useRouter()
 
   // contexts
   const { debts, pagination_debts, onGetDebts, onGetDebtsByDebtor, onCreateDebt, onUpdateDebt, onDeleteDebt } =
@@ -137,6 +140,10 @@ export default function Page() {
     }
   }
 
+  async function handleViewInstallments(debt: DebtProps) {
+    router.push(`/dashboard/debts/${debt.id}${debtorId ? `?debtorId=${debtorId}` : ''}`)
+  }
+
   // effects
   useEffect(() => {
     async function handleGetData() {
@@ -179,11 +186,12 @@ export default function Page() {
 
       <DataTable
         data={debts}
-        onSearch={handleSearch}
-        onDelete={handleDeleteDebt}
-        onEdit={handleUpdateDebt}
         is_loading={is_loading}
         pagination={pagination_debts}
+        onSearch={handleSearch}
+        onDelete={handleDeleteDebt}
+        onViewInstallments={handleViewInstallments}
+        onEdit={handleUpdateDebt}
         onPageChange={handlePageChange}
         onLimitChange={handleLimitChange}
       />

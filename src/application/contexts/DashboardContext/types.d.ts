@@ -40,6 +40,7 @@ export type DashboardContextType = {
   onGetDashboard: () => Promise<void>
   onGetAlerts: () => Promise<void>
   onGetDebtors: (payload: GetDebtorsPayloadProps) => Promise<void>
+  onGetDebtorById: (payload: GetDebtorByIdPayloadProps) => Promise<void>
   onCreateDebtor: (payload: CreateDebtorPayloadProps) => Promise<void>
   onUpdateDebtor: (payload: UpdateDebtorPayloadProps) => Promise<void>
   onDeleteDebtor: (payload: DeleteDebtorPayloadProps) => Promise<void>

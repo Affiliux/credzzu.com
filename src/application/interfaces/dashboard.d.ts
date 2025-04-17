@@ -35,6 +35,7 @@ export interface AlertsProps {
   amount: number
   debtorName: string
   debtorPhone: string
+  debtorEmail: string
   debtDescription: string
   daysLate: number
   daysUntilDue: number
@@ -76,6 +77,12 @@ export interface GetDebtorsPayloadProps {
   limit: number
   query?: string
 }
+
+export interface GetDebtorByIdPayloadProps {
+  id: string
+}
+
+export interface GetDebtorByIdResponseProps extends DebtorProps {}
 
 export interface DebtorResponseProps {
   data: {
@@ -132,7 +139,7 @@ export interface DebtProps {
   feesType: DebtFeesTypeEnum
   feesMonthlyValue: number
   feeLateType: DebtFeesTypeEnum
-  feeLateMonthlyValue: number
+  feeLateValue: number
   installmentsNumber: number
   isPaid?: boolean
   status?: DebtStatusEnum
@@ -217,6 +224,7 @@ export interface InstallmentProps {
   lateFee: number
   interestFee: number
   idDebt: string
+  idDebtor: string
   createdAt: string
   updatedAt: string
 }
@@ -249,4 +257,6 @@ export interface UpdateInstallmentPayloadProps {
   recalculateRemaining: boolean
 }
 
-export interface UpdateInstallmentResponseProps extends InstallmentProps {}
+export interface UpdateInstallmentResponseProps {
+  installment: InstallmentProps
+}

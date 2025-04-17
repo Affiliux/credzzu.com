@@ -1,14 +1,14 @@
 'use client'
 
 import React, { useState } from 'react'
+
+import { FileText, MoreHorizontal, Pencil, Search, Trash2 } from 'lucide-react'
 import { toast } from 'sonner'
 
-import { Edit, MoreHorizontal, Search, Trash2, Pencil, FileText } from 'lucide-react'
-
 import type {
+  CreateDebtPayloadProps,
   DebtProps,
   DeleteDebtPayloadProps,
-  CreateDebtPayloadProps,
   UpdateDebtPayloadProps,
 } from '@/application/interfaces/dashboard'
 import type { PaginationResponseProps } from '@/application/interfaces/pagination'
@@ -29,8 +29,9 @@ import { Input } from '@/presentation/components/ui/input'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/presentation/components/ui/select'
 import { Skeleton } from '@/presentation/components/ui/skeleton'
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/presentation/components/ui/table'
-import { DeleteDebtDialog } from './delete-debt-dialog'
+
 import { DebtForm } from './debt-form'
+import { DeleteDebtDialog } from './delete-debt-dialog'
 
 interface DataTableProps {
   data: DebtProps[]
@@ -39,6 +40,7 @@ interface DataTableProps {
   onSearch: (query: string) => Promise<void>
   onDelete: (data: DeleteDebtPayloadProps) => Promise<void>
   onEdit: (data: CreateDebtPayloadProps | UpdateDebtPayloadProps) => Promise<void>
+  onViewInstallments: (debt: DebtProps) => void
   onPageChange: (page: number, query?: string) => Promise<void>
   onLimitChange: (limit: number, query?: string) => Promise<void>
 }
@@ -50,6 +52,7 @@ export function DataTable({
   onSearch,
   onDelete,
   onEdit,
+  onViewInstallments,
   onPageChange,
   onLimitChange,
 }: DataTableProps) {
@@ -175,7 +178,7 @@ export function DataTable({
               </TableRow>
             ) : (
               data?.map(debt => (
-                <TableRow key={debt.id} className='cursor-pointer' onClick={() => console.log(debt)}>
+                <TableRow key={debt.id} className='cursor-pointer' onClick={() => onViewInstallments(debt)}>
                   <TableCell className='font-medium'>{debt.description || '-'}</TableCell>
                   <TableCell>{formatCurrency(debt.totalValue)}</TableCell>
                   <TableCell>{new Date(debt.dateOfDebt).toLocaleDateString('pt-BR')}</TableCell>
@@ -194,7 +197,7 @@ export function DataTable({
                           <Pencil className='mr-2 h-4 w-4' />
                           Editar
                         </DropdownMenuItem>
-                        <DropdownMenuItem onClick={() => set_selected_debt(debt)}>
+                        <DropdownMenuItem onClick={() => onViewInstallments(debt)}>
                           <FileText className='mr-2 h-4 w-4' />
                           Ver parcelas
                         </DropdownMenuItem>

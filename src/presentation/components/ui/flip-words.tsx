@@ -32,7 +32,7 @@ export const FlipWords = ({
   }, [isAnimating, duration, startAnimation])
 
   return (
-    <div className='relative inline-block'>
+    <div className='relative'>
       <AnimatePresence
         onExitComplete={() => {
           setIsAnimating(false)
@@ -88,7 +88,8 @@ export const FlipWords = ({
           ))}
         </motion.div>
       </AnimatePresence>
-      <div className='invisible inline-block'>
+
+      <div className='invisible'>
         {words.reduce((longest, word) => (word.length > longest.length ? word : longest), '')}
       </div>
     </div>

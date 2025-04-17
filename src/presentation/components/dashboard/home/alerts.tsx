@@ -3,15 +3,30 @@
 import React from 'react'
 
 import { format } from 'date-fns'
-import { AlertTriangle, CheckCircle2, CreditCard, InfoIcon, MoreVertical, Phone } from 'lucide-react'
-import { FaWhatsapp } from 'react-icons/fa'
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '@radix-ui/react-dropdown-menu'
+import {
+  AlertTriangle,
+  CheckCircle2,
+  CreditCard,
+  InfoIcon,
+  Mail,
+  MoreHorizontal,
+  Phone,
+  Smartphone,
+} from 'lucide-react'
 
 import type { AlertsProps } from '@/application/interfaces/dashboard'
 
 import { AlertStatusEnum } from '@/application/lib/enums'
 import { formatCurrency } from '@/application/lib/formatters/currency'
 
+import { Button } from '@/presentation/components/ui/button'
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from '@/presentation/components/ui/dropdown-menu'
 import { Skeleton } from '@/presentation/components/ui/skeleton'
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/presentation/components/ui/table'
 
@@ -135,41 +150,39 @@ export function Alerts({
                       <TableCell>
                         <DropdownMenu>
                           <DropdownMenuTrigger asChild>
-                            <button className='inline-flex h-8 w-8 items-center justify-center rounded-md border border-neutral-700 bg-neutral-800 text-neutral-400 transition-colors hover:bg-neutral-700 hover:text-neutral-300'>
-                              <MoreVertical className='h-4 w-4' />
-                            </button>
+                            <Button variant='ghost' className='h-8 w-8 p-0'>
+                              <span className='sr-only'>Abrir menu</span>
+                              <MoreHorizontal className='h-4 w-4' />
+                            </Button>
                           </DropdownMenuTrigger>
-                          <DropdownMenuContent align='end' className='w-48'>
-                            {alert.debtorPhone && (
-                              <>
-                                <DropdownMenuItem asChild>
-                                  <a
-                                    href={handleWhatsAppLink(alert.debtorPhone)}
-                                    target='_blank'
-                                    rel='noopener noreferrer'
-                                    className='flex w-full items-center gap-2 text-neutral-300 hover:text-neutral-100'
-                                  >
-                                    <FaWhatsapp className='h-4 w-4' />
-                                    <span>WhatsApp</span>
-                                  </a>
-                                </DropdownMenuItem>
-                                <DropdownMenuItem asChild>
-                                  <a
-                                    href={handlePhoneLink(alert.debtorPhone)}
-                                    className='flex w-full items-center gap-2 text-neutral-300 hover:text-neutral-100'
-                                  >
-                                    <Phone className='h-4 w-4' />
-                                    <span>Ligar</span>
-                                  </a>
-                                </DropdownMenuItem>
-                              </>
-                            )}
-                            <DropdownMenuItem
-                              onClick={() => handlePaymentModal(alert)}
-                              className='flex w-full items-center gap-2 text-neutral-300 hover:text-neutral-100'
-                            >
-                              <CreditCard className='h-4 w-4' />
-                              <span>Marcar como pago</span>
+                          <DropdownMenuContent align='end'>
+                            <DropdownMenuItem asChild>
+                              <a
+                                href={handleWhatsAppLink(alert?.debtorPhone)}
+                                target='_blank'
+                                rel='noopener noreferrer'
+                                className='flex items-center'
+                              >
+                                <Smartphone className='mr-2 h-4 w-4' />
+                                WhatsApp
+                              </a>
+                            </DropdownMenuItem>
+                            <DropdownMenuItem asChild>
+                              <a href={handlePhoneLink(alert?.debtorPhone)} className='flex items-center'>
+                                <Phone className='mr-2 h-4 w-4' />
+                                Telefone
+                              </a>
+                            </DropdownMenuItem>
+                            <DropdownMenuItem asChild>
+                              <a href={`mailto:${alert.debtorEmail}`} className='flex items-center'>
+                                <Mail className='mr-2 h-4 w-4' />
+                                Email
+                              </a>
+                            </DropdownMenuItem>
+                            <DropdownMenuSeparator />
+                            <DropdownMenuItem onClick={() => handlePaymentModal(alert)} className='flex items-center'>
+                              <CreditCard className='mr-2 h-4 w-4' />
+                              Registrar Pagamento
                             </DropdownMenuItem>
                           </DropdownMenuContent>
                         </DropdownMenu>

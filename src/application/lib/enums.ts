@@ -20,6 +20,7 @@ export enum DebtStatusEnum {
   ACTIVE = 'ACTIVE',
   OVERDUE = 'OVERDUE',
   PAID = 'PAID',
+  PENDING = 'PENDING',
 }
 
 export enum DebtFeesTypeEnum {

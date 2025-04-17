@@ -4,10 +4,14 @@ import React, { useEffect, useState } from 'react'
 
 import { format } from 'date-fns'
 import { LoaderCircle, RefreshCcw } from 'lucide-react'
+import { toast } from 'sonner'
 
 import type { AlertsProps } from '@/application/interfaces/dashboard'
 
 import { useDashboard } from '@/application/contexts/DashboardContext'
+
+import { DebtStatusEnum } from '@/application/lib/enums'
+import { moneyMask } from '@/application/lib/masks'
 
 import { Alerts } from '@/presentation/components/dashboard/home/alerts'
 import { BigNumbers } from '@/presentation/components/dashboard/home/big-numbers'
@@ -17,7 +21,7 @@ export const runtime = 'edge'
 
 export default function Page() {
   // contexts
-  const { big_numbers, alerts, onGetDashboard, onGetAlerts } = useDashboard()
+  const { big_numbers, alerts, onGetDashboard, onGetAlerts, onUpdateInstallment } = useDashboard()
 
   // states
   const [is_loading, set_loading] = useState<boolean>(true)
@@ -53,27 +57,37 @@ export default function Page() {
   function handleOpenPaymentModal(alert: AlertsProps) {
     set_selected_alert(alert)
     set_payment_date(format(new Date(), 'yyyy-MM-dd'))
-    set_payment_amount(alert.amount.toString())
+    set_payment_amount(moneyMask((alert.amount * 100).toString()))
     set_redistribute_remaining(false)
     set_payment_modal_open(true)
   }
 
-  function handlePayment() {
-    set_payment_modal_open(false)
-    handleGetData()
+  async function handlePayment() {
+    try {
+      await onUpdateInstallment({
+        id: selected_alert?.id,
+        paymentDate: payment_date,
+        paidAmount: parseFloat(payment_amount.replace(/\D/g, '')),
+        status: DebtStatusEnum.PAID,
+        recalculateRemaining: is_redistribute_remaining,
+      })
+    } catch (error: any) {
+      console.error(error)
+      toast.error('Erro ao registrar pagamento')
+    }
   }
 
   function isPaymentValid() {
     if (!payment_date || !payment_amount) return false
 
-    const amount = parseFloat(payment_amount)
+    const amount = parseFloat(payment_amount.replace(/\D/g, '')) / 100
     return !isNaN(amount) && amount > 0
   }
 
   function isPartialPayment() {
     if (!selected_alert || !payment_amount) return false
 
-    const amount = parseFloat(payment_amount)
+    const amount = parseFloat(payment_amount.replace(/\D/g, '')) / 100
     return amount < selected_alert.amount
   }
 

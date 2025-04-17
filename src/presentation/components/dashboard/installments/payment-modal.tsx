@@ -6,7 +6,7 @@ import { format } from 'date-fns'
 import { AnimatePresence, motion } from 'framer-motion'
 import { AlertTriangle } from 'lucide-react'
 
-import type { AlertsProps } from '@/application/interfaces/dashboard'
+import type { InstallmentProps, UpdateInstallmentPayloadProps } from '@/application/interfaces/dashboard'
 
 import { DebtStatusEnum } from '@/application/lib/enums'
 import { formatCurrency } from '@/application/lib/formatters/currency'
@@ -17,47 +17,38 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/presentation
 import { Input } from '@/presentation/components/ui/input'
 import { Label } from '@/presentation/components/ui/label'
 import { SuccessAnimation } from '@/presentation/components/ui/success-animation'
-import { Switch } from '@/presentation/components/ui/switch'
 
 interface PaymentModalProps {
-  isOpen: boolean
-  selectedAlert: AlertsProps | null
-  paymentDate: string
-  paymentAmount: string
-  redistributeRemaining: boolean
+  open: boolean
+  installment: InstallmentProps
+  onOpenChange: (open: boolean) => void
+  onUpdate?: (data: UpdateInstallmentPayloadProps) => Promise<void>
   onClose: () => void
-  onPayment: () => Promise<void>
-  isPaymentValid: () => boolean
-  isPartialPayment: () => boolean
-  onPaymentDateChange: (value: string) => void
-  onPaymentAmountChange: (value: string) => void
-  onRedistributeRemainingChange: (value: boolean) => void
 }
 
-export function PaymentModal({
-  isOpen,
-  selectedAlert,
-  onClose,
-  onPayment,
-  isPaymentValid,
-  isPartialPayment,
-  paymentDate,
-  paymentAmount,
-  redistributeRemaining,
-  onPaymentDateChange,
-  onPaymentAmountChange,
-  onRedistributeRemainingChange,
-}: PaymentModalProps) {
+export function PaymentModal({ open, onOpenChange, installment, onUpdate, onClose }: PaymentModalProps) {
   // states
   const [is_loading, set_loading] = useState<boolean>(false)
   const [is_success, set_success] = useState<boolean>(false)
+  const [payment_date, set_payment_date] = useState<string>(format(new Date(), 'yyyy-MM-dd'))
+  const [payment_amount, set_payment_amount] = useState<string>(formatCurrency(installment.originalAmount))
+  const [is_redistribute_remaining, set_redistribute_remaining] = useState<boolean>(false)
 
   // handlers
   async function handleSubmit() {
+    if (!onUpdate) return
+
     set_loading(true)
 
     try {
-      await onPayment()
+      await onUpdate({
+        id: installment.id,
+        paymentDate: payment_date,
+        paidAmount: parseFloat(payment_amount.replace(/\D/g, '')) / 100,
+        status: DebtStatusEnum.PAID,
+        recalculateRemaining: is_redistribute_remaining,
+      })
+
       set_success(true)
 
       setTimeout(() => {
@@ -71,10 +62,20 @@ export function PaymentModal({
     }
   }
 
-  if (!selectedAlert) return null
+  function isPaymentValid() {
+    if (!payment_date || !payment_amount) return false
+
+    const amount = parseFloat(payment_amount.replace(/\D/g, '')) / 100
+    return !isNaN(amount) && amount > 0
+  }
+
+  function isPartialPayment() {
+    const amount = parseFloat(payment_amount.replace(/\D/g, '')) / 100
+    return amount < installment.originalAmount
+  }
 
   return (
-    <Dialog open={isOpen} onOpenChange={onClose}>
+    <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent className='sm:max-w-[425px]'>
         <AnimatePresence mode='wait'>
           {is_success ? (
@@ -91,15 +92,25 @@ export function PaymentModal({
                 <DialogTitle>Registrar Pagamento</DialogTitle>
               </DialogHeader>
 
-              <div className='grid gap-4 py-6'>
+              <div className='grid gap-4 py-4'>
                 <div className='grid gap-2'>
-                  <Label htmlFor='description'>Descrição</Label>
-                  <Input id='description' value={selectedAlert.debtDescription} disabled className='bg-neutral-900' />
+                  <Label htmlFor='dueDate'>Vencimento</Label>
+                  <Input
+                    id='dueDate'
+                    value={format(new Date(installment.dueDate), 'dd/MM/yyyy')}
+                    disabled
+                    className='bg-neutral-900'
+                  />
                 </div>
 
                 <div className='grid gap-2'>
                   <Label htmlFor='amount'>Valor Original</Label>
-                  <Input id='amount' value={formatCurrency(selectedAlert.amount)} disabled className='bg-neutral-900' />
+                  <Input
+                    id='amount'
+                    value={formatCurrency(installment.originalAmount)}
+                    disabled
+                    className='bg-neutral-900'
+                  />
                 </div>
 
                 <div className='grid gap-2'>
@@ -107,8 +118,8 @@ export function PaymentModal({
                   <Input
                     id='paymentDate'
                     type='date'
-                    value={paymentDate}
-                    onChange={e => onPaymentDateChange(e.target.value)}
+                    value={payment_date}
+                    onChange={e => set_payment_date(e.target.value)}
                   />
                 </div>
 
@@ -116,10 +127,10 @@ export function PaymentModal({
                   <Label htmlFor='paymentAmount'>Valor Pago</Label>
                   <Input
                     id='paymentAmount'
-                    value={paymentAmount}
+                    value={payment_amount}
                     onChange={e => {
                       const masked = moneyMask(e.target.value)
-                      onPaymentAmountChange(masked)
+                      set_payment_amount(masked)
                     }}
                   />
                 </div>
@@ -131,8 +142,8 @@ export function PaymentModal({
                       <div className='space-y-1'>
                         <p className='text-sm font-medium text-amber-500'>Pagamento parcial</p>
                         <p className='text-sm text-amber-500/90'>
-                          O valor informado ({formatCurrency(Number(paymentAmount))}) é menor que o valor total da
-                          dívida ({formatCurrency(selectedAlert.amount)}).
+                          O valor informado ({formatCurrency(Number(payment_amount))}) é menor que o valor total da
+                          dívida ({formatCurrency(installment.originalAmount)}).
                         </p>
                       </div>
                     </div>
@@ -141,8 +152,8 @@ export function PaymentModal({
                       <label className='flex items-center gap-2'>
                         <input
                           type='checkbox'
-                          checked={redistributeRemaining}
-                          onChange={e => onRedistributeRemainingChange(e.target.checked)}
+                          checked={is_redistribute_remaining}
+                          onChange={e => set_redistribute_remaining(e.target.checked)}
                           className='h-4 w-4 rounded border-neutral-700 bg-neutral-800 text-neutral-100'
                         />
                         <span className='text-sm text-amber-500'>Redistribuir valor restante em novas parcelas</span>
