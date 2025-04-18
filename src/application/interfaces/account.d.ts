@@ -1,4 +1,4 @@
-import type { AccountTypes, DocumentTypes, LanguageCodes } from "@/lib/enums";
+import type { AccountTypes, DocumentTypes, LanguageCodes } from '@/lib/enums'
 
 /**
  *
@@ -8,8 +8,8 @@ import type { AccountTypes, DocumentTypes, LanguageCodes } from "@/lib/enums";
  */
 
 export interface RefreshTokenProps {
-  access_token: string;
-  refresh_token: string;
+  access_token: string
+  refresh_token: string
 }
 
 /**
@@ -20,12 +20,12 @@ export interface RefreshTokenProps {
  */
 
 export interface AccountProps {
-  id: string;
-  name: string;
-  email: string;
-  phone?: string;
-  createdAt?: string;
-  updatedAt?: string;
+  id: string
+  name: string
+  email: string
+  phone?: string
+  createdAt?: string
+  updatedAt?: string
 }
 
 /**
@@ -36,8 +36,8 @@ export interface AccountProps {
  */
 
 export interface SignInPayloadProps {
-  email: string;
-  password: string;
+  email: string
+  password: string
 }
 
 /**
@@ -48,10 +48,10 @@ export interface SignInPayloadProps {
  */
 
 export interface SignUpPayloadProps {
-  name: string;
-  email: string;
-  phone: string;
-  password: string;
+  name: string
+  email: string
+  phone: string
+  password: string
 }
 
 /**
@@ -62,8 +62,8 @@ export interface SignUpPayloadProps {
  */
 
 export interface VerifyAccountPayloadProps {
-  email: string;
-  token: string;
+  email: string
+  token: string
 }
 
 /**
@@ -74,7 +74,7 @@ export interface VerifyAccountPayloadProps {
  */
 
 export interface ResendEmailVerificationPayloadProps {
-  email: string;
+  email: string
 }
 
 /**
@@ -85,7 +85,7 @@ export interface ResendEmailVerificationPayloadProps {
  */
 
 export interface ForgotPasswordPayloadProps {
-  email: string;
+  email: string
 }
 
 /**
@@ -96,7 +96,31 @@ export interface ForgotPasswordPayloadProps {
  */
 
 export interface ChangePasswordPayloadProps {
-  email: string;
-  token: string;
-  password: string;
+  email: string
+  token: string
+  password: string
+}
+
+/**
+ *
+ * @name UpdatePassword
+ * @category Interfaces - Account - UpdatePassword
+ *
+ */
+
+export interface UpdatePasswordPayloadProps {
+  password: string
+  newPassword: string
+}
+
+/**
+ *
+ * @name UpdateAccount
+ * @category Interfaces - Account - UpdateAccount
+ *
+ */
+
+export interface UpdateAccountPayloadProps {
+  name: string
+  phone: string
 }

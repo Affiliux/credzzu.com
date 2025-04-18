@@ -18,7 +18,7 @@ export default function Page() {
     <div className='space-y-8'>
       <div className='text-center'>
         <h1 className='text-3xl font-bold text-neutral-100'>Criar uma conta</h1>
-        <p className='text-neutral-400'>Preencha os dados abaixo para começar</p>
+        <p className='mt-3 text-neutral-400'>Preencha os dados abaixo para começar</p>
       </div>
 
       <SignUpForm onSubmit={onSignUp} />

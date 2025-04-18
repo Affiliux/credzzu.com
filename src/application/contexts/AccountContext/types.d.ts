@@ -1,4 +1,4 @@
-import type { ReactNode } from "react";
+import type { ReactNode } from 'react'
 
 import type {
   AccountProps,
@@ -7,23 +7,25 @@ import type {
   ResendEmailVerificationPayloadProps,
   SignInPayloadProps,
   SignUpPayloadProps,
+  UpdateAccountPayloadProps,
+  UpdatePasswordPayloadProps,
   VerifyAccountPayloadProps,
-} from "@/application/interfaces/account";
+} from '@/application/interfaces/account'
 
 export type AccountProviderProps = {
-  children: ReactNode;
-};
+  children: ReactNode
+}
 
 export type AccountContextType = {
-  account: AccountProps | null;
+  account: AccountProps | null
   //
-  onSignIn: (payload: SignInPayloadProps) => Promise<void>;
-  onSignUp: (payload: SignUpPayloadProps) => Promise<void>;
-  onVerifyAccount: (payload: VerifyAccountPayloadProps) => Promise<void>;
-  onResendVerification: (
-    payload: ResendEmailVerificationPayloadProps,
-  ) => Promise<void>;
-  onForgotPassword: (payload: ForgotPasswordPayloadProps) => Promise<void>;
-  onChangePassword: (payload: ChangePasswordPayloadProps) => Promise<void>;
-  onSignOut: () => Promise<void>;
-};
+  onSignIn: (payload: SignInPayloadProps) => Promise<void>
+  onSignUp: (payload: SignUpPayloadProps) => Promise<void>
+  onVerifyAccount: (payload: VerifyAccountPayloadProps) => Promise<void>
+  onResendVerification: (payload: ResendEmailVerificationPayloadProps) => Promise<void>
+  onForgotPassword: (payload: ForgotPasswordPayloadProps) => Promise<void>
+  onChangePassword: (payload: ChangePasswordPayloadProps) => Promise<void>
+  onUpdatePassword: (payload: UpdatePasswordPayloadProps) => Promise<void>
+  onUpdateAccount: (payload: UpdateAccountPayloadProps) => Promise<void>
+  onSignOut: () => Promise<void>
+}

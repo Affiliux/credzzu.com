@@ -1,23 +1,22 @@
-"use client";
+'use client'
 
-import React from "react";
+import React from 'react'
 
-import AccountProvider from "./AccountContext";
-import { ThemeProvider } from "./theme-provider";
+import AccountProvider from './AccountContext'
+import ApplicationProvider from './ApplicationContext'
+import DashboardProvider from './DashboardContext'
+import SubscriptionProvider from './SubscriptionContext'
 
-export default function AppProviders({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
-  return (
-    <ThemeProvider
-      attribute="class"
-      defaultTheme="system"
-      enableSystem
-      disableTransitionOnChange
-    >
-      <AccountProvider>{children}</AccountProvider>
-    </ThemeProvider>
-  );
+export default function AppProviders({ children }: { children: React.ReactNode }) {
+  return typeof window !== 'undefined' ? (
+    <ApplicationProvider>
+      <AccountProvider>
+        <SubscriptionProvider>
+          <DashboardProvider>{children}</DashboardProvider>
+        </SubscriptionProvider>
+      </AccountProvider>
+    </ApplicationProvider>
+  ) : (
+    <>{children}</>
+  )
 }
