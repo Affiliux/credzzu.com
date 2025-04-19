@@ -47,46 +47,46 @@ export function Alerts({
     <>
       {/* Alerts */}
       <div className='mt-8'>
-        <h2 className='mb-4 text-xl font-bold text-neutral-100'>Alertas</h2>
+        <h2 className='mb-4 text-xl font-bold text-white'>Alertas</h2>
 
         {loading ? (
-          <div className='rounded-lg border border-neutral-700 bg-neutral-800'>
+          <div className='overflow-hidden rounded-lg border border-emerald-500/20 bg-black/60 backdrop-blur-sm'>
             <Table>
               <TableHeader>
-                <TableRow>
-                  <TableHead className='min-w-[120px] sm:min-w-[140px]'>Status</TableHead>
-                  <TableHead className='min-w-[120px] sm:min-w-[140px]'>Devedor</TableHead>
-                  <TableHead className='min-w-[160px] sm:min-w-[200px]'>Descrição</TableHead>
-                  <TableHead className='min-w-[100px] sm:min-w-[120px]'>Valor</TableHead>
-                  <TableHead className='min-w-[100px] sm:min-w-[120px]'>Vencimento</TableHead>
-                  <TableHead className='min-w-[80px] sm:min-w-[100px]'>Ações</TableHead>
+                <TableRow className='border-emerald-500/10 hover:bg-emerald-500/5'>
+                  <TableHead className='min-w-[120px] text-white/80 sm:min-w-[140px]'>Status</TableHead>
+                  <TableHead className='min-w-[120px] text-white/80 sm:min-w-[140px]'>Devedor</TableHead>
+                  <TableHead className='min-w-[160px] text-white/80 sm:min-w-[200px]'>Descrição</TableHead>
+                  <TableHead className='min-w-[100px] text-white/80 sm:min-w-[120px]'>Valor</TableHead>
+                  <TableHead className='min-w-[100px] text-white/80 sm:min-w-[120px]'>Vencimento</TableHead>
+                  <TableHead className='min-w-[80px] text-white/80 sm:min-w-[100px]'>Ações</TableHead>
                 </TableRow>
               </TableHeader>
               <TableBody>
                 {Array(5)
                   .fill(0)
                   .map((_, index) => (
-                    <TableRow key={index}>
+                    <TableRow key={index} className='border-emerald-500/10'>
                       <TableCell>
                         <div className='flex items-center gap-2'>
-                          <Skeleton className='h-6 w-6 rounded-full' />
-                          <Skeleton className='h-4 w-24' />
+                          <Skeleton className='h-6 w-6 rounded-full bg-emerald-500/10' />
+                          <Skeleton className='h-4 w-24 bg-emerald-500/10' />
                         </div>
                       </TableCell>
                       <TableCell>
-                        <Skeleton className='h-4 w-32' />
+                        <Skeleton className='h-4 w-32 bg-emerald-500/10' />
                       </TableCell>
                       <TableCell>
-                        <Skeleton className='h-4 w-48' />
+                        <Skeleton className='h-4 w-48 bg-emerald-500/10' />
                       </TableCell>
                       <TableCell>
-                        <Skeleton className='h-4 w-20' />
+                        <Skeleton className='h-4 w-20 bg-emerald-500/10' />
                       </TableCell>
                       <TableCell>
-                        <Skeleton className='h-4 w-24' />
+                        <Skeleton className='h-4 w-24 bg-emerald-500/10' />
                       </TableCell>
                       <TableCell>
-                        <Skeleton className='h-8 w-8 rounded-md' />
+                        <Skeleton className='h-8 w-8 rounded-md bg-emerald-500/10' />
                       </TableCell>
                     </TableRow>
                   ))}
@@ -94,16 +94,16 @@ export function Alerts({
             </Table>
           </div>
         ) : alerts.length > 0 ? (
-          <div className='rounded-lg border border-neutral-700 bg-neutral-800'>
+          <div className='overflow-hidden rounded-lg border border-emerald-500/20 bg-black/60 backdrop-blur-sm'>
             <Table>
               <TableHeader>
-                <TableRow>
-                  <TableHead className='min-w-[140px] sm:min-w-[180px]'>Status</TableHead>
-                  <TableHead className='min-w-[120px] sm:min-w-[140px]'>Devedor</TableHead>
-                  <TableHead className='min-w-[160px] sm:min-w-[200px]'>Descrição</TableHead>
-                  <TableHead className='min-w-[100px] sm:min-w-[120px]'>Valor</TableHead>
-                  <TableHead className='min-w-[100px] sm:min-w-[120px]'>Vencimento</TableHead>
-                  <TableHead className='min-w-[80px] sm:min-w-[100px]'>Ações</TableHead>
+                <TableRow className='border-emerald-500/10 hover:bg-emerald-500/5'>
+                  <TableHead className='min-w-[140px] text-white/80 sm:min-w-[180px]'>Status</TableHead>
+                  <TableHead className='min-w-[120px] text-white/80 sm:min-w-[140px]'>Devedor</TableHead>
+                  <TableHead className='min-w-[160px] text-white/80 sm:min-w-[200px]'>Descrição</TableHead>
+                  <TableHead className='min-w-[100px] text-white/80 sm:min-w-[120px]'>Valor</TableHead>
+                  <TableHead className='min-w-[100px] text-white/80 sm:min-w-[120px]'>Vencimento</TableHead>
+                  <TableHead className='min-w-[80px] text-white/80 sm:min-w-[100px]'>Ações</TableHead>
                 </TableRow>
               </TableHeader>
               <TableBody>
@@ -112,7 +112,7 @@ export function Alerts({
                   const isUpcoming = alert.status === AlertStatusEnum.PENDING
 
                   return (
-                    <TableRow key={alert.id}>
+                    <TableRow key={alert.id} className='border-emerald-500/10 text-white hover:bg-emerald-500/5'>
                       <TableCell>
                         <div className='flex items-center gap-2'>
                           <div
@@ -150,13 +150,22 @@ export function Alerts({
                       <TableCell>
                         <DropdownMenu>
                           <DropdownMenuTrigger asChild>
-                            <Button variant='ghost' className='h-8 w-8 p-0'>
+                            <Button
+                              variant='ghost'
+                              className='h-8 w-8 p-0 text-white/70 hover:bg-emerald-500/10 hover:text-emerald-400'
+                            >
                               <span className='sr-only'>Abrir menu</span>
                               <MoreHorizontal className='h-4 w-4' />
                             </Button>
                           </DropdownMenuTrigger>
-                          <DropdownMenuContent align='end'>
-                            <DropdownMenuItem asChild>
+                          <DropdownMenuContent
+                            align='end'
+                            className='border-emerald-500/20 bg-black/95 text-white backdrop-blur-xl'
+                          >
+                            <DropdownMenuItem
+                              asChild
+                              className='hover:bg-emerald-500/10 hover:text-emerald-400 focus:bg-emerald-500/10 focus:text-emerald-400'
+                            >
                               <a
                                 href={handleWhatsAppLink(alert?.debtorPhone)}
                                 target='_blank'
@@ -167,20 +176,29 @@ export function Alerts({
                                 WhatsApp
                               </a>
                             </DropdownMenuItem>
-                            <DropdownMenuItem asChild>
+                            <DropdownMenuItem
+                              asChild
+                              className='hover:bg-emerald-500/10 hover:text-emerald-400 focus:bg-emerald-500/10 focus:text-emerald-400'
+                            >
                               <a href={handlePhoneLink(alert?.debtorPhone)} className='flex items-center'>
                                 <Phone className='mr-2 h-4 w-4' />
                                 Telefone
                               </a>
                             </DropdownMenuItem>
-                            <DropdownMenuItem asChild>
+                            <DropdownMenuItem
+                              asChild
+                              className='hover:bg-emerald-500/10 hover:text-emerald-400 focus:bg-emerald-500/10 focus:text-emerald-400'
+                            >
                               <a href={`mailto:${alert.debtorEmail}`} className='flex items-center'>
                                 <Mail className='mr-2 h-4 w-4' />
                                 Email
                               </a>
                             </DropdownMenuItem>
-                            <DropdownMenuSeparator />
-                            <DropdownMenuItem onClick={() => handlePaymentModal(alert)} className='flex items-center'>
+                            <DropdownMenuSeparator className='bg-emerald-500/20' />
+                            <DropdownMenuItem
+                              onClick={() => handlePaymentModal(alert)}
+                              className='flex items-center hover:bg-emerald-500/10 hover:text-emerald-400 focus:bg-emerald-500/10 focus:text-emerald-400'
+                            >
                               <CreditCard className='mr-2 h-4 w-4' />
                               Registrar Pagamento
                             </DropdownMenuItem>
@@ -194,8 +212,8 @@ export function Alerts({
             </Table>
           </div>
         ) : (
-          <div className='rounded-lg border border-neutral-700 bg-neutral-800 p-6 text-center'>
-            <p className='text-neutral-400'>Não há alertas para exibir</p>
+          <div className='rounded-lg border border-emerald-500/20 bg-black/60 p-6 text-center backdrop-blur-sm'>
+            <p className='text-white/60'>Não há alertas para exibir</p>
           </div>
         )}
       </div>

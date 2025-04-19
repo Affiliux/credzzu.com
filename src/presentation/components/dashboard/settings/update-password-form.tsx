@@ -103,25 +103,25 @@ export function UpdatePasswordForm({ onSubmit }: { onSubmit: (payload: UpdatePas
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(handleSubmit)} className='space-y-4'>
+      <form onSubmit={form.handleSubmit(handleSubmit)} className='space-y-6'>
         <FormField
           control={form.control}
           name='oldPassword'
           render={({ field }) => (
             <FormItem>
-              <FormLabel className='text-neutral-300'>Senha atual</FormLabel>
+              <FormLabel className='text-white/80'>Senha atual</FormLabel>
               <FormControl>
                 <div className='relative'>
                   <Input
                     type={show_password ? 'text' : 'password'}
                     placeholder='••••••'
                     {...field}
-                    className='h-11 border-neutral-700 bg-neutral-800 pr-10 text-neutral-100 placeholder:text-neutral-500 focus-visible:ring-neutral-600'
+                    className='h-11 border-emerald-500/20 bg-black/40 pr-10 text-white placeholder:text-white/40 focus-visible:border-emerald-500/50 focus-visible:ring-emerald-500/20'
                   />
                   <button
                     type='button'
                     onClick={() => set_show_password(!show_password)}
-                    className='absolute top-1/2 right-3 -translate-y-1/2 cursor-pointer text-neutral-500 hover:text-neutral-300'
+                    className='absolute top-1/2 right-3 -translate-y-1/2 cursor-pointer text-white/40 hover:text-white/80'
                   >
                     {show_password ? <EyeOff size={18} /> : <Eye size={18} />}
                   </button>
@@ -138,19 +138,19 @@ export function UpdatePasswordForm({ onSubmit }: { onSubmit: (payload: UpdatePas
           name='password'
           render={({ field }) => (
             <FormItem>
-              <FormLabel className='text-neutral-300'>Nova senha</FormLabel>
+              <FormLabel className='text-white/80'>Nova senha</FormLabel>
               <FormControl>
                 <div className='relative'>
                   <Input
                     type={show_password ? 'text' : 'password'}
                     placeholder='••••••'
                     {...field}
-                    className='h-11 border-neutral-700 bg-neutral-800 pr-10 text-neutral-100 placeholder:text-neutral-500 focus-visible:ring-neutral-600'
+                    className='h-11 border-emerald-500/20 bg-black/40 pr-10 text-white placeholder:text-white/40 focus-visible:border-emerald-500/50 focus-visible:ring-emerald-500/20'
                   />
                   <button
                     type='button'
                     onClick={() => set_show_password(!show_password)}
-                    className='absolute top-1/2 right-3 -translate-y-1/2 cursor-pointer text-neutral-500 hover:text-neutral-300'
+                    className='absolute top-1/2 right-3 -translate-y-1/2 cursor-pointer text-white/40 hover:text-white/80'
                   >
                     {show_password ? <EyeOff size={18} /> : <Eye size={18} />}
                   </button>
@@ -168,19 +168,19 @@ export function UpdatePasswordForm({ onSubmit }: { onSubmit: (payload: UpdatePas
           name='confirmPassword'
           render={({ field }) => (
             <FormItem>
-              <FormLabel className='text-neutral-300'>Confirmar senha</FormLabel>
+              <FormLabel className='text-white/80'>Confirmar senha</FormLabel>
               <FormControl>
                 <div className='relative'>
                   <Input
                     type={show_password ? 'text' : 'password'}
                     placeholder='••••••'
                     {...field}
-                    className='h-11 border-neutral-700 bg-neutral-800 pr-10 text-neutral-100 placeholder:text-neutral-500 focus-visible:ring-neutral-600'
+                    className='h-11 border-emerald-500/20 bg-black/40 pr-10 text-white placeholder:text-white/40 focus-visible:border-emerald-500/50 focus-visible:ring-emerald-500/20'
                   />
                   <button
                     type='button'
                     onClick={() => set_show_password(!show_password)}
-                    className='absolute top-1/2 right-3 -translate-y-1/2 cursor-pointer text-neutral-500 hover:text-neutral-300'
+                    className='absolute top-1/2 right-3 -translate-y-1/2 cursor-pointer text-white/40 hover:text-white/80'
                   >
                     {show_password ? <EyeOff size={18} /> : <Eye size={18} />}
                   </button>
@@ -193,7 +193,7 @@ export function UpdatePasswordForm({ onSubmit }: { onSubmit: (payload: UpdatePas
 
         <Button
           type='submit'
-          className='mt-4 h-11 w-full bg-neutral-100 text-neutral-900 hover:bg-neutral-200 disabled:opacity-70'
+          className='relative h-11 w-full overflow-hidden border border-emerald-500 bg-emerald-500 text-white transition-all duration-300 hover:bg-emerald-600 disabled:border-emerald-500/30 disabled:bg-emerald-500/10 disabled:text-emerald-500/50'
           disabled={is_loading || !form.formState.isDirty || !form.formState.isValid}
         >
           {is_loading ? (
@@ -203,6 +203,7 @@ export function UpdatePasswordForm({ onSubmit }: { onSubmit: (payload: UpdatePas
           ) : (
             'Alterar senha'
           )}
+          <div className='absolute bottom-0 left-0 h-[2px] w-full bg-white/20'></div>
         </Button>
       </form>
     </Form>

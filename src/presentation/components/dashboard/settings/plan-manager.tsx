@@ -43,29 +43,32 @@ function NoSubscriptionVariant({
 
   return (
     <>
-      <div className='overflow-hidden rounded-xl border border-neutral-800 bg-neutral-900'>
+      <div className='relative overflow-hidden rounded-xl border border-emerald-500/20 bg-black/60 backdrop-blur-sm'>
         {/* Header banner */}
-        <div className='bg-gradient-to-r from-amber-600 to-amber-500 px-6 py-3 text-center'>
+        <div className='bg-gradient-to-r from-emerald-600/80 to-emerald-500/80 px-6 py-4 text-center'>
           <div className='flex items-center justify-center gap-2'>
             <GiftIcon className='h-5 w-5 text-white' />
             <span className='font-medium text-white'>Teste Grátis por 3 Dias</span>
           </div>
         </div>
 
-        <div className='p-6'>
+        <div className='absolute -bottom-40 -left-40 h-80 w-80 rounded-full bg-emerald-500/10 blur-3xl'></div>
+        <div className='absolute top-40 -right-20 h-60 w-60 rounded-full bg-emerald-500/5 blur-2xl'></div>
+
+        <div className='relative p-6'>
           {/* Plan title */}
           <div className='flex items-center'>
-            <div className='mr-4 flex h-14 w-14 items-center justify-center rounded-full bg-neutral-800 p-3'>
-              <Sparkles className='h-7 w-7 animate-pulse text-amber-400' />
+            <div className='mr-4 flex h-14 w-14 items-center justify-center rounded-full bg-emerald-500/10 p-3'>
+              <Sparkles className='h-7 w-7 animate-pulse text-emerald-400' />
             </div>
             <div>
               <h3 className='text-xl font-medium text-white'>Plano Premium</h3>
-              <p className='text-sm text-neutral-400'>Acesse todos os recursos premium</p>
+              <p className='text-sm text-white/60'>Acesse todos os recursos premium</p>
             </div>
           </div>
 
           {/* Plan pricing */}
-          <div className='mt-6 rounded-lg bg-neutral-800 p-4 text-center'>
+          <div className='mt-6 rounded-lg border border-emerald-500/20 bg-black/40 p-4 text-center backdrop-blur-sm'>
             {selectedPlan.recurrence === PlanRecurrenceEnum.MONTHLY ? (
               <div>
                 <span className='text-2xl font-bold text-white'>
@@ -74,16 +77,16 @@ function NoSubscriptionVariant({
                     currency: 'BRL',
                   }).format(selectedPlan.price)}
                 </span>
-                <span className='text-sm text-neutral-400'>/mês</span>
+                <span className='text-sm text-white/60'>/mês</span>
               </div>
             ) : (
               <div>
                 <div className='flex items-center justify-center gap-2'>
                   <span className='text-2xl font-bold text-white'>{formatCurrency(selectedPlan.price / 12)}</span>
-                  <span className='text-sm text-neutral-400'>/mês</span>
+                  <span className='text-sm text-white/60'>/mês</span>
                 </div>
-                <div className='mt-1 text-xs text-neutral-400'>
-                  <span className='text-green-400'>16% de desconto</span> • Anual:
+                <div className='mt-1 text-xs text-white/60'>
+                  <span className='text-emerald-400'>16% de desconto</span> • Anual:
                   {formatCurrency(selectedPlan.price)}
                   <span className='ml-1 line-through'>
                     ({formatCurrency(selectedPlan.price + selectedPlan.price * 0.16)})
@@ -95,39 +98,42 @@ function NoSubscriptionVariant({
 
           {/* Benefits */}
           <div className='mt-6 grid grid-cols-1 gap-3 sm:grid-cols-2'>
-            <div className='rounded-lg bg-neutral-800 p-3'>
-              <div className='flex items-center text-sm text-neutral-300'>
-                <Zap className='mr-2 h-4 w-4 text-amber-400' /> Devedores ilimitados
+            <div className='rounded-lg border border-emerald-500/10 bg-black/30 p-3 backdrop-blur-sm'>
+              <div className='flex items-center text-sm text-white/80'>
+                <Zap className='mr-2 h-4 w-4 text-emerald-400' /> Devedores ilimitados
               </div>
             </div>
-            <div className='rounded-lg bg-neutral-800 p-3'>
-              <div className='flex items-center text-sm text-neutral-300'>
-                <Zap className='mr-2 h-4 w-4 text-amber-400' /> Dívidas ilimitadas
+            <div className='rounded-lg border border-emerald-500/10 bg-black/30 p-3 backdrop-blur-sm'>
+              <div className='flex items-center text-sm text-white/80'>
+                <Zap className='mr-2 h-4 w-4 text-emerald-400' /> Dívidas ilimitadas
               </div>
             </div>
-            <div className='rounded-lg bg-neutral-800 p-3'>
-              <div className='flex items-center text-sm text-neutral-300'>
-                <ShieldCheck className='mr-2 h-4 w-4 text-amber-400' /> Relatórios avançados
+            <div className='rounded-lg border border-emerald-500/10 bg-black/30 p-3 backdrop-blur-sm'>
+              <div className='flex items-center text-sm text-white/80'>
+                <ShieldCheck className='mr-2 h-4 w-4 text-emerald-400' /> Relatórios avançados
               </div>
             </div>
-            <div className='rounded-lg bg-neutral-800 p-3'>
-              <div className='flex items-center text-sm text-neutral-300'>
-                <ShieldCheck className='mr-2 h-4 w-4 text-amber-400' /> Exportação de dados
+            <div className='rounded-lg border border-emerald-500/10 bg-black/30 p-3 backdrop-blur-sm'>
+              <div className='flex items-center text-sm text-white/80'>
+                <ShieldCheck className='mr-2 h-4 w-4 text-emerald-400' /> Exportação de dados
               </div>
             </div>
           </div>
 
           {/* Trial info */}
-          <div className='mt-6 rounded-lg bg-neutral-800 p-4'>
+          <div className='mt-6 rounded-lg border border-emerald-500/20 bg-black/40 p-4 backdrop-blur-sm'>
             <div className='flex items-center'>
-              <CreditCard className='mr-3 h-5 w-5 text-neutral-400' />
-              <p className='text-sm text-neutral-300'>
+              <CreditCard className='mr-3 h-5 w-5 text-emerald-400' />
+              <p className='text-sm text-white/80'>
                 É necessário informar um cartão de crédito, mas você não será cobrado durante o período de teste.
               </p>
             </div>
           </div>
 
-          <Button className='mt-6 h-10 w-full' variant='outline' onClick={() => set_modal_open(true)}>
+          <Button
+            onClick={() => set_modal_open(true)}
+            className='mt-6 h-11 w-full border border-emerald-500 bg-emerald-500 text-white transition-all duration-300 hover:bg-emerald-600'
+          >
             Começar agora
           </Button>
         </div>
@@ -171,24 +177,27 @@ function ActiveSubscriptionVariant({
 
   return (
     <>
-      <div className='overflow-hidden rounded-xl border border-neutral-800 bg-neutral-900'>
+      <div className='relative overflow-hidden rounded-xl border border-emerald-500/20 bg-black/60 backdrop-blur-sm'>
         {/* Header banner */}
-        <div className='bg-gradient-to-r from-green-900 to-green-700 px-6 py-3 text-center'>
+        <div className='bg-gradient-to-r from-emerald-700/80 to-emerald-600/80 px-6 py-4 text-center'>
           <div className='flex items-center justify-center gap-2'>
             <CheckCircle2 className='h-5 w-5 text-white' />
             <span className='font-medium text-white'>Sua assinatura está ativa</span>
           </div>
         </div>
 
-        <div className='p-6'>
+        <div className='absolute -bottom-40 -left-40 h-80 w-80 rounded-full bg-emerald-500/10 blur-3xl'></div>
+        <div className='absolute top-40 -right-20 h-60 w-60 rounded-full bg-emerald-500/5 blur-2xl'></div>
+
+        <div className='relative p-6'>
           {/* Plan title */}
           <div className='flex items-center'>
-            <div className='mr-4 flex h-14 w-14 items-center justify-center rounded-full bg-neutral-800 p-3'>
-              <Sparkles className='h-7 w-7 animate-pulse text-amber-400' />
+            <div className='mr-4 flex h-14 w-14 items-center justify-center rounded-full bg-emerald-500/10 p-3'>
+              <Sparkles className='h-7 w-7 animate-pulse text-emerald-400' />
             </div>
             <div>
               <h3 className='text-xl font-medium text-white'>Plano Premium</h3>
-              <p className='text-sm text-neutral-400'>
+              <p className='text-sm text-white/60'>
                 Renovação em {format(new Date(subscription?.endDate), 'dd/MM/yyyy')}
               </p>
             </div>
@@ -196,24 +205,24 @@ function ActiveSubscriptionVariant({
 
           {/* Plan features */}
           <div className='mt-6 grid grid-cols-1 gap-3 sm:grid-cols-2'>
-            <div className='rounded-lg bg-neutral-800 p-3'>
-              <div className='flex items-center text-sm text-neutral-300'>
-                <CheckCircle2 className='mr-2 h-4 w-4 text-amber-500' /> Devedores ilimitados
+            <div className='rounded-lg border border-emerald-500/10 bg-black/30 p-3 backdrop-blur-sm'>
+              <div className='flex items-center text-sm text-white/80'>
+                <CheckCircle2 className='mr-2 h-4 w-4 text-emerald-400' /> Devedores ilimitados
               </div>
             </div>
-            <div className='rounded-lg bg-neutral-800 p-3'>
-              <div className='flex items-center text-sm text-neutral-300'>
-                <CheckCircle2 className='mr-2 h-4 w-4 text-amber-500' /> Dívidas ilimitadas
+            <div className='rounded-lg border border-emerald-500/10 bg-black/30 p-3 backdrop-blur-sm'>
+              <div className='flex items-center text-sm text-white/80'>
+                <CheckCircle2 className='mr-2 h-4 w-4 text-emerald-400' /> Dívidas ilimitadas
               </div>
             </div>
-            <div className='rounded-lg bg-neutral-800 p-3'>
-              <div className='flex items-center text-sm text-neutral-300'>
-                <CheckCircle2 className='mr-2 h-4 w-4 text-amber-500' /> Relatórios avançados
+            <div className='rounded-lg border border-emerald-500/10 bg-black/30 p-3 backdrop-blur-sm'>
+              <div className='flex items-center text-sm text-white/80'>
+                <CheckCircle2 className='mr-2 h-4 w-4 text-emerald-400' /> Relatórios avançados
               </div>
             </div>
-            <div className='rounded-lg bg-neutral-800 p-3'>
-              <div className='flex items-center text-sm text-neutral-300'>
-                <CheckCircle2 className='mr-2 h-4 w-4 text-amber-500' /> Exportação de dados
+            <div className='rounded-lg border border-emerald-500/10 bg-black/30 p-3 backdrop-blur-sm'>
+              <div className='flex items-center text-sm text-white/80'>
+                <CheckCircle2 className='mr-2 h-4 w-4 text-emerald-400' /> Exportação de dados
               </div>
             </div>
           </div>
@@ -221,14 +230,14 @@ function ActiveSubscriptionVariant({
           <div className='mt-6 flex space-x-2'>
             <Button
               variant='outline'
-              className='h-10 border-neutral-700 bg-neutral-800 text-neutral-300 hover:bg-neutral-700'
+              className='h-11 flex-1 border-emerald-500/30 bg-black/40 text-white hover:bg-emerald-500/10 hover:text-emerald-400'
               onClick={() => set_update_payment_modal_open(true)}
             >
               Atualizar pagamento
             </Button>
             <Button
               variant='outline'
-              className='h-10 border-neutral-700 bg-neutral-800 text-red-400 hover:bg-neutral-700 hover:text-red-300'
+              className='h-11 flex-1 border-red-500/30 bg-black/40 text-red-400 hover:bg-red-500/10 hover:text-red-300'
               onClick={() => set_cancel_modal_open(true)}
             >
               Cancelar
@@ -278,7 +287,7 @@ function CanceledSubscriptionVariant({
 
   return (
     <>
-      <div className='overflow-hidden rounded-xl border border-neutral-800 bg-neutral-900'>
+      <div className='relative overflow-hidden rounded-xl border border-emerald-500/20 bg-black/60 backdrop-blur-sm'>
         {/* Header banner */}
         <div className='bg-gradient-to-r from-red-900 to-red-700 px-6 py-3 text-center'>
           <div className='flex items-center justify-center gap-2'>
@@ -287,32 +296,35 @@ function CanceledSubscriptionVariant({
           </div>
         </div>
 
-        <div className='p-6'>
+        <div className='absolute -bottom-40 -left-40 h-80 w-80 rounded-full bg-emerald-500/10 blur-3xl'></div>
+        <div className='absolute top-40 -right-20 h-60 w-60 rounded-full bg-emerald-500/5 blur-2xl'></div>
+
+        <div className='relative p-6'>
           {/* Plan title */}
           <div className='flex items-center'>
-            <div className='mr-4 flex h-14 w-14 items-center justify-center rounded-full bg-neutral-800 p-3'>
+            <div className='mr-4 flex h-14 w-14 items-center justify-center rounded-full bg-emerald-500/10 p-3'>
               <Sparkles className='h-7 w-7 animate-pulse text-amber-400' />
             </div>
             <div>
               <h3 className='text-xl font-medium text-white'>Plano Premium</h3>
-              <p className='text-sm text-neutral-400'>Sua assinatura foi cancelada. Reative para continuar.</p>
+              <p className='text-sm text-white/60'>Sua assinatura foi cancelada. Reative para continuar.</p>
             </div>
           </div>
 
           {/* Plan pricing */}
-          <div className='mt-6 rounded-lg bg-neutral-800 p-4 text-center'>
+          <div className='mt-6 rounded-lg border border-emerald-500/20 bg-black/40 p-4 text-center backdrop-blur-sm'>
             {selectedPlan.recurrence === PlanRecurrenceEnum.MONTHLY ? (
               <div>
                 <span className='text-2xl font-bold text-white'>{formatCurrency(selectedPlan.price)}</span>
-                <span className='text-sm text-neutral-400'>/mês</span>
+                <span className='text-sm text-white/60'>/mês</span>
               </div>
             ) : (
               <div>
                 <div className='flex items-center justify-center gap-2'>
                   <span className='text-2xl font-bold text-white'>{formatCurrency(selectedPlan.price / 12)}</span>
-                  <span className='text-sm text-neutral-400'>/mês</span>
+                  <span className='text-sm text-white/60'>/mês</span>
                 </div>
-                <div className='mt-1 text-xs text-neutral-400'>
+                <div className='mt-1 text-xs text-white/60'>
                   <span className='text-green-400'>16% de desconto</span> • Anual:
                   {formatCurrency(selectedPlan.price)}
                   <span className='ml-1 line-through'>
@@ -325,29 +337,33 @@ function CanceledSubscriptionVariant({
 
           {/* Plan features */}
           <div className='mt-6 grid grid-cols-1 gap-3 sm:grid-cols-2'>
-            <div className='rounded-lg bg-neutral-800 p-3'>
-              <div className='flex items-center text-sm text-neutral-300'>
+            <div className='rounded-lg border border-emerald-500/10 bg-black/30 p-3 backdrop-blur-sm'>
+              <div className='flex items-center text-sm text-white/80'>
                 <CheckCircle2 className='mr-2 h-4 w-4 text-amber-500' /> Devedores ilimitados
               </div>
             </div>
-            <div className='rounded-lg bg-neutral-800 p-3'>
-              <div className='flex items-center text-sm text-neutral-300'>
+            <div className='rounded-lg border border-emerald-500/10 bg-black/30 p-3 backdrop-blur-sm'>
+              <div className='flex items-center text-sm text-white/80'>
                 <CheckCircle2 className='mr-2 h-4 w-4 text-amber-500' /> Dívidas ilimitadas
               </div>
             </div>
-            <div className='rounded-lg bg-neutral-800 p-3'>
-              <div className='flex items-center text-sm text-neutral-300'>
+            <div className='rounded-lg border border-emerald-500/10 bg-black/30 p-3 backdrop-blur-sm'>
+              <div className='flex items-center text-sm text-white/80'>
                 <CheckCircle2 className='mr-2 h-4 w-4 text-amber-500' /> Relatórios avançados
               </div>
             </div>
-            <div className='rounded-lg bg-neutral-800 p-3'>
-              <div className='flex items-center text-sm text-neutral-300'>
+            <div className='rounded-lg border border-emerald-500/10 bg-black/30 p-3 backdrop-blur-sm'>
+              <div className='flex items-center text-sm text-white/80'>
                 <CheckCircle2 className='mr-2 h-4 w-4 text-amber-500' /> Exportação de dados
               </div>
             </div>
           </div>
 
-          <Button className='mt-6 h-10 w-full' variant='outline' onClick={() => set_reactivate_modal_open(true)}>
+          <Button
+            className='mt-6 h-10 w-full border border-emerald-500/30 bg-black/40 text-white hover:bg-emerald-500/10 hover:text-emerald-400'
+            variant='outline'
+            onClick={() => set_reactivate_modal_open(true)}
+          >
             Reativar assinatura
           </Button>
         </div>
@@ -391,7 +407,7 @@ function ExpiredSubscriptionVariant({
 
   return (
     <>
-      <div className='overflow-hidden rounded-xl border border-neutral-800 bg-neutral-900'>
+      <div className='relative overflow-hidden rounded-xl border border-emerald-500/20 bg-black/60 backdrop-blur-sm'>
         {/* Header banner */}
         <div className='bg-gradient-to-r from-red-900 to-red-700 px-6 py-3 text-center'>
           <div className='flex items-center justify-center gap-2'>
@@ -400,32 +416,35 @@ function ExpiredSubscriptionVariant({
           </div>
         </div>
 
-        <div className='p-6'>
+        <div className='absolute -bottom-40 -left-40 h-80 w-80 rounded-full bg-emerald-500/10 blur-3xl'></div>
+        <div className='absolute top-40 -right-20 h-60 w-60 rounded-full bg-emerald-500/5 blur-2xl'></div>
+
+        <div className='relative p-6'>
           {/* Plan title */}
           <div className='flex items-center'>
-            <div className='mr-4 flex h-14 w-14 items-center justify-center rounded-full bg-neutral-800 p-3'>
+            <div className='mr-4 flex h-14 w-14 items-center justify-center rounded-full bg-emerald-500/10 p-3'>
               <Sparkles className='h-7 w-7 animate-pulse text-amber-400' />
             </div>
             <div>
               <h3 className='text-xl font-medium text-white'>Plano Premium</h3>
-              <p className='text-sm text-neutral-400'>Sua assinatura expirou. Renove para continuar.</p>
+              <p className='text-sm text-white/60'>Sua assinatura expirou. Renove para continuar.</p>
             </div>
           </div>
 
           {/* Plan pricing */}
-          <div className='mt-6 rounded-lg bg-neutral-800 p-4 text-center'>
+          <div className='mt-6 rounded-lg border border-emerald-500/20 bg-black/40 p-4 text-center backdrop-blur-sm'>
             {selectedPlan.recurrence === PlanRecurrenceEnum.MONTHLY ? (
               <div>
                 <span className='text-2xl font-bold text-white'>{formatCurrency(selectedPlan.price)}</span>
-                <span className='text-sm text-neutral-400'>/mês</span>
+                <span className='text-sm text-white/60'>/mês</span>
               </div>
             ) : (
               <div>
                 <div className='flex items-center justify-center gap-2'>
                   <span className='text-2xl font-bold text-white'>{formatCurrency(selectedPlan.price / 12)}</span>
-                  <span className='text-sm text-neutral-400'>/mês</span>
+                  <span className='text-sm text-white/60'>/mês</span>
                 </div>
-                <div className='mt-1 text-xs text-neutral-400'>
+                <div className='mt-1 text-xs text-white/60'>
                   <span className='text-green-400'>16% de desconto</span> • Anual:
                   {formatCurrency(selectedPlan.price)}
                   <span className='ml-1 line-through'>
@@ -438,29 +457,33 @@ function ExpiredSubscriptionVariant({
 
           {/* Plan features */}
           <div className='mt-6 grid grid-cols-1 gap-3 sm:grid-cols-2'>
-            <div className='rounded-lg bg-neutral-800 p-3'>
-              <div className='flex items-center text-sm text-neutral-300'>
+            <div className='rounded-lg border border-emerald-500/10 bg-black/30 p-3 backdrop-blur-sm'>
+              <div className='flex items-center text-sm text-white/80'>
                 <CheckCircle2 className='mr-2 h-4 w-4 text-amber-500' /> Devedores ilimitados
               </div>
             </div>
-            <div className='rounded-lg bg-neutral-800 p-3'>
-              <div className='flex items-center text-sm text-neutral-300'>
+            <div className='rounded-lg border border-emerald-500/10 bg-black/30 p-3 backdrop-blur-sm'>
+              <div className='flex items-center text-sm text-white/80'>
                 <CheckCircle2 className='mr-2 h-4 w-4 text-amber-500' /> Dívidas ilimitadas
               </div>
             </div>
-            <div className='rounded-lg bg-neutral-800 p-3'>
-              <div className='flex items-center text-sm text-neutral-300'>
+            <div className='rounded-lg border border-emerald-500/10 bg-black/30 p-3 backdrop-blur-sm'>
+              <div className='flex items-center text-sm text-white/80'>
                 <CheckCircle2 className='mr-2 h-4 w-4 text-amber-500' /> Relatórios avançados
               </div>
             </div>
-            <div className='rounded-lg bg-neutral-800 p-3'>
-              <div className='flex items-center text-sm text-neutral-300'>
+            <div className='rounded-lg border border-emerald-500/10 bg-black/30 p-3 backdrop-blur-sm'>
+              <div className='flex items-center text-sm text-white/80'>
                 <CheckCircle2 className='mr-2 h-4 w-4 text-amber-500' /> Exportação de dados
               </div>
             </div>
           </div>
 
-          <Button className='mt-6 h-10 w-full' variant='outline' onClick={() => set_renew_modal_open(true)}>
+          <Button
+            className='mt-6 h-10 w-full border border-emerald-500/30 bg-black/40 text-white hover:bg-emerald-500/10 hover:text-emerald-400'
+            variant='outline'
+            onClick={() => set_renew_modal_open(true)}
+          >
             Renovar assinatura
           </Button>
         </div>
@@ -510,13 +533,15 @@ export function PlanManager({
       {/* Plan tabs */}
       {showPlanTabs && (
         <div className='mb-6'>
-          <div className='flex w-full rounded-lg bg-neutral-800 p-1'>
+          <div className='flex w-full rounded-lg border border-emerald-500/20 bg-black/60 p-1 backdrop-blur-sm'>
             {plans.map(plan => {
               return (
                 <button
                   key={plan.id}
                   className={`flex-1 rounded-md py-2 text-sm font-medium transition-colors ${
-                    selected_plan.id === plan.id ? 'bg-neutral-700 text-white' : 'text-neutral-300 hover:bg-neutral-700'
+                    selected_plan.id === plan.id
+                      ? 'bg-emerald-500/10 text-emerald-400'
+                      : 'text-white/80 hover:bg-emerald-500/5'
                   }`}
                   onClick={() => set_selected_plan(plan)}
                 >

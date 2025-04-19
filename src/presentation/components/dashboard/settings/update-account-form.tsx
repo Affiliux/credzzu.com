@@ -83,19 +83,19 @@ export function UpdateAccountForm({
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(handleSubmit)} className='space-y-4'>
+      <form onSubmit={form.handleSubmit(handleSubmit)} className='space-y-6'>
         <FormField
           control={form.control}
           name='name'
           render={({ field }) => (
             <FormItem>
-              <FormLabel className='text-neutral-300'>Nome completo</FormLabel>
+              <FormLabel className='text-white/80'>Nome completo</FormLabel>
               <FormControl>
                 <Input
                   placeholder='João Silva'
                   disabled={!enable}
                   {...field}
-                  className='h-11 border-neutral-700 bg-neutral-800 text-neutral-100 placeholder:text-neutral-500 focus-visible:ring-neutral-600'
+                  className='h-11 border-emerald-500/20 bg-black/40 text-white placeholder:text-white/40 focus-visible:border-emerald-500/50 focus-visible:ring-emerald-500/20'
                 />
               </FormControl>
               <FormMessage className='text-red-400' />
@@ -103,13 +103,13 @@ export function UpdateAccountForm({
           )}
         />
         <FormItem>
-          <FormLabel className='text-neutral-300'>Email</FormLabel>
+          <FormLabel className='text-white/80'>Email</FormLabel>
           <FormControl>
             <Input
               placeholder='seu@email.com'
               value={account.email}
               disabled
-              className='h-11 border-neutral-700 bg-neutral-800 text-neutral-100 placeholder:text-neutral-500 focus-visible:ring-neutral-600'
+              className='h-11 border-emerald-500/20 bg-black/40 text-white/60 placeholder:text-white/40'
             />
           </FormControl>
         </FormItem>
@@ -118,7 +118,7 @@ export function UpdateAccountForm({
           name='phone'
           render={({ field }) => (
             <FormItem>
-              <FormLabel className='text-neutral-300'>Telefone</FormLabel>
+              <FormLabel className='text-white/80'>Telefone</FormLabel>
               <FormControl>
                 <Input
                   placeholder='(00) 00000-0000'
@@ -127,7 +127,7 @@ export function UpdateAccountForm({
                   onChange={e => {
                     field.onChange(phoneMask(e.target.value))
                   }}
-                  className='h-11 border-neutral-700 bg-neutral-800 text-neutral-100 placeholder:text-neutral-500 focus-visible:ring-neutral-600'
+                  className='h-11 border-emerald-500/20 bg-black/40 text-white placeholder:text-white/40 focus-visible:border-emerald-500/50 focus-visible:ring-emerald-500/20'
                 />
               </FormControl>
               <FormMessage className='text-red-400' />
@@ -137,7 +137,7 @@ export function UpdateAccountForm({
 
         <Button
           type='submit'
-          className='mt-4 h-11 w-full bg-neutral-100 text-neutral-900 hover:bg-neutral-200 disabled:opacity-70'
+          className='relative h-11 w-full overflow-hidden border border-emerald-500 bg-emerald-500 text-white transition-all duration-300 hover:bg-emerald-600 disabled:border-emerald-500/30 disabled:bg-emerald-500/10 disabled:text-emerald-500/50'
           disabled={is_loading || !form.formState.isDirty || !form.formState.isValid || !enable}
         >
           {is_loading ? (
@@ -147,6 +147,7 @@ export function UpdateAccountForm({
           ) : (
             'Atualizar conta'
           )}
+          <div className='absolute bottom-0 left-0 h-[2px] w-full bg-white/20'></div>
         </Button>
       </form>
     </Form>

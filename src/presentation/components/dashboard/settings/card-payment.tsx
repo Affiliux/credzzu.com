@@ -279,10 +279,10 @@ export function CardPaymentModal({
 
   return (
     <Dialog open={is_open} onOpenChange={open => !open && onClose()}>
-      <DialogContent className='rounded-xl border border-neutral-800 bg-neutral-900 p-0 shadow-xl sm:max-w-[400px]'>
+      <DialogContent className='rounded-xl border border-emerald-500/20 bg-black/80 p-0 shadow-xl backdrop-blur-sm sm:max-w-[400px]'>
         <DialogHeader className='p-6 pb-0'>
-          <DialogTitle className='text-xl font-medium text-neutral-100'>{title}</DialogTitle>
-          <DialogDescription className='-mt-1 text-sm text-neutral-400'>{description}</DialogDescription>
+          <DialogTitle className='text-xl font-medium text-white'>{title}</DialogTitle>
+          <DialogDescription className='-mt-1 text-sm text-white/60'>{description}</DialogDescription>
         </DialogHeader>
 
         {status === 'success' && (
@@ -307,7 +307,7 @@ export function CardPaymentModal({
         {status === 'idle' && (
           <form onSubmit={handleSubmit} className='space-y-4 p-6 pt-4'>
             <div className='space-y-1'>
-              <Label htmlFor='name' className='text-sm font-normal text-neutral-400'>
+              <Label htmlFor='name' className='text-sm font-normal text-white/60'>
                 Nome no cartão
               </Label>
               <Input
@@ -318,14 +318,14 @@ export function CardPaymentModal({
                 onChange={handleChange}
                 onBlur={handleBlur}
                 required
-                className={`h-10 border-neutral-700/50 bg-neutral-800/50 text-neutral-200 focus:border-neutral-600 focus:ring-0 ${
+                className={`h-10 border-emerald-500/20 bg-black/40 text-white focus:border-emerald-500/30 focus:ring-0 ${
                   touched.name && errors.name ? 'border-red-500' : ''
                 }`}
               />
               {touched.name && errors.name && <p className='mt-1 text-xs text-red-500'>{errors.name}</p>}
             </div>
             <div className='space-y-1'>
-              <Label htmlFor='number' className='text-sm font-normal text-neutral-400'>
+              <Label htmlFor='number' className='text-sm font-normal text-white/60'>
                 Número do cartão
               </Label>
               <Input
@@ -336,7 +336,7 @@ export function CardPaymentModal({
                 onChange={handleChange}
                 onBlur={handleBlur}
                 required
-                className={`h-10 border-neutral-700/50 bg-neutral-800/50 text-neutral-200 focus:border-neutral-600 focus:ring-0 ${
+                className={`h-10 border-emerald-500/20 bg-black/40 text-white focus:border-emerald-500/30 focus:ring-0 ${
                   touched.number && errors.number ? 'border-red-500' : ''
                 }`}
               />
@@ -344,7 +344,7 @@ export function CardPaymentModal({
             </div>
             <div className='grid grid-cols-2 gap-4'>
               <div className='space-y-1'>
-                <Label htmlFor='expiry' className='text-sm font-normal text-neutral-400'>
+                <Label htmlFor='expiry' className='text-sm font-normal text-white/60'>
                   Validade
                 </Label>
                 <Input
@@ -355,14 +355,14 @@ export function CardPaymentModal({
                   onChange={handleChange}
                   onBlur={handleBlur}
                   required
-                  className={`h-10 border-neutral-700/50 bg-neutral-800/50 text-neutral-200 focus:border-neutral-600 focus:ring-0 ${
+                  className={`h-10 border-emerald-500/20 bg-black/40 text-white focus:border-emerald-500/30 focus:ring-0 ${
                     touched.expiry && errors.expiry ? 'border-red-500' : ''
                   }`}
                 />
                 {touched.expiry && errors.expiry && <p className='mt-1 text-xs text-red-500'>{errors.expiry}</p>}
               </div>
               <div className='space-y-1'>
-                <Label htmlFor='cvv' className='text-sm font-normal text-neutral-400'>
+                <Label htmlFor='cvv' className='text-sm font-normal text-white/60'>
                   CVV
                 </Label>
                 <Input
@@ -373,7 +373,7 @@ export function CardPaymentModal({
                   onChange={handleChange}
                   onBlur={handleBlur}
                   required
-                  className={`h-10 border-neutral-700/50 bg-neutral-800/50 text-neutral-200 focus:border-neutral-600 focus:ring-0 ${
+                  className={`h-10 border-emerald-500/20 bg-black/40 text-white focus:border-emerald-500/30 focus:ring-0 ${
                     touched.cvv && errors.cvv ? 'border-red-500' : ''
                   }`}
                 />
@@ -383,7 +383,7 @@ export function CardPaymentModal({
 
             <Button
               type='submit'
-              className='mt-6 h-10 w-full bg-neutral-100 font-medium text-neutral-900 hover:bg-neutral-200'
+              className='mt-6 h-10 w-full bg-emerald-500 font-medium text-white hover:bg-emerald-600'
               disabled={is_loading}
             >
               {is_loading ? 'Processando...' : button_text}

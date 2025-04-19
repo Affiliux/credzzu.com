@@ -14,10 +14,10 @@ import { api } from "../api";
  */
 
 export async function get_plans(): Promise<PlanProps[]> {
-  // try {
-  //   const { data: response } = await api.get(`plan/all`);
-  //   return response;
-  // } catch (error: AxiosError | any) {
-  //   throw new Error(error?.response.status);
-  // }
+   try {
+     const { data: response } = await api.get(`plan/all`);
+     return response;
+   } catch (error: AxiosError | any) {
+     throw new Error(error?.response.status);
+   }
 }

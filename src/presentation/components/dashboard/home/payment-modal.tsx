@@ -75,7 +75,7 @@ export function PaymentModal({
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogContent className='sm:max-w-[425px]'>
+      <DialogContent className='border-emerald-500/20 bg-black/95 backdrop-blur-xl sm:max-w-[425px]'>
         <AnimatePresence mode='wait'>
           {is_success ? (
             <SuccessAnimation message='Pagamento registrado com sucesso!' />
@@ -88,32 +88,51 @@ export function PaymentModal({
               transition={{ duration: 0.2 }}
             >
               <DialogHeader>
-                <DialogTitle>Registrar Pagamento</DialogTitle>
+                <DialogTitle className='text-white'>Registrar Pagamento</DialogTitle>
               </DialogHeader>
 
               <div className='grid gap-4 py-6'>
                 <div className='grid gap-2'>
-                  <Label htmlFor='description'>Descrição</Label>
-                  <Input id='description' value={selectedAlert.debtDescription} disabled className='bg-neutral-900' />
+                  <Label htmlFor='description' className='text-white/80'>
+                    Descrição
+                  </Label>
+                  <Input
+                    id='description'
+                    value={selectedAlert.debtDescription}
+                    disabled
+                    className='border-emerald-500/20 bg-black/60 text-white/60'
+                  />
                 </div>
 
                 <div className='grid gap-2'>
-                  <Label htmlFor='amount'>Valor Original</Label>
-                  <Input id='amount' value={formatCurrency(selectedAlert.amount)} disabled className='bg-neutral-900' />
+                  <Label htmlFor='amount' className='text-white/80'>
+                    Valor Original
+                  </Label>
+                  <Input
+                    id='amount'
+                    value={formatCurrency(selectedAlert.amount)}
+                    disabled
+                    className='border-emerald-500/20 bg-black/60 text-white/60'
+                  />
                 </div>
 
                 <div className='grid gap-2'>
-                  <Label htmlFor='paymentDate'>Data do Pagamento</Label>
+                  <Label htmlFor='paymentDate' className='text-white/80'>
+                    Data do Pagamento
+                  </Label>
                   <Input
                     id='paymentDate'
                     type='date'
                     value={paymentDate}
                     onChange={e => onPaymentDateChange(e.target.value)}
+                    className='border-emerald-500/20 bg-black/60 text-white focus-visible:ring-emerald-500/30'
                   />
                 </div>
 
                 <div className='grid gap-2'>
-                  <Label htmlFor='paymentAmount'>Valor Pago</Label>
+                  <Label htmlFor='paymentAmount' className='text-white/80'>
+                    Valor Pago
+                  </Label>
                   <Input
                     id='paymentAmount'
                     value={paymentAmount}
@@ -121,6 +140,7 @@ export function PaymentModal({
                       const masked = moneyMask(e.target.value)
                       onPaymentAmountChange(masked)
                     }}
+                    className='border-emerald-500/20 bg-black/60 text-white focus-visible:ring-emerald-500/30'
                   />
                 </div>
 
@@ -143,7 +163,7 @@ export function PaymentModal({
                           type='checkbox'
                           checked={redistributeRemaining}
                           onChange={e => onRedistributeRemainingChange(e.target.checked)}
-                          className='h-4 w-4 rounded border-neutral-700 bg-neutral-800 text-neutral-100'
+                          className='h-4 w-4 rounded border-emerald-500/20 bg-black/60 text-emerald-500'
                         />
                         <span className='text-sm text-amber-500'>Redistribuir valor restante em novas parcelas</span>
                       </label>
@@ -153,10 +173,19 @@ export function PaymentModal({
               </div>
 
               <div className='flex justify-end space-x-2'>
-                <Button variant='outline' onClick={onClose} disabled={is_loading}>
+                <Button
+                  variant='outline'
+                  onClick={onClose}
+                  disabled={is_loading}
+                  className='border-emerald-500/20 bg-black/60 text-white hover:bg-emerald-500/10 hover:text-emerald-400'
+                >
                   Cancelar
                 </Button>
-                <Button onClick={handleSubmit} disabled={!isPaymentValid() || is_loading}>
+                <Button
+                  onClick={handleSubmit}
+                  disabled={!isPaymentValid() || is_loading}
+                  className='bg-emerald-500 text-white hover:bg-emerald-600'
+                >
                   Registrar
                 </Button>
               </div>

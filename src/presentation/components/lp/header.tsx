@@ -47,7 +47,7 @@ export default function Header() {
         {/* Right-side actions (desktop) */}
         <div className='hidden items-center gap-3 md:flex lg:gap-6'>
           <Link
-            href='/login'
+            href='/auth/sign-in'
             className='relative text-sm font-medium text-white opacity-80 transition-all duration-300 after:absolute after:bottom-0 after:left-0 after:h-[1px] after:w-0 after:bg-white after:transition-all after:duration-300 hover:opacity-100 hover:after:w-full'
           >
             Entrar

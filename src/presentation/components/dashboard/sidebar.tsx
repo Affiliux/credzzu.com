@@ -5,6 +5,7 @@ import React, { useState } from 'react'
 import {
   BadgeDollarSign,
   BarChart3,
+  ChevronDown,
   ChevronRight,
   Home,
   LogOut,
@@ -29,6 +30,15 @@ import { Avatar, AvatarFallback } from '../ui/avatar'
 import { Button } from '../ui/button'
 import { Separator } from '../ui/separator'
 import { Badge } from '../ui/badge'
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuGroup,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from '../ui/dropdown-menu'
 
 const sidebarLinks = [
   {
@@ -73,10 +83,12 @@ export function DashboardSidebar({
   return (
     <>
       {/* Mobile overlay */}
-      {is_open && <div className='fixed inset-0 z-40 bg-black/80 md:hidden' onClick={() => set_open(false)} />}
+      {is_open && (
+        <div className='fixed inset-0 z-40 bg-black/90 backdrop-blur-sm md:hidden' onClick={() => set_open(false)} />
+      )}
 
       {/* Mobile toggle */}
-      <div className='flex items-center justify-between border-b border-neutral-700 px-6 py-4 md:hidden'>
+      <div className='flex items-center justify-between border-b border-neutral-800/50 bg-black px-6 py-4 md:hidden'>
         <div className='flex h-16 items-center'>
           <Link href='/' className='flex items-center gap-2'>
             <Image src='/logo.png' alt='Credzzu Logo' width={160} height={160} priority className='h-10 w-auto' />
@@ -86,7 +98,7 @@ export function DashboardSidebar({
         <Button
           variant='outline'
           size='icon'
-          className='border-neutral-700 bg-neutral-800 text-neutral-100 hover:bg-neutral-700'
+          className='border-emerald-500/30 bg-black text-white hover:bg-emerald-500/10 hover:text-emerald-400'
           onClick={() => set_open(!is_open)}
         >
           {is_open ? <X size={20} /> : <Menu size={20} />}
@@ -95,7 +107,7 @@ export function DashboardSidebar({
 
       {/* Sidebar */}
       <aside
-        className={`fixed inset-y-0 left-0 z-50 w-64 transform bg-neutral-800 transition-transform duration-200 ease-in-out md:translate-x-0 ${
+        className={`fixed inset-y-0 left-0 z-50 w-64 transform border-r border-emerald-500/10 bg-black/95 backdrop-blur-xl transition-transform duration-200 ease-in-out md:translate-x-0 ${
           is_open ? 'translate-x-0' : '-translate-x-full'
         }`}
       >
@@ -107,7 +119,7 @@ export function DashboardSidebar({
             </Link>
           </div>
 
-          <Separator className='bg-neutral-700' />
+          <Separator className='bg-emerald-500/20' />
 
           {/* Navigation */}
           <nav className='flex-1 space-y-1 px-3 py-4'>
@@ -124,14 +136,14 @@ export function DashboardSidebar({
                     isDisabled
                       ? 'cursor-not-allowed opacity-50'
                       : isActive
-                        ? 'bg-neutral-700 text-neutral-100'
-                        : 'text-neutral-400 hover:bg-neutral-700 hover:text-neutral-100'
+                        ? 'bg-emerald-500/10 text-emerald-400'
+                        : 'text-white/80 hover:bg-emerald-500/5 hover:text-white'
                   }`}
                 >
-                  <link.icon className='mr-3 h-5 w-5' />
+                  <link.icon className={`mr-3 h-5 w-5 ${isActive ? 'text-emerald-400' : ''}`} />
                   {link.title}
 
-                  {isDisabled && <Badge className='ml-auto'>{badge}</Badge>}
+                  {isDisabled && <Badge className='ml-auto bg-emerald-500/20 text-emerald-400'>{badge}</Badge>}
                 </Link>
               )
             })}
@@ -139,18 +151,18 @@ export function DashboardSidebar({
 
           {/* Pro Plan Widget */}
           {subscription?.status && subscription?.status === SubscriptionStatusEnum.ACTIVE && (
-            <div className='mx-3 mb-4 rounded-lg border border-amber-200/40 bg-neutral-700 p-4'>
+            <div className='mx-3 mb-4 rounded-lg border border-emerald-500/30 bg-gradient-to-b from-emerald-500/[0.08] to-transparent p-4 backdrop-blur-sm'>
               <div className='mb-2 flex items-center'>
-                <Sparkles className='mr-2 h-5 w-5 animate-pulse text-amber-400' />
-                <span className='font-medium text-neutral-100'>Assinatura Premium</span>
+                <Sparkles className='mr-2 h-5 w-5 animate-pulse text-emerald-400' />
+                <span className='font-medium text-white'>Assinatura Premium</span>
               </div>
-              <p className='mb-3 text-xs text-neutral-300'>
+              <p className='mb-3 text-xs text-white/80'>
                 Aproveite todos os recursos premium do Credzzu sem limitações.
               </p>
               <Button
                 variant='outline'
                 size='sm'
-                className='w-full border-neutral-600 bg-neutral-800 text-xs text-neutral-100 hover:bg-neutral-600'
+                className='w-full border-emerald-500/30 bg-black/50 text-xs text-white hover:bg-emerald-500/10 hover:text-emerald-400'
                 asChild
               >
                 <Link href='/dashboard/settings'>
@@ -162,18 +174,18 @@ export function DashboardSidebar({
           )}
 
           {subscription?.status && subscription?.status === SubscriptionStatusEnum.EXPIRED && (
-            <div className='mx-3 mb-4 rounded-lg border border-red-200/40 bg-neutral-700 p-4'>
+            <div className='mx-3 mb-4 rounded-lg border border-red-500/30 bg-gradient-to-b from-red-500/[0.08] to-transparent p-4 backdrop-blur-sm'>
               <div className='mb-2 flex items-center'>
                 <ShieldAlert className='mr-2 h-5 w-5 animate-pulse text-red-400' />
-                <span className='font-medium text-neutral-100'>Renove sua Assinatura</span>
+                <span className='font-medium text-white'>Renove sua Assinatura</span>
               </div>
-              <p className='mb-3 text-xs text-neutral-300'>
+              <p className='mb-3 text-xs text-white/80'>
                 Seu plano expirou. Renove para continuar aproveitando todos os recursos premium do Credzzu.
               </p>
               <Button
                 variant='outline'
                 size='sm'
-                className='w-full border-neutral-600 bg-neutral-800 text-xs text-neutral-100 hover:bg-neutral-600'
+                className='w-full border-red-500/30 bg-black/50 text-xs text-white hover:bg-red-500/10 hover:text-red-400'
                 asChild
               >
                 <Link href='/dashboard/settings'>
@@ -185,18 +197,18 @@ export function DashboardSidebar({
           )}
 
           {subscription?.status && subscription?.status === SubscriptionStatusEnum.CANCELED && (
-            <div className='mx-3 mb-4 rounded-lg border border-red-200/40 bg-neutral-700 p-4'>
+            <div className='mx-3 mb-4 rounded-lg border border-red-500/30 bg-gradient-to-b from-red-500/[0.08] to-transparent p-4 backdrop-blur-sm'>
               <div className='mb-2 flex items-center'>
                 <ShieldAlert className='mr-2 h-5 w-5 animate-pulse text-red-400' />
-                <span className='font-medium text-neutral-100'>Assinatura Cancelada</span>
+                <span className='font-medium text-white'>Assinatura Cancelada</span>
               </div>
-              <p className='mb-3 text-xs text-neutral-300'>
+              <p className='mb-3 text-xs text-white/80'>
                 Sua assinatura foi cancelada. Renove para continuar aproveitando todos os recursos premium do Credzzu.
               </p>
               <Button
                 variant='outline'
                 size='sm'
-                className='w-full border-neutral-600 bg-neutral-800 text-xs text-neutral-100 hover:bg-neutral-600'
+                className='w-full border-red-500/30 bg-black/50 text-xs text-white hover:bg-red-500/10 hover:text-red-400'
                 asChild
               >
                 <Link href='/dashboard/settings'>
@@ -208,18 +220,18 @@ export function DashboardSidebar({
           )}
 
           {!subscription?.status && (
-            <div className='mx-3 mb-4 rounded-lg border border-amber-200/40 bg-neutral-700 p-4'>
+            <div className='mx-3 mb-4 rounded-lg border border-emerald-500/30 bg-gradient-to-b from-emerald-500/[0.08] to-transparent p-4 backdrop-blur-sm'>
               <div className='mb-2 flex items-center'>
-                <Sparkles className='mr-2 h-5 w-5 animate-pulse text-amber-400' />
-                <span className='font-medium text-neutral-100'>Testar Grátis</span>
+                <Sparkles className='mr-2 h-5 w-5 animate-pulse text-emerald-400' />
+                <span className='font-medium text-white'>Testar Grátis</span>
               </div>
-              <p className='mb-3 text-xs text-neutral-300'>
+              <p className='mb-3 text-xs text-white/80'>
                 Experimente todos os recursos premium do Credzzu por 3 dias grátis.
               </p>
               <Button
                 variant='outline'
                 size='sm'
-                className='w-full border-neutral-600 bg-neutral-800 text-xs text-neutral-100 hover:bg-neutral-600'
+                className='w-full border-emerald-500/30 bg-black/50 text-xs text-white hover:bg-emerald-500/10 hover:text-emerald-400'
                 asChild
               >
                 <Link href='/dashboard/settings'>
@@ -231,44 +243,57 @@ export function DashboardSidebar({
           )}
 
           {/* User section */}
-          <div className='border-t border-neutral-700 p-4'>
-            <div className='flex items-center'>
-              <Avatar className='h-9 w-9'>
-                {/* <AvatarImage src='/placeholder.svg?height=36&width=36' alt='Avatar' /> */}
-                <AvatarFallback className='bg-neutral-700 text-neutral-200'>
-                  {account?.name?.split(' ')[0][0].toUpperCase()}
-                  {account?.name?.split(' ')[1][0].toUpperCase() ?? account?.name?.split(' ')[0][1].toUpperCase()}
-                </AvatarFallback>
-              </Avatar>
-              <div className='ml-3 flex-1 truncate'>
-                <p className='truncate text-sm font-medium text-neutral-100'>{account?.name}</p>
-                <p className='truncate text-xs text-neutral-400'>{account?.email}</p>
-              </div>
-            </div>
-
-            <div className='mt-4 flex flex-col space-y-2'>
-              <Button
-                variant='ghost'
-                size='sm'
-                className='justify-start text-neutral-400 hover:bg-neutral-700 hover:text-neutral-100'
-                asChild
+          <div className='border-t border-emerald-500/20 p-4'>
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <Button variant='ghost' className='flex w-full items-center justify-between px-0 hover:bg-transparent'>
+                  <div className='flex items-center'>
+                    <Avatar className='h-9 w-9 border border-emerald-500/30'>
+                      <AvatarFallback className='bg-emerald-500/10 text-emerald-400'>
+                        {account?.name?.split(' ')[0][0].toUpperCase()}
+                        {account?.name?.split(' ')[1][0].toUpperCase() ?? account?.name?.split(' ')[0][1].toUpperCase()}
+                      </AvatarFallback>
+                    </Avatar>
+                    <div className='ml-3 flex-1 truncate text-left'>
+                      <p className='truncate text-sm font-medium text-white'>{account?.name}</p>
+                      <p className='truncate text-xs text-white/60'>{account?.email}</p>
+                    </div>
+                  </div>
+                  <ChevronDown className='h-4 w-4 text-white/60' />
+                </Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent
+                align='end'
+                className='w-56 border-emerald-500/20 bg-black/95 text-white backdrop-blur-xl'
               >
-                <Link href='/dashboard/settings'>
-                  <Settings className='mr-2 h-4 w-4' />
-                  Configurações
-                </Link>
-              </Button>
-              <Button
-                type='button'
-                variant='ghost'
-                size='sm'
-                className='justify-start text-neutral-400 hover:bg-neutral-700 hover:text-neutral-100'
-                onClick={onSignOut}
-              >
-                <LogOut className='mr-2 h-4 w-4' />
-                Sair
-              </Button>
-            </div>
+                <DropdownMenuLabel className='font-normal'>
+                  <div className='flex flex-col space-y-1'>
+                    <p className='text-sm leading-none font-medium'>{account?.name}</p>
+                    <p className='text-xs leading-none text-white/60'>{account?.email}</p>
+                  </div>
+                </DropdownMenuLabel>
+                <DropdownMenuSeparator className='bg-emerald-500/20' />
+                <DropdownMenuGroup>
+                  <DropdownMenuItem
+                    className='hover:bg-emerald-500/10 hover:text-emerald-400 focus:bg-emerald-500/10 focus:text-emerald-400'
+                    asChild
+                  >
+                    <Link href='/dashboard/settings' className='flex w-full items-center'>
+                      <Settings className='mr-2 h-4 w-4' />
+                      <span>Configurações</span>
+                    </Link>
+                  </DropdownMenuItem>
+                </DropdownMenuGroup>
+                <DropdownMenuSeparator className='bg-emerald-500/20' />
+                <DropdownMenuItem
+                  onClick={onSignOut}
+                  className='hover:bg-emerald-500/10 hover:text-emerald-400 focus:bg-emerald-500/10 focus:text-emerald-400'
+                >
+                  <LogOut className='mr-2 h-4 w-4' />
+                  <span>Sair</span>
+                </DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
           </div>
         </div>
       </aside>
