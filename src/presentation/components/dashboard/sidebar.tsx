@@ -27,9 +27,8 @@ import { SubscriptionProps } from '@/application/interfaces/subscription'
 import { SubscriptionStatusEnum } from '@/application/lib/enums'
 
 import { Avatar, AvatarFallback } from '../ui/avatar'
-import { Button } from '../ui/button'
-import { Separator } from '../ui/separator'
 import { Badge } from '../ui/badge'
+import { Button } from '../ui/button'
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -39,6 +38,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from '../ui/dropdown-menu'
+import { Separator } from '../ui/separator'
 
 const sidebarLinks = [
   {
@@ -259,7 +259,7 @@ export function DashboardSidebar({
                       <p className='truncate text-xs text-white/60'>{account?.email}</p>
                     </div>
                   </div>
-                  <ChevronDown className='h-4 w-4 text-white/60' />
+                  <ChevronDown className='-ml-1 h-4 w-4 text-white/60' />
                 </Button>
               </DropdownMenuTrigger>
               <DropdownMenuContent
