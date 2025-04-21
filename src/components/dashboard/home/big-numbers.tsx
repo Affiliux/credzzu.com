@@ -43,7 +43,7 @@ export function BigNumbers({ bigNumbers, loading }: { bigNumbers: DashboardProps
               </div>
             </CardHeader>
             <CardContent className='p-0'>
-              <p className='text-xl font-bold text-white'>{formatCurrency(bigNumbers.totalBorrowed || 0)}</p>
+              <p className='text-2xl font-bold text-white'>{formatCurrency(bigNumbers.totalBorrowed || 0)}</p>
               <p className='mt-1 text-xs text-white/60'>Valor total emprestado para todos os devedores</p>
             </CardContent>
           </Card>
@@ -91,7 +91,7 @@ export function BigNumbers({ bigNumbers, loading }: { bigNumbers: DashboardProps
               </div>
             </CardHeader>
             <CardContent className='p-0'>
-              <p className='text-xl font-bold text-white'>{formatCurrency(bigNumbers.profitWithInterest || 0)}</p>
+              <p className='text-2xl font-bold text-white'>{formatCurrency(bigNumbers.profitWithInterest || 0)}</p>
               <p className='mt-1 text-xs text-white/60'>Ganhos provenientes dos juros das dívidas</p>
             </CardContent>
           </Card>
@@ -107,7 +107,7 @@ export function BigNumbers({ bigNumbers, loading }: { bigNumbers: DashboardProps
               </div>
             </CardHeader>
             <CardContent className='p-0'>
-              <p className='text-xl font-bold text-white'>{bigNumbers.numDebtors || 0}</p>
+              <p className='text-2xl font-bold text-white'>{bigNumbers.numDebtors || 0}</p>
               <p className='mt-1 text-xs text-white/60'>Número total de pessoas que devem valores</p>
             </CardContent>
           </Card>
@@ -123,7 +123,7 @@ export function BigNumbers({ bigNumbers, loading }: { bigNumbers: DashboardProps
               </div>
             </CardHeader>
             <CardContent className='p-0'>
-              <p className='text-xl font-bold text-white'>{bigNumbers.numOpenDebts || 0}</p>
+              <p className='text-2xl font-bold text-white'>{bigNumbers.numOpenDebts || 0}</p>
               <p className='mt-1 text-xs text-white/60'>Quantidade de dívidas pendentes de pagamento</p>
             </CardContent>
           </Card>
@@ -139,7 +139,7 @@ export function BigNumbers({ bigNumbers, loading }: { bigNumbers: DashboardProps
               </div>
             </CardHeader>
             <CardContent className='p-0'>
-              <p className='text-xl font-bold text-white'>{bigNumbers.numDebtsPaid || 0}</p>
+              <p className='text-2xl font-bold text-white'>{bigNumbers.numDebtsPaid || 0}</p>
               <p className='mt-1 text-xs text-white/60'>Quantidade de dívidas totalmente quitadas</p>
             </CardContent>
           </Card>
