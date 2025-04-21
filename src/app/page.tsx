@@ -2,14 +2,14 @@
 
 import React from 'react'
 
-import CTA from '@/presentation/components/lp/cta'
-import FAQ from '@/presentation/components/lp/faq'
-import Features from '@/presentation/components/lp/features'
-import Footer from '@/presentation/components/lp/footer'
-import Header from '@/presentation/components/lp/header'
-import Hero from '@/presentation/components/lp/hero'
-import HowItWorks from '@/presentation/components/lp/howitworks'
-import Pricing from '@/presentation/components/lp/pricing'
+import CTA from '@/components/lp/cta'
+import FAQ from '@/components/lp/faq'
+import Features from '@/components/lp/features'
+import Footer from '@/components/lp/footer'
+import Header from '@/components/lp/header'
+import Hero from '@/components/lp/hero'
+import HowItWorks from '@/components/lp/howitworks'
+import Pricing from '@/components/lp/pricing'
 
 export default function LandingPage() {
   return (

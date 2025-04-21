@@ -6,16 +6,18 @@ import { format } from 'date-fns'
 import { LoaderCircle, RefreshCcw } from 'lucide-react'
 import { toast } from 'sonner'
 
-import type { AlertsProps } from '@/application/interfaces/dashboard'
+import type { AlertsProps } from '@/interfaces/dashboard'
 
-import { useDashboard } from '@/application/contexts/DashboardContext'
+import { useDashboard } from '@/contexts/DashboardContext'
 
-import { DebtStatusEnum } from '@/application/lib/enums'
-import { moneyMask } from '@/application/lib/masks'
+import { DebtStatusEnum } from '@/lib/enums'
+import { moneyMask } from '@/lib/masks/money'
 
-import { Alerts } from '@/presentation/components/dashboard/home/alerts'
-import { BigNumbers } from '@/presentation/components/dashboard/home/big-numbers'
-import { PaymentModal } from '@/presentation/components/dashboard/home/payment-modal'
+import { Alerts } from '@/components/dashboard/home/alerts'
+import { BigNumbers } from '@/components/dashboard/home/big-numbers'
+import { PaymentModal } from '@/components/dashboard/home/payment-modal'
+import { Button } from '@/components/ui/button'
+import { removeMask } from '@/lib/masks/remove'
 
 export const runtime = 'edge'
 
@@ -67,7 +69,7 @@ export default function Page() {
       await onUpdateInstallment({
         id: selected_alert?.id,
         paymentDate: payment_date,
-        paidAmount: parseFloat(payment_amount.replace(/\D/g, '')),
+        paidAmount: parseFloat(payment_amount.replace('R$', '').replace('.', '').replace(',', '.')),
         status: DebtStatusEnum.PAID,
         recalculateRemaining: is_redistribute_remaining,
       })
@@ -99,11 +101,7 @@ export default function Page() {
     <div className='w-full space-y-6'>
       <div className='flex flex-col justify-between space-y-2 md:flex-row md:items-center md:space-y-0'>
         <h1 className='text-2xl font-bold text-neutral-100'>Dashboard</h1>
-        <button
-          onClick={handleGetData}
-          disabled={is_loading}
-          className='inline-flex items-center justify-center rounded-md bg-neutral-800 px-4 py-2 text-sm font-medium text-neutral-100 transition-colors hover:bg-neutral-700 disabled:cursor-not-allowed disabled:opacity-50'
-        >
+        <Button onClick={handleGetData} disabled={is_loading}>
           {is_loading ? (
             <>
               <LoaderCircle className='mr-2 h-4 w-4 animate-spin' />
@@ -115,7 +113,7 @@ export default function Page() {
               Atualizar
             </>
           )}
-        </button>
+        </Button>
       </div>
 
       {/* Big Numbers */}

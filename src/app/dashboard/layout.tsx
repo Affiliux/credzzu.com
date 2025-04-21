@@ -2,10 +2,10 @@
 
 import * as React from 'react'
 
-import { useAccount } from '@/application/contexts/AccountContext'
-import { useSubscription } from '@/application/contexts/SubscriptionContext'
+import { useAccount } from '@/contexts/AccountContext'
+import { useSubscription } from '@/contexts/SubscriptionContext'
 
-import { DashboardSidebar } from '@/presentation/components/dashboard/sidebar'
+import { DashboardSidebar } from '@/components/dashboard/sidebar'
 
 export default function Layout({ children }: { children: React.ReactNode }) {
   // contexts

@@ -4,18 +4,18 @@ import React from 'react'
 
 import { AlertCircle, CreditCard, Shield, User2 } from 'lucide-react'
 
-import { useAccount } from '@/application/contexts/AccountContext'
-import { useApplication } from '@/application/contexts/ApplicationContext'
-import { useSubscription } from '@/application/contexts/SubscriptionContext'
+import { useAccount } from '@/contexts/AccountContext'
+import { useApplication } from '@/contexts/ApplicationContext'
+import { useSubscription } from '@/contexts/SubscriptionContext'
 
-import { SubscriptionStatusEnum } from '@/application/lib/enums'
+import { SubscriptionStatusEnum } from '@/lib/enums'
 
-import { PlanManager } from '@/presentation/components/dashboard/settings/plan-manager'
-import { UpdateAccountForm } from '@/presentation/components/dashboard/settings/update-account-form'
-import { UpdatePasswordForm } from '@/presentation/components/dashboard/settings/update-password-form'
-import { Alert, AlertDescription, AlertTitle } from '@/presentation/components/ui/alert'
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/presentation/components/ui/card'
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/presentation/components/ui/tabs'
+import { PlanManager } from '@/components/dashboard/settings/plan-manager'
+import { UpdateAccountForm } from '@/components/dashboard/settings/update-account-form'
+import { UpdatePasswordForm } from '@/components/dashboard/settings/update-password-form'
+import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert'
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 
 export const runtime = 'edge'
 
@@ -23,7 +23,8 @@ export default function Page() {
   // contexts
   const { plans } = useApplication()
   const { account, onUpdateAccount, onUpdatePassword } = useAccount()
-  const { subscription, onCancelSubscription, onCreateSubscription, onUpdateSubscription } = useSubscription()
+  const { subscription, onCancelSubscription, onCreateSubscription, onUpdateSubscription, onReactivateSubscription } =
+    useSubscription()
 
   return (
     <div className='w-full space-y-6'>
@@ -75,6 +76,7 @@ export default function Page() {
                       onCancel={onCancelSubscription}
                       onCreate={onCreateSubscription}
                       onUpdate={onUpdateSubscription}
+                      onReactivate={onReactivateSubscription}
                     />
                   </div>
                 </CardContent>
