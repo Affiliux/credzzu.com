@@ -3,7 +3,7 @@
 import { useEffect, useState } from 'react'
 
 import { AnimatePresence, motion } from 'framer-motion'
-import { Check, Loader2 } from 'lucide-react'
+import { Loader2 } from 'lucide-react'
 import { useForm } from 'react-hook-form'
 import * as z from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
@@ -28,28 +28,36 @@ const createFormSchema = (documentType: 'CPF' | 'CNPJ') =>
     name: z
       .string()
       .min(2, 'Nome deve ter pelo menos 2 caracteres')
+      .max(100, 'Nome deve ter no máximo 100 caracteres')
       .transform(value => removeNonLetters(value).trim())
       .refine(value => validateName(value), 'Insira o nome completo'),
-    email: z.string().email('Email inválido'),
-    phone: z.string().min(14, 'Telefone inválido').max(15, 'Telefone inválido'),
+    email: z.string().email('Email inválido').max(100, 'Email deve ter no máximo 100 caracteres').toLowerCase(),
+    phone: z
+      .string()
+      .min(14, 'Telefone inválido')
+      .max(15, 'Telefone inválido')
+      .refine(value => {
+        const cleaned = value.replace(/\D/g, '')
+        return cleaned.length === 11 && /^[1-9]{2}[9]?[0-9]{8}$/.test(cleaned)
+      }, 'Telefone inválido'),
     address: z
       .string()
-      .min(5, 'Endereço deve ter pelo menos 5 caracteres')
+      .max(200, 'Endereço deve ter no máximo 200 caracteres')
       .optional()
       .or(z.literal(''))
       .transform(value => removeNonLetters(value).trim()),
     city: z
       .string()
-      .min(2, 'Cidade deve ter pelo menos 2 caracteres')
+      .max(50, 'Cidade deve ter no máximo 50 caracteres')
       .optional()
       .or(z.literal(''))
       .transform(value => removeNonLetters(value).trim()),
     state: z
       .string()
-      .min(2, 'Estado deve ter pelo menos 2 caracteres')
+      .max(2, 'Estado deve ter 2 caracteres')
       .optional()
       .or(z.literal(''))
-      .transform(value => removeNonLetters(value).trim()),
+      .transform(value => removeNonLetters(value).trim().toUpperCase()),
     documentType: z
       .enum(['CPF', 'CNPJ'], {
         required_error: 'Selecione um tipo de documento',
@@ -86,12 +94,12 @@ export function DebtorForm({ debtor, onSubmit, children, open, onOpenChange }: D
     defaultValues: {
       name: debtor?.name ?? '',
       email: debtor?.email ?? '',
-      phone: debtor?.phone ?? '',
+      phone: phoneMask(debtor?.phone ?? ''),
       address: debtor?.address ?? '',
       city: debtor?.city ?? '',
       state: debtor?.state ?? '',
       documentType: (debtor?.documentType as 'CPF' | 'CNPJ') ?? 'CPF',
-      documentNumber: debtor?.documentNumber ?? '',
+      documentNumber: documentMask(debtor?.documentNumber ?? '', document_type ?? 'CPF'),
     },
   })
 
@@ -103,6 +111,7 @@ export function DebtorForm({ debtor, onSubmit, children, open, onOpenChange }: D
       const data = {
         ...values,
         id: debtor?.id,
+        phone: `+55${values.phone.replace(/\D/g, '')}`,
       } as DebtorProps
 
       await onSubmit(data)
@@ -168,7 +177,7 @@ export function DebtorForm({ debtor, onSubmit, children, open, onOpenChange }: D
                           <FormItem>
                             <FormLabel className='text-white/80'>Nome</FormLabel>
                             <FormControl>
-                              <Input placeholder='Nome completo' {...field} />
+                              <Input maxLength={100} placeholder='Nome completo' {...field} />
                             </FormControl>
                             <FormMessage className='text-red-400/80' />
                           </FormItem>
@@ -182,7 +191,7 @@ export function DebtorForm({ debtor, onSubmit, children, open, onOpenChange }: D
                           <FormItem>
                             <FormLabel className='text-white/80'>Email</FormLabel>
                             <FormControl>
-                              <Input type='email' placeholder='Email' {...field} />
+                              <Input maxLength={100} type='email' placeholder='Email' {...field} />
                             </FormControl>
                             <FormMessage className='text-red-400/80' />
                           </FormItem>
@@ -197,6 +206,7 @@ export function DebtorForm({ debtor, onSubmit, children, open, onOpenChange }: D
                             <FormLabel className='text-white/80'>Telefone</FormLabel>
                             <FormControl>
                               <Input
+                                maxLength={15}
                                 placeholder='(00) 00000-0000'
                                 {...field}
                                 onChange={e => {
@@ -248,6 +258,7 @@ export function DebtorForm({ debtor, onSubmit, children, open, onOpenChange }: D
                             <FormLabel className='text-white/80'>Número do Documento</FormLabel>
                             <FormControl>
                               <Input
+                                maxLength={document_type === 'CPF' ? 14 : 18}
                                 placeholder={document_type === 'CPF' ? '000.000.000-00' : '00.000.000/0000-00'}
                                 {...field}
                                 onChange={e => {
@@ -271,7 +282,7 @@ export function DebtorForm({ debtor, onSubmit, children, open, onOpenChange }: D
                           <FormItem>
                             <FormLabel className='text-white/80'>Endereço</FormLabel>
                             <FormControl>
-                              <Input placeholder='Endereço completo' {...field} />
+                              <Input maxLength={200} placeholder='Endereço completo' {...field} />
                             </FormControl>
                             <FormMessage className='text-red-400/80' />
                           </FormItem>
@@ -285,7 +296,7 @@ export function DebtorForm({ debtor, onSubmit, children, open, onOpenChange }: D
                             <FormItem>
                               <FormLabel className='text-white/80'>Cidade</FormLabel>
                               <FormControl>
-                                <Input placeholder='Cidade' {...field} />
+                                <Input maxLength={50} placeholder='Cidade' {...field} />
                               </FormControl>
                               <FormMessage className='text-red-400/80' />
                             </FormItem>
@@ -298,7 +309,7 @@ export function DebtorForm({ debtor, onSubmit, children, open, onOpenChange }: D
                             <FormItem>
                               <FormLabel className='text-white/80'>Estado</FormLabel>
                               <FormControl>
-                                <Input placeholder='Estado' {...field} />
+                                <Input maxLength={2} placeholder='Estado' {...field} />
                               </FormControl>
                               <FormMessage className='text-red-400/80' />
                             </FormItem>

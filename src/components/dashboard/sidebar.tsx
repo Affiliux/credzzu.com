@@ -100,7 +100,7 @@ export function DashboardSidebar({
         <Button
           variant='outline'
           size='icon'
-          className='border-emerald-500/30 bg-black text-white hover:bg-emerald-500/10 hover:text-emerald-400'
+          className='z-50 border-emerald-500/30 bg-black text-white hover:bg-emerald-500/10 hover:text-emerald-400'
           onClick={() => set_open(!is_open)}
         >
           {is_open ? <X size={20} /> : <Menu size={20} />}
@@ -109,7 +109,7 @@ export function DashboardSidebar({
 
       {/* Sidebar */}
       <aside
-        className={`fixed inset-y-0 left-0 z-50 w-64 transform border-r border-emerald-500/10 bg-black/95 backdrop-blur-xl transition-transform duration-200 ease-in-out md:translate-x-0 ${
+        className={`fixed inset-y-0 left-0 z-50 w-3/4 transform border-r border-emerald-500/10 bg-black/95 backdrop-blur-xl transition-transform duration-200 ease-in-out md:w-64 md:translate-x-0 ${
           is_open ? 'translate-x-0' : '-translate-x-full'
         }`}
       >
@@ -134,6 +134,7 @@ export function DashboardSidebar({
                 <Link
                   key={link.href}
                   href={link.href}
+                  onClick={() => set_open(false)}
                   className={`flex items-center rounded-md px-3 py-2 text-sm font-medium ${
                     isDisabled
                       ? 'cursor-not-allowed opacity-50'
@@ -246,7 +247,7 @@ export function DashboardSidebar({
             </div>
           )}
 
-          {!subscription?.status && (
+          {subscription?.status && subscription?.status === SubscriptionStatusEnum.NO_EXIST && (
             <div className='mx-3 mb-4 rounded-lg border border-emerald-500/30 bg-gradient-to-b from-emerald-500/[0.08] to-transparent p-4 backdrop-blur-sm'>
               <div className='mb-2 flex items-center'>
                 <Sparkles className='mr-2 h-5 w-5 animate-pulse text-emerald-400' />

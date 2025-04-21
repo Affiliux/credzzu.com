@@ -2,7 +2,7 @@ import { Badge } from '@/components/ui/badge'
 
 export default function HowItWorks() {
   return (
-    <section id='how-it-works' className='relative w-full overflow-hidden bg-black py-16 md:py-24 lg:py-32'>
+    <section id='how-it-works' className='relative w-full overflow-hidden bg-black py-16 md:py-24 lg:pt-48 lg:pb-12'>
       {/* Background Elements */}
       <div className='absolute top-0 left-0 h-full w-full'>
         <div className='absolute -bottom-40 -left-40 h-80 w-80 rounded-full bg-emerald-500/5 blur-3xl'></div>

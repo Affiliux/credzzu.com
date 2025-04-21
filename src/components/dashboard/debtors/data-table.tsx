@@ -57,9 +57,9 @@ export function DataTable({
   }
 
   return (
-    <div className='mt-12 space-y-4 md:mt-0'>
+    <div className='mt-4 space-y-4 md:mt-0'>
       <div className='flex flex-row items-center justify-between gap-4'>
-        <div className='relative min-w-full md:min-w-[350px]'>
+        <div className='relative min-w-2/3 md:min-w-[350px]'>
           <Search className='absolute top-2.5 left-2 h-4 w-4 text-emerald-400/60' />
           <Input
             placeholder='Buscar nome, email ou telefone...'
@@ -137,7 +137,7 @@ export function DataTable({
             ) : data?.length === 0 ? (
               <TableRow>
                 <TableCell colSpan={6} className='h-40 px-4'>
-                  <div className='flex flex-col items-start md:items-center'>
+                  <div className='flex flex-col items-center'>
                     <p className='text-center text-base text-white/60 sm:text-sm'>Nenhum devedor cadastrado</p>
                     <p className='text-center text-sm text-white/40 sm:text-xs'>
                       Adicione um novo devedor para começar
@@ -152,15 +152,17 @@ export function DataTable({
                   className='cursor-pointer border-emerald-500/10 text-white hover:bg-emerald-500/5'
                   onClick={() => onViewDebts(debtor)}
                 >
-                  <TableCell className='font-medium'>{debtor.name || '-'}</TableCell>
-                  <TableCell>{debtor.email || '-'}</TableCell>
-                  <TableCell>{debtor.phone || '-'}</TableCell>
-                  <TableCell>
+                  <TableCell className='max-w-[200px] truncate font-medium'>{debtor.name || '-'}</TableCell>
+                  <TableCell className='max-w-[200px] truncate'>{debtor.email || '-'}</TableCell>
+                  <TableCell className='max-w-[150px] truncate'>{debtor.phone || '-'}</TableCell>
+                  <TableCell className='max-w-[200px] truncate'>
                     {debtor.documentType && debtor.documentNumber
                       ? `${debtor.documentType} - ${debtor.documentNumber}`
                       : '-'}
                   </TableCell>
-                  <TableCell>{debtor.city && debtor.state ? `${debtor.city}/${debtor.state}` : '-'}</TableCell>
+                  <TableCell className='max-w-[200px] truncate'>
+                    {debtor.city && debtor.state ? `${debtor.city}/${debtor.state}` : '-'}
+                  </TableCell>
                   <TableCell>
                     <DropdownMenu>
                       <DropdownMenuTrigger asChild>

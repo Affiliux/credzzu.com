@@ -1,7 +1,7 @@
 'use client'
 import React, { useCallback, useEffect, useRef, useState } from 'react'
 
-import { AnimatePresence, LayoutGroup, motion } from 'framer-motion'
+import { AnimatePresence, motion } from 'framer-motion'
 
 import { cn } from '@/lib/utils'
 
@@ -53,37 +53,22 @@ export const FlipWords = ({
           exit={{
             opacity: 0,
           }}
-          className={cn('inline-block text-left text-neutral-900 dark:text-neutral-100', className)}
+          className={cn('inline-block text-center whitespace-nowrap text-neutral-900 dark:text-neutral-100', className)}
           key={currentWord}
           style={{ position: 'absolute', left: 0, top: 0 }}
         >
-          {/* edit suggested by Sajal: https://x.com/DewanganSajal */}
-          {currentWord.split(' ').map((word, wordIndex) => (
+          {currentWord.split('').map((letter, letterIndex) => (
             <motion.span
-              key={word + wordIndex}
+              key={letterIndex}
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{
-                delay: wordIndex * 0.1,
-                duration: 0.2,
+                delay: letterIndex * 0.02,
+                duration: 0.1,
               }}
-              className='inline-block whitespace-nowrap'
+              className='inline-block'
             >
-              {word.split('').map((letter, letterIndex) => (
-                <motion.span
-                  key={word + letterIndex}
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  transition={{
-                    delay: wordIndex * 0.1 + letterIndex * 0.02,
-                    duration: 0.1,
-                  }}
-                  className='inline-block'
-                >
-                  {letter}
-                </motion.span>
-              ))}
-              <span className='inline-block'>&nbsp;</span>
+              {letter === ' ' ? '\u00A0' : letter}
             </motion.span>
           ))}
         </motion.div>

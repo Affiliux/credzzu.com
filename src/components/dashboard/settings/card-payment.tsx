@@ -41,7 +41,7 @@ const formSchema = z.object({
     .string()
     .min(1, 'Data de validade é obrigatória')
     .transform(value => removeNonNumbers(value))
-    .refine(value => validateExpiryDate(value), 'Data de validade inválida'),
+    .refine(value => !validateExpiryDate(value), 'Data de validade inválida'),
   cvv: z
     .string()
     .min(1, 'CVV é obrigatório')

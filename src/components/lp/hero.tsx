@@ -10,21 +10,21 @@ import { WavyBackground } from '@/components/ui/wavy-background'
 
 export default function Hero() {
   return (
-    <WavyBackground
-      containerClassName='w-full py-8'
-      className='mx-auto w-full max-w-7xl'
-      colors={['rgba(16, 185, 129, 0.4)', 'rgba(16, 185, 129, 0.2)', 'rgba(16, 185, 129, 0.1)']}
-      waveWidth={100}
-      backgroundFill='black'
-      blur={10}
-      speed='slow'
-      waveOpacity={0.5}
-    >
-      <div className='container mx-auto px-3 sm:px-6 md:-mt-20 lg:px-8'>
-        <div className='grid items-center gap-8 lg:grid-cols-2'>
-          <div className='flex flex-col justify-center space-y-6 md:space-y-8'>
-            <div className='space-y-4 md:space-y-6'>
-              <h1 className='text-4xl leading-tight font-bold tracking-tight text-white md:text-6xl'>
+    <div className='lg:mt-44'>
+      <WavyBackground
+        containerClassName='w-full'
+        className='mx-auto w-full max-w-7xl'
+        colors={['rgba(16, 185, 129, 0.4)', 'rgba(16, 185, 129, 0.2)', 'rgba(16, 185, 129, 0.1)']}
+        waveWidth={100}
+        backgroundFill='black'
+        blur={15}
+        speed='slow'
+        waveOpacity={0.5}
+      >
+        <div className='container mx-auto px-3 sm:px-6 lg:px-8'>
+          <div className='flex flex-col items-center gap-12'>
+            <div className='flex w-full flex-col items-start text-left md:items-center md:text-center'>
+              <h1 className='max-w-3xl text-left text-4xl leading-tight font-bold tracking-tight text-white md:text-center md:text-6xl'>
                 <span className='font-light'>Receba de quem</span>{' '}
                 <FlipWords
                   words={['te deve dinheiro', 'você emprestou', 'precisa te pagar']}
@@ -32,45 +32,46 @@ export default function Hero() {
                   duration={2500}
                 />
               </h1>
-              <p className='max-w-xl text-lg text-white/80 md:text-xl'>
+
+              <p className='mt-4 max-w-2xl text-left text-lg text-white/80 md:text-center md:text-xl'>
                 Credzzu ajuda você a rastrear dinheiro devido por amigos, parentes, conhecidos e torna a cobrança
                 simples e sem estresse.
               </p>
+
+              <div className='mt-8 flex w-full flex-col items-stretch gap-3 sm:flex-row sm:items-center sm:justify-center'>
+                <Button
+                  asChild
+                  size='lg'
+                  className='group relative overflow-hidden border-0 bg-emerald-500 px-6 py-5 text-sm text-white shadow-[0_0_15px_rgba(16,185,129,0.3)] hover:bg-emerald-600 hover:shadow-[0_0_25px_rgba(16,185,129,0.5)] md:px-8 md:py-6 md:text-base'
+                >
+                  <Link href='/signup' className='flex items-center gap-3'>
+                    <span>Começar Agora</span>
+                    <ArrowRight className='h-4 w-4 transition-transform duration-300 group-hover:translate-x-1' />
+                  </Link>
+                </Button>
+                <Button
+                  variant='outline'
+                  size='lg'
+                  className='border border-white/20 bg-black/50 px-6 py-5 text-sm text-white backdrop-blur-sm hover:border-white/30 hover:bg-white/5 md:px-8 md:py-6 md:text-base'
+                >
+                  <Link href='#how-it-works'>Saiba Mais</Link>
+                </Button>
+              </div>
             </div>
-            <div className='flex flex-col gap-3 sm:flex-row'>
-              <Button
-                asChild
-                size='lg'
-                className='group relative overflow-hidden border-0 bg-emerald-500 px-6 py-5 text-sm text-white shadow-[0_0_15px_rgba(16,185,129,0.3)] hover:bg-emerald-600 hover:shadow-[0_0_25px_rgba(16,185,129,0.5)] md:px-8 md:py-6 md:text-base'
-              >
-                <Link href='/signup' className='flex items-center gap-3'>
-                  <span>Começar Agora</span>
-                  <ArrowRight className='h-4 w-4 transition-transform duration-300 group-hover:translate-x-1' />
-                </Link>
-              </Button>
-              <Button
-                variant='outline'
-                size='lg'
-                className='border border-white/20 bg-black/50 px-6 py-5 text-sm text-white backdrop-blur-sm hover:border-white/30 hover:bg-white/5 md:px-8 md:py-6 md:text-base'
-              >
-                <Link href='#how-it-works'>Saiba Mais</Link>
-              </Button>
-            </div>
-          </div>
-          <div className='mt-6 flex justify-center lg:mt-0'>
-            <div className='relative'>
+
+            <div className='relative w-full'>
               <div className='absolute inset-0 -m-10 rounded-full bg-gradient-to-br from-emerald-500/20 to-transparent opacity-30 blur-3xl'></div>
               <Image
-                src='/placeholder.svg?height=550&width=550'
-                width={550}
-                height={550}
+                src='/hero.png'
+                width={1200}
+                height={800}
                 alt='Prévia do Dashboard'
-                className='xs:max-w-sm relative z-10 aspect-square w-full max-w-[280px] rounded-xl object-cover shadow-xl sm:max-w-md md:max-w-lg lg:max-w-xl xl:max-w-2xl'
+                className='relative z-10 w-full rounded-xl object-cover shadow-xl'
               />
             </div>
           </div>
         </div>
-      </div>
-    </WavyBackground>
+      </WavyBackground>
+    </div>
   )
 }

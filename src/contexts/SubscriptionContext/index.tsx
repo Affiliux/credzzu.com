@@ -17,6 +17,8 @@ import type {
   UpdateSubscriptionPayloadProps,
 } from '@/interfaces/subscription'
 
+import { SubscriptionStatusEnum } from '@/lib/enums'
+
 import type { SubscriptionContextType, SubscriptionProviderProps } from './types'
 import { useAccount } from '../AccountContext'
 
@@ -34,7 +36,7 @@ export default function SubscriptionProvider({ children }: SubscriptionProviderP
       const response = await get_subscription()
 
       if (response) set_subscription(response)
-      else set_subscription(null)
+      else set_subscription({ ...(subscription as SubscriptionProps), status: SubscriptionStatusEnum.NO_EXIST })
     } catch (error: any) {
       console.error(error)
       throw new Error(error.message)

@@ -5,6 +5,7 @@ export enum SubscriptionStatusEnum {
   CANCELED = 'CANCELED',
   EXPIRED = 'EXPIRED',
   PENDING_CANCELLATION = 'PENDING_CANCELLATION',
+  NO_EXIST = 'NO_EXIST',
 }
 
 export enum PlanRecurrenceEnum {

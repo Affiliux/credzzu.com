@@ -637,7 +637,7 @@ export function PlanManager({
   onReactivate,
 }: {
   plans: PlanProps[]
-  subscription?: SubscriptionProps
+  subscription?: SubscriptionProps | null
   onCancel: () => Promise<void>
   onCreate: (payload: CreateSubscriptionPayloadProps) => Promise<void>
   onUpdate: (payload: UpdateSubscriptionPayloadProps) => Promise<void>
@@ -688,10 +688,18 @@ export function PlanManager({
 
       {/* Plan component */}
       {!subscription ? (
-        <NoSubscriptionVariant onCreate={onCreate} selectedPlan={selected_plan} />
+        <div className='flex animate-pulse flex-col gap-4'>
+          <div className='h-24 w-full rounded-lg bg-emerald-500/10' />
+          <div className='h-12 w-full rounded-lg bg-emerald-500/10' />
+          <div className='flex flex-col gap-2'>
+            <div className='h-4 w-1/3 rounded-lg bg-emerald-500/10' />
+            <div className='h-4 w-1/2 rounded-lg bg-emerald-500/10' />
+            <div className='h-4 w-2/3 rounded-lg bg-emerald-500/10' />
+          </div>
+        </div>
       ) : (
         (() => {
-          switch (subscription.status) {
+          switch (subscription?.status) {
             case SubscriptionStatusEnum.ACTIVE:
               return <ActiveSubscriptionVariant subscription={subscription} onCancel={onCancel} onUpdate={onUpdate} />
             case SubscriptionStatusEnum.CANCELED:
@@ -718,6 +726,8 @@ export function PlanManager({
                   selectedPlan={selected_plan}
                 />
               )
+            case SubscriptionStatusEnum.NO_EXIST:
+              return <NoSubscriptionVariant onCreate={onCreate} selectedPlan={selected_plan} />
             default:
               return <NoSubscriptionVariant onCreate={onCreate} selectedPlan={selected_plan} />
           }

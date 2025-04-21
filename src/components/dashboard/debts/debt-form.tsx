@@ -47,10 +47,10 @@ interface DebtFormProps {
   children: React.ReactNode
   open: boolean
   debtorId?: string
-  onSubmit: (data: CreateDebtPayloadProps | UpdateDebtPayloadProps) => Promise<void>
-  onOpenChange: (open: boolean) => void
   initialData?: CreateDebtPayloadProps | UpdateDebtPayloadProps
   is_loading?: boolean
+  onSubmit: (data: CreateDebtPayloadProps | UpdateDebtPayloadProps) => Promise<void>
+  onOpenChange: (open: boolean) => void
 }
 
 export function DebtForm({

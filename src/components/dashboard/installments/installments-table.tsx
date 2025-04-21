@@ -82,7 +82,7 @@ export function InstallmentsTable({ data, debtor, is_loading = false, onUpdateIn
   }
 
   return (
-    <div className='mt-12 space-y-4 md:mt-0'>
+    <div className='mt-4 space-y-4 md:mt-0'>
       <div className='overflow-hidden rounded-lg border border-emerald-500/20 bg-black/60 backdrop-blur-sm'>
         <Table>
           <TableHeader>
@@ -126,7 +126,7 @@ export function InstallmentsTable({ data, debtor, is_loading = false, onUpdateIn
             ) : data?.length === 0 ? (
               <TableRow>
                 <TableCell colSpan={7} className='h-40 px-4'>
-                  <div className='flex flex-col items-start md:items-center'>
+                  <div className='flex flex-col items-center'>
                     <p className='text-center text-base text-white/60 sm:text-sm'>Nenhuma parcela encontrada</p>
                   </div>
                 </TableCell>
