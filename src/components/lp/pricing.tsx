@@ -80,6 +80,10 @@ export default function Pricing() {
                       </li>
                       <li className='flex items-start'>
                         <CheckCircle className='mr-3 h-4 w-4 shrink-0 text-emerald-400 md:h-5 md:w-5' />
+                        <span className='text-white/80'>Mensagens por whatsapp e email</span>
+                      </li>
+                      <li className='flex items-start'>
+                        <CheckCircle className='mr-3 h-4 w-4 shrink-0 text-emerald-400 md:h-5 md:w-5' />
                         <span className='text-white/80'>Lembretes automáticos de pagamento</span>
                       </li>
                     </ul>
@@ -91,7 +95,7 @@ export default function Pricing() {
                     className='group relative w-full overflow-hidden border border-white/20 bg-transparent py-2.5 text-sm text-white transition-all duration-300 hover:border-white/30 hover:bg-white/5 md:py-3 md:text-base'
                     asChild
                   >
-                    <Link href='/signup' className='flex items-center justify-center'>
+                    <Link href='/auth/sign-up' className='flex items-center justify-center'>
                       <span className='z-10'>Começar Grátis</span>
                       <span className='absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/10 to-transparent opacity-0 transition-all duration-500 group-hover:translate-x-full group-hover:opacity-100'></span>
                     </Link>
@@ -145,6 +149,10 @@ export default function Pricing() {
                       </li>
                       <li className='flex items-start'>
                         <CheckCircle className='mr-3 h-4 w-4 shrink-0 text-emerald-400 md:h-5 md:w-5' />
+                        <span className='text-white/80'>Mensagens por whatsapp e email</span>
+                      </li>
+                      <li className='flex items-start'>
+                        <CheckCircle className='mr-3 h-4 w-4 shrink-0 text-emerald-400 md:h-5 md:w-5' />
                         <span className='text-white/80'>Cancelamento sem taxas a qualquer momento</span>
                       </li>
                     </ul>
@@ -156,7 +164,7 @@ export default function Pricing() {
                     className='group relative w-full overflow-hidden border-0 bg-emerald-500 py-2.5 text-sm text-white shadow-[0_0_1rem_rgba(16,185,129,0.3)] transition-all duration-300 hover:bg-emerald-600 hover:shadow-[0_0_2rem_rgba(16,185,129,0.5)] md:py-3 md:text-base'
                     asChild
                   >
-                    <Link href='/signup' className='flex items-center justify-center'>
+                    <Link href='/auth/sign-up' className='flex items-center justify-center'>
                       <span className='z-10'>Assinar Premium</span>
                       <span className='absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/20 to-transparent opacity-0 transition-all duration-500 group-hover:translate-x-full group-hover:opacity-100'></span>
                     </Link>

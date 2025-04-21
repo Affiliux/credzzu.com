@@ -42,7 +42,7 @@ export default function CTA() {
               size='lg'
               className='group relative bg-black px-6 py-5 text-sm font-light text-white hover:bg-black/90 md:px-8 md:py-7 md:text-base'
             >
-              <Link href='/signup' className='flex items-center gap-4 pr-2 md:gap-8 md:pr-4'>
+              <Link href='/auth/sign-up' className='flex items-center gap-4 pr-2 md:gap-8 md:pr-4'>
                 <span>Comece sua jornada hoje</span>
                 <span className='flex h-6 w-6 items-center justify-center rounded-full bg-emerald-500 text-black transition-all duration-300 group-hover:bg-white md:h-8 md:w-8'>
                   <ArrowRight className='h-3 w-3 md:h-4 md:w-4' />
