@@ -12,15 +12,17 @@ import type {
   DebtorProps,
   DeleteDebtorPayloadProps,
   UpdateDebtorPayloadProps,
-} from '@/application/interfaces/dashboard'
+} from '@/interfaces/dashboard'
 
-import { useDashboard } from '@/application/contexts/DashboardContext'
+import { useDashboard } from '@/contexts/DashboardContext'
+import { useSubscription } from '@/contexts/SubscriptionContext'
 
-import { DataTable } from '@/presentation/components/dashboard/debtors/data-table'
-import { DebtorForm } from '@/presentation/components/dashboard/debtors/debtor-form'
-import { DeleteDialog } from '@/presentation/components/dashboard/debtors/delete-dialog'
-import { DebtForm } from '@/presentation/components/dashboard/debts/debt-form'
-import { Button } from '@/presentation/components/ui/button'
+import { DataTable } from '@/components/dashboard/debtors/data-table'
+import { DebtorForm } from '@/components/dashboard/debtors/debtor-form'
+import { DeleteDialog } from '@/components/dashboard/debtors/delete-dialog'
+import { DebtForm } from '@/components/dashboard/debts/debt-form'
+import { LockedScreen } from '@/components/dashboard/locked-screen'
+import { Button } from '@/components/ui/button'
 
 export const runtime = 'edge'
 
@@ -29,6 +31,7 @@ export default function Page() {
   const router = useRouter()
 
   // contexts
+  const { subscription } = useSubscription()
   const { debtors, pagination, onGetDebtors, onCreateDebtor, onUpdateDebtor, onDeleteDebtor, onCreateDebt } =
     useDashboard()
 
@@ -180,72 +183,74 @@ export default function Page() {
 
   // render
   return (
-    <div className='w-full space-y-6'>
-      <div className='flex flex-col justify-between space-y-2 md:flex-row md:items-center md:space-y-0'>
-        <h1 className='text-2xl font-bold text-neutral-100'>Devedores</h1>
-        <DebtorForm onSubmit={handleCreateDebtor} open={is_create_sheet_open} onOpenChange={set_is_create_sheet_open}>
-          <Button>
-            <Plus className='mr-2 h-4 w-4' />
-            Novo Devedor
-          </Button>
-        </DebtorForm>
+    <LockedScreen subscription={subscription}>
+      <div className='flex h-full flex-col space-y-6'>
+        <div className='flex flex-col justify-between space-y-2 md:flex-row md:items-center md:space-y-0'>
+          <h1 className='text-2xl font-bold text-neutral-100'>Devedores</h1>
+          <DebtorForm onSubmit={handleCreateDebtor} open={is_create_sheet_open} onOpenChange={set_is_create_sheet_open}>
+            <Button>
+              <Plus className='mr-2 h-4 w-4' />
+              Novo Devedor
+            </Button>
+          </DebtorForm>
+        </div>
+
+        <DataTable
+          data={debtors}
+          onSearch={handleSearch}
+          onDelete={id => {
+            const debtor = debtors.find(d => d.id === id)
+
+            if (debtor) {
+              set_selected_debtor(debtor)
+              set_is_delete_dialog_open(true)
+            }
+          }}
+          onEdit={debtor => {
+            set_editing_debtor(debtor)
+            set_is_edit_sheet_open(true)
+          }}
+          onCreateDebt={handleCreateDebt}
+          onViewDebts={handleViewDebts}
+          is_loading={is_loading}
+          pagination={pagination}
+          onPageChange={handlePageChange}
+          onLimitChange={handleLimitChange}
+        />
+
+        {selected_debtor && (
+          <DeleteDialog
+            open={is_delete_dialog_open}
+            debtor={selected_debtor}
+            onDelete={handleDeleteDebtor}
+            onOpenChange={set_is_delete_dialog_open}
+          >
+            <div />
+          </DeleteDialog>
+        )}
+
+        {editing_debtor && (
+          <DebtorForm
+            open={is_edit_sheet_open}
+            debtor={editing_debtor}
+            onSubmit={handleUpdateDebtor}
+            onOpenChange={set_is_edit_sheet_open}
+          >
+            <div />
+          </DebtorForm>
+        )}
+
+        {selected_debtor_for_debt && (
+          <DebtForm
+            open={is_create_debt_sheet_open}
+            debtorId={selected_debtor_for_debt.id!}
+            onSubmit={handleSubmitDebt}
+            onOpenChange={set_is_create_debt_sheet_open}
+          >
+            <div />
+          </DebtForm>
+        )}
       </div>
-
-      <DataTable
-        data={debtors}
-        onSearch={handleSearch}
-        onDelete={id => {
-          const debtor = debtors.find(d => d.id === id)
-
-          if (debtor) {
-            set_selected_debtor(debtor)
-            set_is_delete_dialog_open(true)
-          }
-        }}
-        onEdit={debtor => {
-          set_editing_debtor(debtor)
-          set_is_edit_sheet_open(true)
-        }}
-        onCreateDebt={handleCreateDebt}
-        onViewDebts={handleViewDebts}
-        is_loading={is_loading}
-        pagination={pagination}
-        onPageChange={handlePageChange}
-        onLimitChange={handleLimitChange}
-      />
-
-      {selected_debtor && (
-        <DeleteDialog
-          open={is_delete_dialog_open}
-          debtor={selected_debtor}
-          onDelete={handleDeleteDebtor}
-          onOpenChange={set_is_delete_dialog_open}
-        >
-          <div />
-        </DeleteDialog>
-      )}
-
-      {editing_debtor && (
-        <DebtorForm
-          open={is_edit_sheet_open}
-          debtor={editing_debtor}
-          onSubmit={handleUpdateDebtor}
-          onOpenChange={set_is_edit_sheet_open}
-        >
-          <div />
-        </DebtorForm>
-      )}
-
-      {selected_debtor_for_debt && (
-        <DebtForm
-          open={is_create_debt_sheet_open}
-          debtorId={selected_debtor_for_debt.id!}
-          onSubmit={handleSubmitDebt}
-          onOpenChange={set_is_create_debt_sheet_open}
-        >
-          <div />
-        </DebtForm>
-      )}
-    </div>
+    </LockedScreen>
   )
 }

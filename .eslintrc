@@ -33,20 +33,19 @@
               ["^@next$", "^next$"],
               ["^[a-z]", "^@[a-z]"],
               //
-              ["^@/infrastructure/http", "^@/infrastructure/storage"],
+              ["^@/http", "^@/storage"],
               //
-              ["^@/application/interfaces"],
+              ["^@/interfaces"],
               //
-              ["^@/application/contexts"],
+              ["^@/contexts"],
               //
-              ["^@/application/lib", "^@/application/lib/helpers", "^@/application/lib/validation"],
+              ["^@/lib", "^@/lib/helpers", "^@/lib/validators", "^@/lib/formatters", "^@/lib/masks"],
               //
-              ["^@/application/hooks"],
+              ["^@/hooks"],
               //
-              ["^@/presentation/screens"],
-              ["^@/presentation/translate"],
-              ["^@/presentation/components"],
-              ["^@/presentation/commons"],
+              ["^@/screens"],
+              ["^@/translate"],
+              ["^@/components"],
               //
               ["^\\./(?=.*/)(?!/?$)", "^\\.(?!/?$)", "^\\./?$", "^\\.\\.(?!/?$)", "^\\.\\./?$"],
             ],

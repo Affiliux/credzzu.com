@@ -3,7 +3,7 @@ import React, { ReactNode } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 
-import { WavyBackground } from '@/presentation/components/ui/wavy-background'
+import { WavyBackground } from '@/components/ui/wavy-background'
 
 export default function Layout({ children }: { children: ReactNode }) {
   return (

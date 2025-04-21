@@ -6,14 +6,16 @@ import { ArrowLeft } from 'lucide-react'
 import { useRouter } from 'next/navigation'
 import { toast } from 'sonner'
 
-import type { UpdateInstallmentPayloadProps } from '@/application/interfaces/dashboard'
+import type { UpdateInstallmentPayloadProps } from '@/interfaces/dashboard'
 
-import { useDashboard } from '@/application/contexts/DashboardContext'
+import { useDashboard } from '@/contexts/DashboardContext'
+import { useSubscription } from '@/contexts/SubscriptionContext'
 
-import { useQueryParams } from '@/application/hooks/use-query-params'
+import { useQueryParams } from '@/hooks/use-query-params'
 
-import { InstallmentsTable } from '@/presentation/components/dashboard/installments/installments-table'
-import { Button } from '@/presentation/components/ui/button'
+import { InstallmentsTable } from '@/components/dashboard/installments/installments-table'
+import { LockedScreen } from '@/components/dashboard/locked-screen'
+import { Button } from '@/components/ui/button'
 
 export const runtime = 'edge'
 
@@ -24,6 +26,7 @@ export default function Page({ params }: { params: Promise<{ id: string }> }) {
   const { debtorId } = useQueryParams()
 
   // contexts
+  const { subscription } = useSubscription()
   const { debtor, installments, onGetInstallments, onUpdateInstallment, onGetDebtorById } = useDashboard()
 
   // states
@@ -94,22 +97,24 @@ export default function Page({ params }: { params: Promise<{ id: string }> }) {
 
   // render
   return (
-    <div className='w-full space-y-6'>
-      <div className='flex flex-col justify-between space-y-2 md:flex-row md:items-center md:space-y-0'>
-        <div className='flex items-center space-x-4'>
-          <Button variant='ghost' size='icon' onClick={handleBack}>
-            <ArrowLeft className='h-6 w-6' />
-          </Button>
-          <h1 className='text-2xl font-bold text-neutral-100'>Parcelas</h1>
+    <LockedScreen subscription={subscription}>
+      <div className='flex h-full flex-col space-y-6'>
+        <div className='flex flex-col justify-between space-y-2 md:flex-row md:items-center md:space-y-0'>
+          <div className='flex items-center space-x-4'>
+            <Button variant='ghost' size='icon' onClick={handleBack}>
+              <ArrowLeft className='h-6 w-6' />
+            </Button>
+            <h1 className='text-2xl font-bold text-neutral-100'>Parcelas</h1>
+          </div>
         </div>
-      </div>
 
-      <InstallmentsTable
-        data={installments}
-        debtor={debtor}
-        is_loading={is_loading}
-        onUpdateInstallment={handleUpdateInstallment}
-      />
-    </div>
+        <InstallmentsTable
+          data={installments}
+          debtor={debtor}
+          is_loading={is_loading}
+          onUpdateInstallment={handleUpdateInstallment}
+        />
+      </div>
+    </LockedScreen>
   )
 }

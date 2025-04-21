@@ -4,9 +4,9 @@ import React from 'react'
 
 import Link from 'next/link'
 
-import { useAccount } from '@/application/contexts/AccountContext'
+import { useAccount } from '@/contexts/AccountContext'
 
-import { SignUpForm } from '@/presentation/components/auth/sign-up-form'
+import { SignUpForm } from '@/components/auth/sign-up-form'
 
 export const runtime = 'edge'
 

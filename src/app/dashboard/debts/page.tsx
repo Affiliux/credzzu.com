@@ -11,15 +11,17 @@ import type {
   DebtProps,
   DeleteDebtPayloadProps,
   UpdateDebtPayloadProps,
-} from '@/application/interfaces/dashboard'
+} from '@/interfaces/dashboard'
 
-import { useDashboard } from '@/application/contexts/DashboardContext'
+import { useDashboard } from '@/contexts/DashboardContext'
+import { useSubscription } from '@/contexts/SubscriptionContext'
 
-import { useQueryParams } from '@/application/hooks/use-query-params'
+import { useQueryParams } from '@/hooks/use-query-params'
 
-import { DataTable } from '@/presentation/components/dashboard/debts/data-table'
-import { DebtForm } from '@/presentation/components/dashboard/debts/debt-form'
-import { Button } from '@/presentation/components/ui/button'
+import { DataTable } from '@/components/dashboard/debts/data-table'
+import { DebtForm } from '@/components/dashboard/debts/debt-form'
+import { LockedScreen } from '@/components/dashboard/locked-screen'
+import { Button } from '@/components/ui/button'
 
 export const runtime = 'edge'
 
@@ -29,6 +31,7 @@ export default function Page() {
   const router = useRouter()
 
   // contexts
+  const { subscription } = useSubscription()
   const { debts, pagination_debts, onGetDebts, onGetDebtsByDebtor, onCreateDebt, onUpdateDebt, onDeleteDebt } =
     useDashboard()
 
@@ -168,33 +171,35 @@ export default function Page() {
 
   // render
   return (
-    <div className='w-full space-y-6'>
-      <div className='flex flex-col justify-between space-y-2 md:flex-row md:items-center md:space-y-0'>
-        <h1 className='text-2xl font-bold text-neutral-100'>Dívidas</h1>
-        <DebtForm
-          open={is_create_sheet_open}
-          debtorId={debtorId || ''}
-          onSubmit={handleCreateDebt}
-          onOpenChange={set_is_create_sheet_open}
-        >
-          <Button>
-            <Plus className='mr-2 h-4 w-4' />
-            Nova Dívida
-          </Button>
-        </DebtForm>
-      </div>
+    <LockedScreen subscription={subscription}>
+      <div className='flex h-full flex-col space-y-6'>
+        <div className='flex flex-col justify-between space-y-2 md:flex-row md:items-center md:space-y-0'>
+          <h1 className='text-2xl font-bold text-neutral-100'>Dívidas</h1>
+          <DebtForm
+            open={is_create_sheet_open}
+            debtorId={debtorId || ''}
+            onSubmit={handleCreateDebt}
+            onOpenChange={set_is_create_sheet_open}
+          >
+            <Button>
+              <Plus className='mr-2 h-4 w-4' />
+              Nova Dívida
+            </Button>
+          </DebtForm>
+        </div>
 
-      <DataTable
-        data={debts}
-        is_loading={is_loading}
-        pagination={pagination_debts}
-        onSearch={handleSearch}
-        onDelete={handleDeleteDebt}
-        onViewInstallments={handleViewInstallments}
-        onEdit={handleUpdateDebt}
-        onPageChange={handlePageChange}
-        onLimitChange={handleLimitChange}
-      />
-    </div>
+        <DataTable
+          data={debts}
+          is_loading={is_loading}
+          pagination={pagination_debts}
+          onSearch={handleSearch}
+          onDelete={handleDeleteDebt}
+          onViewInstallments={handleViewInstallments}
+          onEdit={handleUpdateDebt}
+          onPageChange={handlePageChange}
+          onLimitChange={handleLimitChange}
+        />
+      </div>
+    </LockedScreen>
   )
 }

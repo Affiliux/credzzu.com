@@ -1,7 +1,7 @@
 import type { NextRequest } from 'next/server'
 import { NextResponse } from 'next/server'
 
-import { NEXT_REFRESH_TOKEN, NEXT_USER_TOKEN } from './application/lib/constants'
+import { NEXT_REFRESH_TOKEN, NEXT_USER_TOKEN } from './lib/constants'
 
 export function middleware(request: NextRequest) {
   const refresh_token = request.cookies.get(NEXT_REFRESH_TOKEN)?.value
