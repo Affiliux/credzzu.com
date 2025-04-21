@@ -1,0 +1,46 @@
+---
+description: 
+globs: 
+alwaysApply: false
+---
+# Development Guidelines
+
+## Code Style and Formatting
+
+The project uses ESLint and Prettier for code formatting and style enforcement:
+- [.eslintrc](mdc:.eslintrc) - ESLint configuration
+- [.prettierrc](mdc:.prettierrc) - Prettier configuration
+
+## TypeScript Usage
+
+- All new code should be written in TypeScript
+- Types and interfaces should be placed in [src/interfaces](mdc:src/interfaces)
+- Use TypeScript's strict mode as configured in [tsconfig.json](mdc:tsconfig.json)
+
+## Component Structure
+
+1. React components should be placed in [src/components](mdc:src/components)
+2. Each component should:
+   - Have its own directory
+   - Include an index.ts file for exports
+   - Include TypeScript interfaces for props
+   - Follow the component configuration in [components.json](mdc:components.json)
+
+## State Management
+
+- Use React Context for global state ([src/contexts](mdc:src/contexts))
+- Custom hooks should be placed in [src/hooks](mdc:src/hooks)
+- Keep component state local when possible
+
+## API and Data Handling
+
+- HTTP requests should be organized in [src/http](mdc:src/http)
+- Data persistence utilities in [src/storage](mdc:src/storage)
+- Use proper error handling and loading states
+
+## Monitoring and Debugging
+
+Application monitoring is configured through:
+- [sentry.edge.config.ts](mdc:sentry.edge.config.ts)
+- [sentry.server.config.ts](mdc:sentry.server.config.ts)
+- [src/instrumentation.ts](mdc:src/instrumentation.ts)

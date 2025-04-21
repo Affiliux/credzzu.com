@@ -1,0 +1,348 @@
+'use client'
+
+import { useEffect, useState } from 'react'
+
+import { AnimatePresence, motion } from 'framer-motion'
+import { Loader2 } from 'lucide-react'
+import { useForm } from 'react-hook-form'
+import * as z from 'zod'
+import { zodResolver } from '@hookform/resolvers/zod'
+
+import type { DebtorProps } from '@/interfaces/dashboard'
+
+import { validateDocument } from '@/lib/validators/document'
+import { validateName } from '@/lib/validators/name'
+import { removeNonLetters } from '@/lib/formatters/non-letters'
+import { documentMask } from '@/lib/masks/document'
+import { phoneMask } from '@/lib/masks/phone'
+
+import { Button } from '@/components/ui/button'
+import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form'
+import { Input } from '@/components/ui/input'
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
+import { Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle, SheetTrigger } from '@/components/ui/sheet'
+import { SuccessAnimation } from '@/components/ui/success-animation'
+
+const createFormSchema = (documentType: 'CPF' | 'CNPJ') =>
+  z.object({
+    name: z
+      .string()
+      .min(2, 'Nome deve ter pelo menos 2 caracteres')
+      .max(100, 'Nome deve ter no máximo 100 caracteres')
+      .transform(value => removeNonLetters(value).trim())
+      .refine(value => validateName(value), 'Insira o nome completo'),
+    email: z.string().email('Email inválido').max(100, 'Email deve ter no máximo 100 caracteres').toLowerCase(),
+    phone: z
+      .string()
+      .min(14, 'Telefone inválido')
+      .max(15, 'Telefone inválido')
+      .refine(value => {
+        const cleaned = value.replace(/\D/g, '')
+        return cleaned.length === 11 && /^[1-9]{2}[9]?[0-9]{8}$/.test(cleaned)
+      }, 'Telefone inválido'),
+    address: z
+      .string()
+      .max(200, 'Endereço deve ter no máximo 200 caracteres')
+      .optional()
+      .or(z.literal(''))
+      .transform(value => removeNonLetters(value).trim()),
+    city: z
+      .string()
+      .max(50, 'Cidade deve ter no máximo 50 caracteres')
+      .optional()
+      .or(z.literal(''))
+      .transform(value => removeNonLetters(value).trim()),
+    state: z
+      .string()
+      .max(2, 'Estado deve ter 2 caracteres')
+      .optional()
+      .or(z.literal(''))
+      .transform(value => removeNonLetters(value).trim().toUpperCase()),
+    documentType: z
+      .enum(['CPF', 'CNPJ'], {
+        required_error: 'Selecione um tipo de documento',
+      })
+      .optional(),
+    documentNumber: z
+      .string()
+      .refine(value => {
+        if (!value) return true
+        const cleaned = value.replace(/\D/g, '')
+        return validateDocument(cleaned, documentType)
+      }, 'Documento inválido')
+      .optional(),
+  })
+
+interface DebtorFormProps {
+  children: React.ReactNode
+  open: boolean
+  debtor?: DebtorProps
+  onSubmit: (data: DebtorProps) => Promise<void>
+  onOpenChange: (open: boolean) => void
+}
+
+export function DebtorForm({ debtor, onSubmit, children, open, onOpenChange }: DebtorFormProps) {
+  // states
+  const [document_type, set_document_type] = useState<'CPF' | 'CNPJ'>((debtor?.documentType as 'CPF' | 'CNPJ') ?? 'CPF')
+  const [is_loading, set_is_loading] = useState<boolean>(false)
+  const [is_success, set_is_success] = useState<boolean>(false)
+
+  // form
+  const formSchema = createFormSchema(document_type)
+  const form = useForm<z.infer<typeof formSchema>>({
+    resolver: zodResolver(formSchema),
+    defaultValues: {
+      name: debtor?.name ?? '',
+      email: debtor?.email ?? '',
+      phone: phoneMask(debtor?.phone ?? ''),
+      address: debtor?.address ?? '',
+      city: debtor?.city ?? '',
+      state: debtor?.state ?? '',
+      documentType: (debtor?.documentType as 'CPF' | 'CNPJ') ?? 'CPF',
+      documentNumber: documentMask(debtor?.documentNumber ?? '', document_type ?? 'CPF'),
+    },
+  })
+
+  // handlers
+  async function handleSubmit(values: z.infer<typeof formSchema>) {
+    set_is_loading(true)
+
+    try {
+      const data = {
+        ...values,
+        id: debtor?.id,
+        phone: `+55${values.phone.replace(/\D/g, '')}`,
+      } as DebtorProps
+
+      await onSubmit(data)
+      set_is_success(true)
+
+      setTimeout(() => {
+        onOpenChange(false)
+        set_is_success(false)
+        form.reset()
+      }, 2000)
+    } catch (error) {
+      console.error(error)
+    } finally {
+      set_is_loading(false)
+    }
+  }
+
+  // effects
+  useEffect(() => {
+    if (!open) {
+      set_is_success(false)
+      form.reset()
+    }
+  }, [open, form])
+
+  // render
+  return (
+    <Sheet open={open} onOpenChange={onOpenChange}>
+      <SheetTrigger asChild>{children}</SheetTrigger>
+
+      <SheetContent className='flex h-full w-screen flex-col overflow-y-scroll border-emerald-500/20 bg-black md:w-[640px]'>
+        <AnimatePresence mode='wait'>
+          {is_success ? (
+            <SuccessAnimation message={debtor ? 'Devedor atualizado com sucesso!' : 'Devedor criado com sucesso!'} />
+          ) : (
+            <motion.div
+              key='form-content'
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.2 }}
+              className='flex h-full flex-col'
+            >
+              <SheetHeader className='border-b border-emerald-500/20 pb-6'>
+                <SheetTitle className='text-xl font-bold text-white'>
+                  {debtor ? 'Editar Devedor' : 'Novo Devedor'}
+                </SheetTitle>
+                <SheetDescription className='-mt-2 text-white/60'>
+                  {debtor
+                    ? 'Faça alterações no devedor aqui. Clique em salvar quando terminar.'
+                    : 'Adicione um novo devedor aqui. Clique em salvar quando terminar.'}
+                </SheetDescription>
+              </SheetHeader>
+
+              <Form {...form}>
+                <form onSubmit={form.handleSubmit(handleSubmit)} className='flex h-full flex-col'>
+                  <div className='space-y-6 py-6'>
+                    <div className='space-y-4'>
+                      <FormField
+                        control={form.control}
+                        name='name'
+                        render={({ field }) => (
+                          <FormItem>
+                            <FormLabel className='text-white/80'>Nome</FormLabel>
+                            <FormControl>
+                              <Input maxLength={100} placeholder='Nome completo' {...field} />
+                            </FormControl>
+                            <FormMessage className='text-red-400/80' />
+                          </FormItem>
+                        )}
+                      />
+
+                      <FormField
+                        control={form.control}
+                        name='email'
+                        render={({ field }) => (
+                          <FormItem>
+                            <FormLabel className='text-white/80'>Email</FormLabel>
+                            <FormControl>
+                              <Input maxLength={100} type='email' placeholder='Email' {...field} />
+                            </FormControl>
+                            <FormMessage className='text-red-400/80' />
+                          </FormItem>
+                        )}
+                      />
+
+                      <FormField
+                        control={form.control}
+                        name='phone'
+                        render={({ field }) => (
+                          <FormItem>
+                            <FormLabel className='text-white/80'>Telefone</FormLabel>
+                            <FormControl>
+                              <Input
+                                maxLength={15}
+                                placeholder='(00) 00000-0000'
+                                {...field}
+                                onChange={e => {
+                                  const masked = phoneMask(e.target.value)
+                                  field.onChange(masked)
+                                }}
+                              />
+                            </FormControl>
+                            <FormMessage className='text-red-400/80' />
+                          </FormItem>
+                        )}
+                      />
+                    </div>
+
+                    <div className='space-y-4 rounded-lg border bg-black/60 p-4'>
+                      <h3 className='text-sm font-medium text-white/80'>Documento</h3>
+                      <FormField
+                        control={form.control}
+                        name='documentType'
+                        render={({ field }) => (
+                          <FormItem>
+                            <FormLabel className='text-white/80'>Tipo de Documento</FormLabel>
+                            <Select
+                              onValueChange={(value: 'CPF' | 'CNPJ') => {
+                                set_document_type(value)
+                                field.onChange(value)
+                              }}
+                              defaultValue={field.value}
+                            >
+                              <FormControl>
+                                <SelectTrigger>
+                                  <SelectValue placeholder='Selecione o tipo de documento' />
+                                </SelectTrigger>
+                              </FormControl>
+                              <SelectContent>
+                                <SelectItem value='CPF'>CPF</SelectItem>
+                                <SelectItem value='CNPJ'>CNPJ</SelectItem>
+                              </SelectContent>
+                            </Select>
+                            <FormMessage className='text-red-400/80' />
+                          </FormItem>
+                        )}
+                      />
+                      <FormField
+                        control={form.control}
+                        name='documentNumber'
+                        render={({ field }) => (
+                          <FormItem>
+                            <FormLabel className='text-white/80'>Número do Documento</FormLabel>
+                            <FormControl>
+                              <Input
+                                maxLength={document_type === 'CPF' ? 14 : 18}
+                                placeholder={document_type === 'CPF' ? '000.000.000-00' : '00.000.000/0000-00'}
+                                {...field}
+                                onChange={e => {
+                                  const masked = documentMask(e.target.value, document_type)
+                                  field.onChange(masked)
+                                }}
+                              />
+                            </FormControl>
+                            <FormMessage className='text-red-400/80' />
+                          </FormItem>
+                        )}
+                      />
+                    </div>
+
+                    <div className='space-y-4 rounded-lg border bg-black/60 p-4'>
+                      <h3 className='text-sm font-medium text-white/80'>Endereço</h3>
+                      <FormField
+                        control={form.control}
+                        name='address'
+                        render={({ field }) => (
+                          <FormItem>
+                            <FormLabel className='text-white/80'>Endereço</FormLabel>
+                            <FormControl>
+                              <Input maxLength={200} placeholder='Endereço completo' {...field} />
+                            </FormControl>
+                            <FormMessage className='text-red-400/80' />
+                          </FormItem>
+                        )}
+                      />
+                      <div className='grid grid-cols-2 gap-4'>
+                        <FormField
+                          control={form.control}
+                          name='city'
+                          render={({ field }) => (
+                            <FormItem>
+                              <FormLabel className='text-white/80'>Cidade</FormLabel>
+                              <FormControl>
+                                <Input maxLength={50} placeholder='Cidade' {...field} />
+                              </FormControl>
+                              <FormMessage className='text-red-400/80' />
+                            </FormItem>
+                          )}
+                        />
+                        <FormField
+                          control={form.control}
+                          name='state'
+                          render={({ field }) => (
+                            <FormItem>
+                              <FormLabel className='text-white/80'>Estado</FormLabel>
+                              <FormControl>
+                                <Input maxLength={2} placeholder='Estado' {...field} />
+                              </FormControl>
+                              <FormMessage className='text-red-400/80' />
+                            </FormItem>
+                          )}
+                        />
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className='py-6'>
+                    <div className='flex flex-col gap-2'>
+                      <Button type='submit' className='h-10' disabled={is_loading}>
+                        {is_loading ? (
+                          <>
+                            <Loader2 className='mr-2 h-4 w-4 animate-spin' /> Salvando...
+                          </>
+                        ) : debtor ? (
+                          'Atualizar'
+                        ) : (
+                          'Criar'
+                        )}
+                      </Button>
+                      <Button type='button' variant='outline' className='h-10' onClick={() => onOpenChange(false)}>
+                        Cancelar
+                      </Button>
+                    </div>
+                  </div>
+                </form>
+              </Form>
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </SheetContent>
+    </Sheet>
+  )
+}

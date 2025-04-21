@@ -4,13 +4,13 @@ import React, { useState } from 'react'
 
 import Link from 'next/link'
 
-import { useAccount } from '@/application/contexts/AccountContext'
+import { useAccount } from '@/contexts/AccountContext'
 
-import { useStep } from '@/application/hooks/use-step'
+import { useStep } from '@/hooks/use-step'
 
-import { ChangePasswordForm } from '@/presentation/components/auth/change-password-form'
-import { ForgotPasswordForm } from '@/presentation/components/auth/forgot-password-form'
-import { VerifyChangePasswordForm } from '@/presentation/components/auth/verify-change-password-form'
+import { ChangePasswordForm } from '@/components/auth/change-password-form'
+import { ForgotPasswordForm } from '@/components/auth/forgot-password-form'
+import { VerifyChangePasswordForm } from '@/components/auth/verify-change-password-form'
 
 export const runtime = 'edge'
 
@@ -30,7 +30,7 @@ export default function Page() {
       {currentStep === 1 && (
         <>
           <div className='text-center'>
-            <h1 className='text-3xl font-bold text-neutral-100 mb-3'>Recuperar senha</h1>
+            <h1 className='mb-3 text-3xl font-bold text-neutral-100'>Recuperar senha</h1>
             <p className='text-neutral-400'>Digite seu email para receber um código de recuperação</p>
           </div>
 

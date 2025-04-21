@@ -1,10 +1,10 @@
 import { Metadata, Viewport } from 'next'
 
-import AppProviders from '@/application/contexts'
+import AppProviders from '@/contexts'
 
-import { Toaster as Sonner } from '@/presentation/components/ui/sonner'
-import { Toaster } from '@/presentation/components/ui/toaster'
-import { TooltipProvider } from '@/presentation/components/ui/tooltip'
+import { Toaster as Sonner } from '@/components/ui/sonner'
+import { Toaster } from '@/components/ui/toaster'
+import { TooltipProvider } from '@/components/ui/tooltip'
 
 import './globals.css'
 

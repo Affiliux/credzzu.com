@@ -1,0 +1,36 @@
+---
+description: 
+globs: 
+alwaysApply: false
+---
+# Deployment and Configuration Guide
+
+## Environment Setup
+
+- Node.js version is specified in [.nvmrc](mdc:.nvmrc)
+- Package dependencies are managed through [package.json](mdc:package.json)
+- Yarn is used as the package manager ([yarn.lock](mdc:yarn.lock))
+
+## Build Configuration
+
+- Next.js configuration is in [next.config.mjs](mdc:next.config.mjs)
+- PostCSS configuration in [postcss.config.mjs](mdc:postcss.config.mjs)
+- Cloudflare Workers configuration in [wrangler.toml](mdc:wrangler.toml)
+
+## Deployment Process
+
+1. The application uses Next.js with Edge Runtime capabilities
+2. Deployment is handled through Cloudflare Workers
+3. Build artifacts are generated in the `.next` directory
+4. Wrangler is used for Cloudflare Workers deployment
+
+## Monitoring Setup
+
+Error tracking and monitoring is configured through:
+- [sentry.edge.config.ts](mdc:sentry.edge.config.ts) for edge runtime
+- [sentry.server.config.ts](mdc:sentry.server.config.ts) for server runtime
+
+## Git Configuration
+
+- Git ignore rules are specified in [.gitignore](mdc:.gitignore)
+- Husky is used for Git hooks ([.husky](mdc:.husky))
