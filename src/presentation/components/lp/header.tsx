@@ -56,7 +56,7 @@ export default function Header() {
             asChild
             className='group border border-emerald-500 bg-transparent px-4 py-5 text-sm text-emerald-400 shadow-[0_0_15px_rgba(16,185,129,0.15)] transition-all duration-300 hover:bg-emerald-500/10 hover:shadow-[0_0_25px_rgba(16,185,129,0.25)] md:px-4 lg:px-6 lg:py-6'
           >
-            <Link href='/signup' className='flex items-center gap-2'>
+            <Link href='/auth/sign-up' className='flex items-center gap-2'>
               <span>Começar Agora</span>
               <span className='h-[1px] w-5 bg-emerald-400 transition-all duration-300 group-hover:w-8'></span>
             </Link>
