@@ -14,7 +14,9 @@ export default function Header() {
   const [is_open, set_open] = useState(false)
 
   return (
-    <header className={`sticky top-0 z-50 w-full bg-transparent transition-all duration-300`}>
+    <header
+      className={`sticky top-0 z-50 w-full bg-transparent transition-all duration-300 md:bg-black/80 md:backdrop-blur-xl`}
+    >
       <div className='container mx-auto flex h-20 items-center justify-between px-4 sm:px-6 lg:px-8 xl:max-w-7xl 2xl:max-w-[1400px]'>
         {/* Logo */}
         <Link href='/' className='relative z-50 flex items-center gap-2'>
