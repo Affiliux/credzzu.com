@@ -1,3 +1,7 @@
+'use client'
+
+import React from 'react'
+
 import { Loader2, Lock } from 'lucide-react'
 import { useRouter } from 'next/navigation'
 

@@ -168,7 +168,7 @@ export function DashboardSidebar({
                 className='w-full border-emerald-500/30 bg-black/50 text-xs text-white hover:bg-emerald-500/10 hover:text-emerald-400'
                 asChild
               >
-                <Link href='/dashboard/settings'>
+                <Link href='/dashboard/settings' onClick={() => set_open(false)}>
                   Gerenciar assinatura
                   <ChevronRight className='ml-1 h-4 w-4' />
                 </Link>
@@ -191,7 +191,7 @@ export function DashboardSidebar({
                 className='w-full border-red-500/30 bg-black/50 text-xs text-white hover:bg-red-500/10 hover:text-red-400'
                 asChild
               >
-                <Link href='/dashboard/settings'>
+                <Link href='/dashboard/settings' onClick={() => set_open(false)}>
                   Renovar assinatura
                   <ChevronRight className='ml-1 h-4 w-4' />
                 </Link>
@@ -214,7 +214,7 @@ export function DashboardSidebar({
                 className='w-full border-red-500/30 bg-black/50 text-xs text-white hover:bg-red-500/10 hover:text-red-400'
                 asChild
               >
-                <Link href='/dashboard/settings'>
+                <Link href='/dashboard/settings' onClick={() => set_open(false)}>
                   Renovar assinatura
                   <ChevronRight className='ml-1 h-4 w-4' />
                 </Link>
@@ -239,7 +239,7 @@ export function DashboardSidebar({
                 className='w-full border-amber-500/30 bg-black/50 text-xs text-white hover:bg-amber-500/10 hover:text-amber-400'
                 asChild
               >
-                <Link href='/dashboard/settings'>
+                <Link href='/dashboard/settings' onClick={() => set_open(false)}>
                   Reativar assinatura
                   <ChevronRight className='ml-1 h-4 w-4' />
                 </Link>
@@ -295,7 +295,7 @@ export function DashboardSidebar({
                 variant='ghost'
                 className='w-full justify-start hover:bg-emerald-500/10 hover:text-emerald-400'
               >
-                <Link href='/dashboard/settings' className='flex items-center'>
+                <Link href='/dashboard/settings' className='flex items-center' onClick={() => set_open(false)}>
                   <Settings className='mr-2 h-4 w-4' />
                   <span>Configurações</span>
                 </Link>

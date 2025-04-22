@@ -1,5 +1,7 @@
 'use client'
 
+import React from 'react'
+
 import { ArrowRight } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
@@ -44,7 +46,7 @@ export default function Hero() {
                   size='lg'
                   className='group relative overflow-hidden border-0 bg-emerald-500 px-6 py-5 text-sm text-white shadow-[0_0_15px_rgba(16,185,129,0.3)] hover:bg-emerald-600 hover:shadow-[0_0_25px_rgba(16,185,129,0.5)] md:px-8 md:py-6 md:text-base'
                 >
-                  <Link href='/signup' className='flex items-center gap-3'>
+                  <Link href='/auth/sign-up' className='flex items-center gap-3'>
                     <span>Começar Agora</span>
                     <ArrowRight className='h-4 w-4 transition-transform duration-300 group-hover:translate-x-1' />
                   </Link>
@@ -60,7 +62,6 @@ export default function Hero() {
             </div>
 
             <div className='relative w-full'>
-              <div className='absolute inset-0 -m-10 rounded-full bg-gradient-to-br from-emerald-500/20 to-transparent opacity-30 blur-3xl'></div>
               <Image
                 src='/hero.png'
                 width={1200}

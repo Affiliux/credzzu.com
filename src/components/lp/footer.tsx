@@ -1,3 +1,7 @@
+'use client'
+
+import React from 'react'
+
 import Image from 'next/image'
 import Link from 'next/link'
 
@@ -15,10 +19,10 @@ export default function Footer() {
 
           <div className='flex flex-wrap items-center gap-x-8'>
             <nav className='flex flex-wrap gap-6 text-xs font-light'>
-              <Link href='#' className='text-white/60 transition-colors hover:text-white'>
+              <Link href='/terms' className='text-white/60 transition-colors hover:text-white'>
                 Termos de Uso
               </Link>
-              <Link href='#' className='text-white/60 transition-colors hover:text-white'>
+              <Link href='/privacy' className='text-white/60 transition-colors hover:text-white'>
                 Política de Privacidade
               </Link>
               <Link href='#' className='text-white/60 transition-colors hover:text-white'>

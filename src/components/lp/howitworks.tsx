@@ -1,3 +1,7 @@
+'use client'
+
+import React from 'react'
+
 import { Badge } from '@/components/ui/badge'
 
 export default function HowItWorks() {
@@ -27,29 +31,29 @@ export default function HowItWorks() {
             Como Funciona
           </Badge>
           <h2 className='mt-5 bg-gradient-to-r from-white to-white/70 bg-clip-text text-3xl font-light tracking-tight text-transparent sm:text-4xl md:mt-6 md:text-5xl lg:text-6xl'>
-            Passos simples para <span className='font-medium'>recuperar seu dinheiro</span>
+            Passos simples para <span className='font-bold'>recuperar seu dinheiro</span>
           </h2>
-          <p className='mt-4 max-w-2xl text-base text-white/60 md:mt-6 md:text-lg'>
+          <p className='mt-4 max-w-2xl text-base text-white/60 md:text-lg'>
             O Credzzu torna o processo desconfortável de pedir seu dinheiro de volta simples e direto.
           </p>
         </div>
 
-        <div className='mx-auto grid max-w-5xl gap-6 md:gap-6 md:gap-8 lg:grid-cols-3'>
+        <div className='mx-auto grid max-w-5xl gap-6 md:gap-8 lg:grid-cols-3'>
           {[
             {
               step: '1',
               title: 'Adicionar uma dívida',
-              description: 'Registre quem deve, quanto deve e quando deve ser pago.',
+              description: 'Registre facilmente quem deve, quanto deve e quando deve ser pago.',
             },
             {
               step: '2',
-              title: 'Enviaremos uma mensagem para o devedor',
-              description: 'Enviaremos uma mensagem para o devedor avisando que você está esperando o pagamento.',
+              title: 'Controle da dívida',
+              description: 'Enviamos notificações automáticas para lembrar você sobre os pagamentos pendentes.',
             },
             {
               step: '3',
-              title: 'Receber o pagamento',
-              description: 'Receba pagamentos diretamente do devedor.',
+              title: 'Receber pagamento',
+              description: 'Acompanhe e receba os pagamentos de forma organizada e eficiente.',
             },
           ].map((item, index) => (
             <div
