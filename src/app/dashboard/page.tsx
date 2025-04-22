@@ -12,12 +12,12 @@ import { useDashboard } from '@/contexts/DashboardContext'
 
 import { DebtStatusEnum } from '@/lib/enums'
 import { moneyMask } from '@/lib/masks/money'
+import { removeMask } from '@/lib/masks/remove'
 
 import { Alerts } from '@/components/dashboard/home/alerts'
 import { BigNumbers } from '@/components/dashboard/home/big-numbers'
 import { PaymentModal } from '@/components/dashboard/home/payment-modal'
 import { Button } from '@/components/ui/button'
-import { removeMask } from '@/lib/masks/remove'
 
 export const runtime = 'edge'
 

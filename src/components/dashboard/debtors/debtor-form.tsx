@@ -17,7 +17,7 @@ import { documentMask } from '@/lib/masks/document'
 import { phoneMask } from '@/lib/masks/phone'
 
 import { Button } from '@/components/ui/button'
-import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form'
+import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
 import { Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle, SheetTrigger } from '@/components/ui/sheet'
@@ -189,11 +189,15 @@ export function DebtorForm({ debtor, onSubmit, children, open, onOpenChange }: D
                         name='email'
                         render={({ field }) => (
                           <FormItem>
-                            <FormLabel className='text-white/80'>Email</FormLabel>
+                            <FormLabel className='text-white/80'>E-mail</FormLabel>
                             <FormControl>
                               <Input maxLength={100} type='email' placeholder='Email' {...field} />
                             </FormControl>
                             <FormMessage className='text-red-400/80' />
+
+                            <FormDescription className='text-xs text-white/60'>
+                              * Caso tenha um e-mail, ele irá receber um alerta 1 dia antes do vencimento da dívida.
+                            </FormDescription>
                           </FormItem>
                         )}
                       />
@@ -216,6 +220,10 @@ export function DebtorForm({ debtor, onSubmit, children, open, onOpenChange }: D
                               />
                             </FormControl>
                             <FormMessage className='text-red-400/80' />
+
+                            <FormDescription className='text-xs text-white/60'>
+                              * Caso tenha um whatsapp, ele irá receber um alerta 1 dia antes do vencimento da dívida.
+                            </FormDescription>
                           </FormItem>
                         )}
                       />
