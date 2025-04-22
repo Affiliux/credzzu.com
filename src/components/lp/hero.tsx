@@ -1,5 +1,7 @@
 'use client'
 
+import React from 'react'
+
 import { ArrowRight } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
@@ -60,7 +62,6 @@ export default function Hero() {
             </div>
 
             <div className='relative w-full'>
-              <div className='absolute inset-0 -m-10 rounded-full bg-gradient-to-br from-emerald-500/20 to-transparent opacity-30 blur-3xl'></div>
               <Image
                 src='/hero.png'
                 width={1200}

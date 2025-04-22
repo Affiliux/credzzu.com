@@ -1,6 +1,8 @@
+'use client'
+
 import React from 'react'
 
-import { CreditCard, DollarSign, Users } from 'lucide-react'
+import { BarChart3, Bell, CreditCard, DollarSign, LayoutDashboard, Users } from 'lucide-react'
 
 import { Badge } from '@/components/ui/badge'
 
@@ -31,8 +33,8 @@ export default function Features() {
           >
             Recursos
           </Badge>
-          <h2 className='mt-5 text-6xl font-light tracking-tight text-white'>
-            Tudo que você precisa <span className='font-medium'>para gerenciar dívidas</span>
+          <h2 className='mt-5 text-3xl font-light tracking-tight text-white sm:text-4xl md:text-5xl lg:text-6xl'>
+            Tudo que você precisa <span className='font-bold'>para gerenciar dívidas</span>
           </h2>
           <p className='mt-4 max-w-2xl text-base text-white/60 md:mt-6 md:text-lg'>
             Credzzu facilita o rastreamento, lembretes e cobrança de dinheiro devido por conhecidos, amigos e
@@ -40,22 +42,38 @@ export default function Features() {
           </p>
         </div>
 
-        <div className='mx-auto grid max-w-5xl gap-6 sm:grid-cols-2 md:gap-8 lg:grid-cols-3'>
+        <div className='mx-auto grid max-w-6xl gap-6 sm:grid-cols-2 md:gap-8 lg:grid-cols-3'>
           {[
             {
               icon: <Users className='h-6 w-6 md:h-8 md:w-8' />,
-              title: 'Gestão de Amigos',
-              description: 'Adicione amigos facilmente e acompanhe quem deve o quê, quando e por quê.',
+              title: 'Controle de Devedores',
+              description:
+                'Gerencie facilmente todos os seus devedores em um só lugar, com informações detalhadas e histórico completo.',
             },
             {
               icon: <CreditCard className='h-6 w-6 md:h-8 md:w-8' />,
-              title: 'Cobrança de Pagamentos',
-              description: 'Envie solicitações de pagamento e receba dinheiro através de múltiplos métodos.',
+              title: 'Controle de Dívidas',
+              description: 'Acompanhe todas as dívidas, prazos e status de pagamento de forma organizada e eficiente.',
             },
             {
               icon: <DollarSign className='h-6 w-6 md:h-8 md:w-8' />,
-              title: 'Controle de Dívidas',
-              description: 'Obtenha uma visão clara de todas as dívidas pendentes e histórico de pagamentos.',
+              title: 'Taxas em Dívidas',
+              description: 'Calcule automaticamente juros e multas por atraso, mantendo os valores sempre atualizados.',
+            },
+            {
+              icon: <Bell className='h-6 w-6 md:h-8 md:w-8' />,
+              title: 'Notificações Inteligentes',
+              description: 'Receba lembretes automáticos via WhatsApp e email para não perder nenhum pagamento.',
+            },
+            {
+              icon: <BarChart3 className='h-6 w-6 md:h-8 md:w-8' />,
+              title: 'Relatórios Avançados',
+              description: 'Visualize estatísticas detalhadas e insights sobre suas cobranças e recebimentos.',
+            },
+            {
+              icon: <LayoutDashboard className='h-6 w-6 md:h-8 md:w-8' />,
+              title: 'Painel Fácil',
+              description: 'Interface intuitiva e simples de usar, tornando o gerenciamento de dívidas mais prático.',
             },
           ].map((feature, index) => (
             <div

@@ -111,12 +111,22 @@ function PendingCancellationSubscriptionVariant({
             </div>
             <div className='rounded-lg border border-emerald-500/10 bg-black/30 p-3 backdrop-blur-sm'>
               <div className='flex items-center text-sm text-white/80'>
-                <CheckCircle2 className='mr-2 h-4 w-4 text-emerald-400' /> Relatórios avançados
+                <CheckCircle2 className='mr-2 h-4 w-4 text-emerald-400' /> Relatórios detalhados
               </div>
             </div>
             <div className='rounded-lg border border-emerald-500/10 bg-black/30 p-3 backdrop-blur-sm'>
               <div className='flex items-center text-sm text-white/80'>
-                <CheckCircle2 className='mr-2 h-4 w-4 text-emerald-400' /> Exportação de dados
+                <CheckCircle2 className='mr-2 h-4 w-4 text-emerald-400' /> Controle de taxas e juros
+              </div>
+            </div>
+            <div className='rounded-lg border border-emerald-500/10 bg-black/30 p-3 backdrop-blur-sm'>
+              <div className='flex items-center text-sm text-white/80'>
+                <CheckCircle2 className='mr-2 h-4 w-4 text-emerald-400' /> Lembretes por WhatsApp e E-mail
+              </div>
+            </div>
+            <div className='rounded-lg border border-emerald-500/10 bg-black/30 p-3 backdrop-blur-sm'>
+              <div className='flex items-center text-sm text-white/80'>
+                <CheckCircle2 className='mr-2 h-4 w-4 text-emerald-400' /> Registro manual de pagamentos
               </div>
             </div>
           </div>
@@ -226,22 +236,32 @@ function NoSubscriptionVariant({
           <div className='mt-6 grid grid-cols-1 gap-3 sm:grid-cols-2'>
             <div className='rounded-lg border border-emerald-500/10 bg-black/30 p-3 backdrop-blur-sm'>
               <div className='flex items-center text-sm text-white/80'>
-                <Zap className='mr-2 h-4 w-4 text-emerald-400' /> Devedores ilimitados
+                <CheckCircle2 className='mr-2 h-4 w-4 text-emerald-400' /> Devedores ilimitados
               </div>
             </div>
             <div className='rounded-lg border border-emerald-500/10 bg-black/30 p-3 backdrop-blur-sm'>
               <div className='flex items-center text-sm text-white/80'>
-                <Zap className='mr-2 h-4 w-4 text-emerald-400' /> Dívidas ilimitadas
+                <CheckCircle2 className='mr-2 h-4 w-4 text-emerald-400' /> Dívidas ilimitadas
               </div>
             </div>
             <div className='rounded-lg border border-emerald-500/10 bg-black/30 p-3 backdrop-blur-sm'>
               <div className='flex items-center text-sm text-white/80'>
-                <ShieldCheck className='mr-2 h-4 w-4 text-emerald-400' /> Relatórios avançados
+                <CheckCircle2 className='mr-2 h-4 w-4 text-emerald-400' /> Relatórios detalhados
               </div>
             </div>
             <div className='rounded-lg border border-emerald-500/10 bg-black/30 p-3 backdrop-blur-sm'>
               <div className='flex items-center text-sm text-white/80'>
-                <ShieldCheck className='mr-2 h-4 w-4 text-emerald-400' /> Exportação de dados
+                <CheckCircle2 className='mr-2 h-4 w-4 text-emerald-400' /> Controle de taxas e juros
+              </div>
+            </div>
+            <div className='rounded-lg border border-emerald-500/10 bg-black/30 p-3 backdrop-blur-sm'>
+              <div className='flex items-center text-sm text-white/80'>
+                <CheckCircle2 className='mr-2 h-4 w-4 text-emerald-400' /> Lembretes por WhatsApp e E-mail
+              </div>
+            </div>
+            <div className='rounded-lg border border-emerald-500/10 bg-black/30 p-3 backdrop-blur-sm'>
+              <div className='flex items-center text-sm text-white/80'>
+                <CheckCircle2 className='mr-2 h-4 w-4 text-emerald-400' /> Registro manual de pagamentos
               </div>
             </div>
           </div>
@@ -343,12 +363,22 @@ function ActiveSubscriptionVariant({
             </div>
             <div className='rounded-lg border border-emerald-500/10 bg-black/30 p-3 backdrop-blur-sm'>
               <div className='flex items-center text-sm text-white/80'>
-                <CheckCircle2 className='mr-2 h-4 w-4 text-emerald-400' /> Relatórios avançados
+                <CheckCircle2 className='mr-2 h-4 w-4 text-emerald-400' /> Relatórios detalhados
               </div>
             </div>
             <div className='rounded-lg border border-emerald-500/10 bg-black/30 p-3 backdrop-blur-sm'>
               <div className='flex items-center text-sm text-white/80'>
-                <CheckCircle2 className='mr-2 h-4 w-4 text-emerald-400' /> Exportação de dados
+                <CheckCircle2 className='mr-2 h-4 w-4 text-emerald-400' /> Controle de taxas e juros
+              </div>
+            </div>
+            <div className='rounded-lg border border-emerald-500/10 bg-black/30 p-3 backdrop-blur-sm'>
+              <div className='flex items-center text-sm text-white/80'>
+                <CheckCircle2 className='mr-2 h-4 w-4 text-emerald-400' /> Lembretes por WhatsApp e E-mail
+              </div>
+            </div>
+            <div className='rounded-lg border border-emerald-500/10 bg-black/30 p-3 backdrop-blur-sm'>
+              <div className='flex items-center text-sm text-white/80'>
+                <CheckCircle2 className='mr-2 h-4 w-4 text-emerald-400' /> Registro manual de pagamentos
               </div>
             </div>
           </div>
@@ -475,12 +505,22 @@ function CanceledSubscriptionVariant({
             </div>
             <div className='rounded-lg border border-emerald-500/10 bg-black/30 p-3 backdrop-blur-sm'>
               <div className='flex items-center text-sm text-white/80'>
-                <CheckCircle2 className='mr-2 h-4 w-4 text-emerald-400' /> Relatórios avançados
+                <CheckCircle2 className='mr-2 h-4 w-4 text-emerald-400' /> Relatórios detalhados
               </div>
             </div>
             <div className='rounded-lg border border-emerald-500/10 bg-black/30 p-3 backdrop-blur-sm'>
               <div className='flex items-center text-sm text-white/80'>
-                <CheckCircle2 className='mr-2 h-4 w-4 text-emerald-400' /> Exportação de dados
+                <CheckCircle2 className='mr-2 h-4 w-4 text-emerald-400' /> Controle de taxas e juros
+              </div>
+            </div>
+            <div className='rounded-lg border border-emerald-500/10 bg-black/30 p-3 backdrop-blur-sm'>
+              <div className='flex items-center text-sm text-white/80'>
+                <CheckCircle2 className='mr-2 h-4 w-4 text-emerald-400' /> Lembretes por WhatsApp e E-mail
+              </div>
+            </div>
+            <div className='rounded-lg border border-emerald-500/10 bg-black/30 p-3 backdrop-blur-sm'>
+              <div className='flex items-center text-sm text-white/80'>
+                <CheckCircle2 className='mr-2 h-4 w-4 text-emerald-400' /> Registro manual de pagamentos
               </div>
             </div>
           </div>
@@ -595,12 +635,22 @@ function ExpiredSubscriptionVariant({
             </div>
             <div className='rounded-lg border border-emerald-500/10 bg-black/30 p-3 backdrop-blur-sm'>
               <div className='flex items-center text-sm text-white/80'>
-                <CheckCircle2 className='mr-2 h-4 w-4 text-emerald-400' /> Relatórios avançados
+                <CheckCircle2 className='mr-2 h-4 w-4 text-emerald-400' /> Relatórios detalhados
               </div>
             </div>
             <div className='rounded-lg border border-emerald-500/10 bg-black/30 p-3 backdrop-blur-sm'>
               <div className='flex items-center text-sm text-white/80'>
-                <CheckCircle2 className='mr-2 h-4 w-4 text-emerald-400' /> Exportação de dados
+                <CheckCircle2 className='mr-2 h-4 w-4 text-emerald-400' /> Controle de taxas e juros
+              </div>
+            </div>
+            <div className='rounded-lg border border-emerald-500/10 bg-black/30 p-3 backdrop-blur-sm'>
+              <div className='flex items-center text-sm text-white/80'>
+                <CheckCircle2 className='mr-2 h-4 w-4 text-emerald-400' /> Lembretes por WhatsApp e E-mail
+              </div>
+            </div>
+            <div className='rounded-lg border border-emerald-500/10 bg-black/30 p-3 backdrop-blur-sm'>
+              <div className='flex items-center text-sm text-white/80'>
+                <CheckCircle2 className='mr-2 h-4 w-4 text-emerald-400' /> Registro manual de pagamentos
               </div>
             </div>
           </div>

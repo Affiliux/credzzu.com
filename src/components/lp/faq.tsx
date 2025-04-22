@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import React, { useState } from 'react'
 
 import { ChevronDown } from 'lucide-react'
 
@@ -57,16 +57,16 @@ export default function FAQ() {
       <div className='absolute top-0 left-0 h-24 w-full bg-gradient-to-b from-black to-transparent'></div>
 
       <div className='relative container mx-auto px-3 sm:px-6'>
-        <div className='mx-auto mb-12 flex max-w-3xl flex-col items-center text-center md:mb-16'>
-          <h2 className='bg-gradient-to-r from-white via-white to-white/80 bg-clip-text text-3xl font-light tracking-tight text-transparent sm:text-4xl md:text-5xl lg:text-6xl'>
+        <div className='mx-auto flex max-w-3xl flex-col items-center text-center md:mb-16'>
+          <h2 className='text-3xl font-bold tracking-tight text-white sm:text-4xl md:text-5xl lg:text-6xl'>
             Perguntas Frequentes
           </h2>
-          <p className='mt-4 max-w-2xl text-base text-white/60 md:mt-6 md:text-lg'>
+          <p className='mt-4 max-w-2xl text-base text-white/60 md:text-lg'>
             Tire suas dúvidas sobre como o Credzzu pode ajudar você a recuperar seu dinheiro
           </p>
         </div>
 
-        <div className='mx-auto max-w-3xl divide-y divide-white/10'>
+        <div className='mx-auto mt-8 max-w-3xl divide-y divide-white/10'>
           {faqItems.map((item, index) => (
             <div key={index} className='py-4 md:py-5'>
               <button

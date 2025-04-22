@@ -1,3 +1,7 @@
+'use client'
+
+import React from 'react'
+
 import { ArrowRight } from 'lucide-react'
 import Link from 'next/link'
 
@@ -26,12 +30,12 @@ export default function CTA() {
 
       <div className='relative container mx-auto px-3 sm:px-6'>
         <div className='mx-auto flex max-w-4xl flex-col items-center text-center'>
-          <h2 className='mt-5 text-6xl font-light tracking-tight text-white'>
+          <h2 className='mt-5 text-3xl font-light tracking-tight text-white sm:text-4xl md:text-5xl lg:text-6xl'>
             Pronto para receber
-            <span className='block font-medium'>o que é seu?</span>
+            <span className='block font-bold'>o que é seu?</span>
           </h2>
 
-          <p className='mt-4 max-w-2xl text-base text-white/60 md:mt-6 md:text-lg'>
+          <p className='mt-4 max-w-2xl text-base text-white/60 md:text-lg'>
             Junte-se a centenas de usuários que não esqueceram de receber o que era deles.
           </p>
 
