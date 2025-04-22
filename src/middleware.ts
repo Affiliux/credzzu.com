@@ -21,6 +21,16 @@ export function middleware(request: NextRequest) {
       return NextResponse.redirect(new URL(`/dashboard`, request.url))
     }
   }
+
+  // Redirecionamentos para as páginas legais
+  if (pathname === '/termos' || pathname === '/termos-de-uso') {
+    return NextResponse.redirect(new URL('/terms', request.url))
+  }
+
+  if (pathname === '/privacidade' || pathname === '/politica-de-privacidade') {
+    return NextResponse.redirect(new URL('/privacy', request.url))
+  }
+
   return NextResponse.next()
 }
 
