@@ -230,7 +230,7 @@ export function DataTable({
       </div>
 
       <div className='flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between'>
-        <div className='text-center text-sm text-emerald-400/60 md:text-left'>
+        <div className='hidden text-center text-sm text-emerald-400/60 md:block md:text-left'>
           Mostrando {data?.length} de {pagination.itemCount ?? 0} itens
         </div>
         <div className='flex flex-wrap items-center justify-center gap-2'>
