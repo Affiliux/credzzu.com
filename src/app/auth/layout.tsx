@@ -35,7 +35,7 @@ export default function Layout({ children }: { children: ReactNode }) {
         <div className='relative z-10 w-full max-w-md space-y-8 px-4 sm:px-6'>
           <main className='rounded-xl bg-black p-6 shadow-2xl ring-1 ring-white/10 sm:p-8'>{children}</main>
         </div>
-        <div className='mt-6 flex items-center gap-2'>
+        <div className='mt-6 flex text-xs items-center gap-2'>
           <Link href='/terms' className='text-white/30 transition-colors hover:text-white'>
             Termos de Uso
           </Link>
