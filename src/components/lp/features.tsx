@@ -8,7 +8,7 @@ import { Badge } from '@/components/ui/badge'
 
 export default function Features() {
   return (
-    <section id='features' className='relative w-full overflow-hidden bg-black py-16 md:py-24 lg:py-32'>
+    <section id='features' className='relative w-full overflow-hidden bg-black py-16 md:py-24'>
       {/* Background Elements */}
       <div className='absolute top-0 left-0 h-full w-full'>
         <div className='absolute -top-40 -left-40 h-80 w-80 rounded-full bg-emerald-500/5 blur-3xl'></div>
@@ -63,7 +63,8 @@ export default function Features() {
             {
               icon: <Bell className='h-6 w-6 md:h-8 md:w-8' />,
               title: 'Notificações Inteligentes',
-              description: 'Receba lembretes automáticos via WhatsApp e email para não perder nenhum pagamento.',
+              description:
+                'Receba e envie lembretes automáticos via WhatsApp e email para não perder nenhum pagamento.',
             },
             {
               icon: <BarChart3 className='h-6 w-6 md:h-8 md:w-8' />,

@@ -9,6 +9,7 @@ import Footer from '@/components/lp/footer'
 import Header from '@/components/lp/header'
 import Hero from '@/components/lp/hero'
 import HowItWorks from '@/components/lp/howitworks'
+import Notifications from '@/components/lp/notifications'
 import Pricing from '@/components/lp/pricing'
 
 export default function LandingPage() {
@@ -19,6 +20,7 @@ export default function LandingPage() {
       <main className='flex-1'>
         <Hero />
         <HowItWorks />
+        <Notifications />
         <Features />
         <Pricing />
         <CTA />

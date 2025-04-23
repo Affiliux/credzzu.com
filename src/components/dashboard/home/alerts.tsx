@@ -49,21 +49,21 @@ export function Alerts({
       <div className='mt-8'>
         <h2 className='mb-4 text-xl font-bold text-white'>Alertas</h2>
 
-        {loading ? (
-          <div className='overflow-hidden rounded-lg border border-emerald-500/20 bg-black/60 backdrop-blur-sm'>
-            <Table>
-              <TableHeader>
-                <TableRow className='border-emerald-500/10 hover:bg-emerald-500/5'>
-                  <TableHead className='min-w-[120px] text-white/80 sm:min-w-[140px]'>Status</TableHead>
-                  <TableHead className='min-w-[120px] text-white/80 sm:min-w-[140px]'>Devedor</TableHead>
-                  <TableHead className='min-w-[160px] text-white/80 sm:min-w-[200px]'>Descrição</TableHead>
-                  <TableHead className='min-w-[100px] text-white/80 sm:min-w-[120px]'>Valor</TableHead>
-                  <TableHead className='min-w-[100px] text-white/80 sm:min-w-[120px]'>Vencimento</TableHead>
-                  <TableHead className='min-w-[80px] text-white/80 sm:min-w-[100px]'>Ações</TableHead>
-                </TableRow>
-              </TableHeader>
-              <TableBody>
-                {Array(5)
+        <div className='overflow-hidden rounded-lg border border-emerald-500/20 bg-black/60 backdrop-blur-sm'>
+          <Table>
+            <TableHeader>
+              <TableRow className='border-emerald-500/10 hover:bg-emerald-500/5'>
+                <TableHead className='min-w-[120px] text-white/80 sm:min-w-[140px]'>Status</TableHead>
+                <TableHead className='min-w-[120px] text-white/80 sm:min-w-[140px]'>Devedor</TableHead>
+                <TableHead className='min-w-[160px] text-white/80 sm:min-w-[200px]'>Descrição</TableHead>
+                <TableHead className='min-w-[100px] text-white/80 sm:min-w-[120px]'>Valor</TableHead>
+                <TableHead className='min-w-[100px] text-white/80 sm:min-w-[120px]'>Vencimento</TableHead>
+                <TableHead className='min-w-[80px] text-white/80 sm:min-w-[100px]'>Ações</TableHead>
+              </TableRow>
+            </TableHeader>
+            <TableBody>
+              {loading ? (
+                Array(5)
                   .fill(0)
                   .map((_, index) => (
                     <TableRow key={index} className='border-emerald-500/10'>
@@ -89,25 +89,9 @@ export function Alerts({
                         <Skeleton className='h-8 w-8 rounded-md bg-emerald-500/10' />
                       </TableCell>
                     </TableRow>
-                  ))}
-              </TableBody>
-            </Table>
-          </div>
-        ) : alerts.length > 0 ? (
-          <div className='overflow-hidden rounded-lg border border-emerald-500/20 bg-black/60 backdrop-blur-sm'>
-            <Table>
-              <TableHeader>
-                <TableRow className='border-emerald-500/10 hover:bg-emerald-500/5'>
-                  <TableHead className='min-w-[140px] text-white/80 sm:min-w-[180px]'>Status</TableHead>
-                  <TableHead className='min-w-[120px] text-white/80 sm:min-w-[140px]'>Devedor</TableHead>
-                  <TableHead className='min-w-[160px] text-white/80 sm:min-w-[200px]'>Descrição</TableHead>
-                  <TableHead className='min-w-[100px] text-white/80 sm:min-w-[120px]'>Valor</TableHead>
-                  <TableHead className='min-w-[100px] text-white/80 sm:min-w-[120px]'>Vencimento</TableHead>
-                  <TableHead className='min-w-[80px] text-white/80 sm:min-w-[100px]'>Ações</TableHead>
-                </TableRow>
-              </TableHeader>
-              <TableBody>
-                {alerts.map(alert => {
+                  ))
+              ) : alerts.length > 0 ? (
+                alerts.map(alert => {
                   const isLate = alert.status === AlertStatusEnum.OVERDUE
                   const isUpcoming = alert.status === AlertStatusEnum.PENDING
 
@@ -207,15 +191,22 @@ export function Alerts({
                       </TableCell>
                     </TableRow>
                   )
-                })}
-              </TableBody>
-            </Table>
-          </div>
-        ) : (
-          <div className='rounded-lg border border-emerald-500/20 bg-black/60 p-6 text-center backdrop-blur-sm'>
-            <p className='text-white/60'>Não há alertas para exibir</p>
-          </div>
-        )}
+                })
+              ) : (
+                <TableRow>
+                  <TableCell colSpan={6} className='h-40 px-4'>
+                    <div className='flex flex-col items-center'>
+                      <p className='text-center text-base text-white/60 sm:text-sm'>Nenhuma alerta encontrado</p>
+                      <p className='text-center text-sm text-white/40 sm:text-xs'>
+                        Quando uma dívida estiver atrasada, um alerta será exibido aqui
+                      </p>
+                    </div>
+                  </TableCell>
+                </TableRow>
+              )}
+            </TableBody>
+          </Table>
+        </div>
       </div>
     </>
   )
