@@ -42,23 +42,22 @@ export default function Notifications() {
           </p>
         </div>
 
-        <div className='grid grid-cols-1 gap-16 lg:grid-cols-2'>
-          <div className='relative order-2 lg:order-1'>
+        <div className='flex flex-col items-center justify-center gap-16 lg:flex-row'>
+          <div className='relative order-2 lg:order-1 lg:pt-6'>
             <div className='overflow-hidden rounded-2xl'>
               <Image
                 src='/whatsapp.png'
                 alt='Notificações inteligentes via WhatsApp'
                 width={600}
                 height={400}
-                className='w-full object-cover shadow-xl transition duration-300 hover:scale-105'
-                quality={90}
+                className='w-full scale-105 object-cover shadow-xl transition duration-300'
                 priority
               />
             </div>
           </div>
 
-          <div className='order-1 mt-6 lg:order-2'>
-            <dl className='space-y-8'>
+          <div className='order-1 lg:order-2 lg:-mt-6'>
+            <dl className='space-y-8 lg:max-w-md'>
               <div className='flex gap-x-4 rounded-lg border border-emerald-500/30 bg-emerald-500/5 p-4 transition duration-300 hover:translate-x-2'>
                 <div className='flex h-10 w-10 items-center justify-center rounded-lg bg-emerald-600 shadow-lg shadow-emerald-500/20'>
                   <Bell className='h-6 w-6 text-white' />
