@@ -15,7 +15,7 @@ export default function Header() {
 
   return (
     <header
-      className={`sticky top-0 z-50 w-full bg-transparent transition-all duration-300 md:bg-black/80 md:backdrop-blur-xl`}
+      className={`sticky top-0 z-50 w-full transition-all duration-300 ${!is_open ? 'bg-black/80 backdrop-blur-xl' : 'bg-transparent'}`}
     >
       <div className='container mx-auto flex h-20 items-center justify-between px-4 sm:px-6 lg:px-8 xl:max-w-7xl 2xl:max-w-[1400px]'>
         {/* Logo */}
@@ -79,7 +79,7 @@ export default function Header() {
 
             <div className='${isMenuOpen ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"} flex flex-col items-center space-y-6 transition-all delay-500 duration-500'>
               <Link
-                href='/login'
+                href='/auth/sign-in'
                 className='text-lg font-light tracking-wide text-white/70 transition-all duration-300 hover:text-white'
                 onClick={() => set_open(false)}
               >
@@ -90,7 +90,7 @@ export default function Header() {
                 asChild
                 className='w-full max-w-xs border border-emerald-500 bg-transparent text-emerald-400 shadow-[0_0_15px_rgba(16,185,129,0.15)] transition-all duration-300 hover:bg-emerald-500/10 hover:shadow-[0_0_25px_rgba(16,185,129,0.25)]'
               >
-                <Link href='/signup'>Começar Agora</Link>
+                <Link href='/auth/sign-up'>Começar Agora</Link>
               </Button>
             </div>
           </div>
