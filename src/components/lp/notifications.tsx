@@ -42,7 +42,7 @@ export default function Notifications() {
           </p>
         </div>
 
-        <div className='flex flex-col items-center justify-center gap-16 lg:flex-row'>
+        <div className='flex flex-col items-center justify-center gap-16 lg:flex-row xl:gap-32'>
           <div className='relative order-2 lg:order-1 lg:pt-6'>
             <div className='overflow-hidden rounded-2xl'>
               <Image
