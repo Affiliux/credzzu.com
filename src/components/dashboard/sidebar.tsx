@@ -90,7 +90,7 @@ export function DashboardSidebar({
       )}
 
       {/* Mobile toggle */}
-      <div className='flex items-center justify-between border-b border-neutral-800/50 bg-black px-6 py-4 md:hidden'>
+      <div className='flex items-center justify-between border-b border-emerald-500/20 bg-black px-6 py-4 md:hidden'>
         <div className='flex h-16 items-center'>
           <Link href='/' className='flex items-center gap-2'>
             <Image src='/logo.png' alt='Credzzu Logo' width={160} height={160} priority className='h-10 w-auto' />
