@@ -698,9 +698,9 @@ export function PlanManager({
 
   // Only show tabs if not on active subscription
   const showPlanTabs =
-    !subscription ||
-    subscription.status === SubscriptionStatusEnum.CANCELED ||
-    subscription.status === SubscriptionStatusEnum.EXPIRED
+    subscription?.status === SubscriptionStatusEnum.NO_EXIST ||
+    subscription?.status === SubscriptionStatusEnum.CANCELED ||
+    subscription?.status === SubscriptionStatusEnum.EXPIRED
 
   useEffect(() => {
     if (!!plans?.length) set_selected_plan(plans[0])
