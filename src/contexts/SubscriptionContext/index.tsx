@@ -39,7 +39,10 @@ export default function SubscriptionProvider({ children }: SubscriptionProviderP
       else set_subscription({ ...(subscription as SubscriptionProps), status: SubscriptionStatusEnum.NO_EXIST })
     } catch (error: any) {
       console.error(error)
-      throw new Error(error.message)
+
+      if (error.message === '404') {
+        set_subscription({ ...(subscription as SubscriptionProps), status: SubscriptionStatusEnum.NO_EXIST })
+      } else throw new Error(error.message)
     }
   }
 
