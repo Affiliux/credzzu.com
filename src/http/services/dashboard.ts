@@ -6,6 +6,7 @@ import type {
   CreateDebtorResponseProps,
   CreateDebtPayloadProps,
   CreateDebtResponseProps,
+  CreateInstallmentPayloadProps,
   DashboardResponseProps,
   DebtorResponseProps,
   DeleteDebtorPayloadProps,
@@ -273,6 +274,23 @@ export async function update_installment(
   try {
     const { data: response } = await api.patch(`installments/${payload.id}`, payload)
     return response
+  } catch (error: AxiosError | any) {
+    throw new Error(error?.response.status)
+  }
+}
+
+/**
+ *
+ * @name create_installment
+ * @category Http - Services - Dashboard - Create Installment
+ *
+ * @param {CreateInstallmentPayloadProps} payload - The payload of the API
+ * @return {PromiseLike<void>} - The response of the API
+ */
+
+export async function create_installment(payload: CreateInstallmentPayloadProps): Promise<void> {
+  try {
+    await api.post(`installments/create-for-debt`, payload)
   } catch (error: AxiosError | any) {
     throw new Error(error?.response.status)
   }

@@ -260,3 +260,19 @@ export interface UpdateInstallmentPayloadProps {
 export interface UpdateInstallmentResponseProps {
   installment: InstallmentProps
 }
+
+/**
+ *
+ * @name CreateInstallment
+ * @category Dashboard - Create Installment
+ *
+ */
+
+export interface CreateInstallmentPayloadProps {
+  idDebt: string
+  installmentNumber: number
+  dueDate: string
+  originalAmount: number
+  lateFee: number
+  interestFee: number
+}

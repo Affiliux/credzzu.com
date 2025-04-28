@@ -5,6 +5,7 @@ import React, { createContext, useContext, useState } from 'react'
 import {
   create_debt,
   create_debtor,
+  create_installment,
   delete_debt,
   delete_debtor,
   get_alerts,
@@ -23,6 +24,7 @@ import type {
   AlertsProps,
   CreateDebtorPayloadProps,
   CreateDebtPayloadProps,
+  CreateInstallmentPayloadProps,
   DashboardProps,
   DebtorProps,
   DebtProps,
@@ -245,6 +247,17 @@ export default function DashboardProvider({ children }: DashboardProviderProps) 
     }
   }
 
+  async function onCreateInstallment(payload: CreateInstallmentPayloadProps) {
+    try {
+      await create_installment(payload)
+      await onGetInstallments({
+        idDebt: payload.idDebt,
+      })
+    } catch (error: any) {
+      console.error(error)
+    }
+  }
+
   return (
     <DashboardContext.Provider
       value={{
@@ -277,6 +290,7 @@ export default function DashboardProvider({ children }: DashboardProviderProps) 
         onDeleteDebt,
         onGetInstallments,
         onUpdateInstallment,
+        onCreateInstallment,
       }}
     >
       {children}

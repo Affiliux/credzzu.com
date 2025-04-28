@@ -2,17 +2,18 @@
 
 import React, { use, useEffect, useState } from 'react'
 
-import { ArrowLeft } from 'lucide-react'
+import { ArrowLeft, Plus } from 'lucide-react'
 import { useRouter } from 'next/navigation'
 import { toast } from 'sonner'
 
-import type { UpdateInstallmentPayloadProps } from '@/interfaces/dashboard'
+import type { CreateInstallmentPayloadProps, UpdateInstallmentPayloadProps } from '@/interfaces/dashboard'
 
 import { useDashboard } from '@/contexts/DashboardContext'
 import { useSubscription } from '@/contexts/SubscriptionContext'
 
 import { useQueryParams } from '@/hooks/use-query-params'
 
+import { InstallmentForm } from '@/components/dashboard/installments/installment-form'
 import { InstallmentsTable } from '@/components/dashboard/installments/installments-table'
 import { LockedScreen } from '@/components/dashboard/locked-screen'
 import { Button } from '@/components/ui/button'
@@ -27,10 +28,12 @@ export default function Page({ params }: { params: Promise<{ id: string }> }) {
 
   // contexts
   const { subscription } = useSubscription()
-  const { debtor, installments, onGetInstallments, onUpdateInstallment, onGetDebtorById } = useDashboard()
+  const { debtor, installments, onGetInstallments, onUpdateInstallment, onGetDebtorById, onCreateInstallment } =
+    useDashboard()
 
   // states
   const [is_loading, set_loading] = useState<boolean>(true)
+  const [is_create_installment_sheet_open, set_create_installment_sheet_open] = useState<boolean>(false)
 
   // handlers
   async function handleGetInstallments() {
@@ -57,6 +60,20 @@ export default function Page({ params }: { params: Promise<{ id: string }> }) {
       toast.error('Erro ao registrar pagamento')
 
       throw new Error(error.message)
+    } finally {
+      set_loading(false)
+    }
+  }
+
+  async function handleCreateInstallment(data: CreateInstallmentPayloadProps) {
+    set_loading(true)
+
+    try {
+      await onCreateInstallment(data)
+      await handleGetInstallments()
+    } catch (error) {
+      console.error(error)
+      toast.error('Erro ao criar parcela')
     } finally {
       set_loading(false)
     }
@@ -106,6 +123,18 @@ export default function Page({ params }: { params: Promise<{ id: string }> }) {
             </Button>
             <h1 className='text-2xl font-bold text-neutral-100'>Parcelas</h1>
           </div>
+          <InstallmentForm
+            open={is_create_installment_sheet_open}
+            debtId={id}
+            installments={installments}
+            onSubmit={handleCreateInstallment}
+            onOpenChange={set_create_installment_sheet_open}
+          >
+            <Button disabled={is_loading || installments.length === 0}>
+              <Plus className='mr-2 h-4 w-4' />
+              Nova Parcela
+            </Button>
+          </InstallmentForm>
         </div>
 
         <InstallmentsTable

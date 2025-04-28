@@ -3,6 +3,7 @@ import type { Dispatch, ReactNode, SetStateAction } from 'react'
 import type {
   AlertsProps,
   CreateDebtorPayloadProps,
+  CreateInstallmentPayloadProps,
   DashboardProps,
   DebtorProps,
   DeleteDebtorPayloadProps,
@@ -51,4 +52,5 @@ export type DashboardContextType = {
   onDeleteDebt: (payload: DeleteDebtPayloadProps) => Promise<void>
   onGetInstallments: (payload: GetInstallmentsPayloadProps) => Promise<void>
   onUpdateInstallment: (payload: UpdateInstallmentPayloadProps) => Promise<void>
+  onCreateInstallment: (payload: CreateInstallmentPayloadProps) => Promise<void>
 }
