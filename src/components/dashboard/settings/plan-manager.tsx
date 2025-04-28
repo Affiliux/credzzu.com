@@ -41,6 +41,7 @@ function PendingCancellationSubscriptionVariant({
       })
     } catch (error) {
       console.error('Failed to reactivate subscription', error)
+      throw new Error('Failed to reactivate subscription')
     }
   }
 
@@ -174,6 +175,7 @@ function NoSubscriptionVariant({
       })
     } catch (error) {
       console.error('Failed to create subscription', error)
+      throw new Error('Failed to create subscription')
     }
   }
 
@@ -318,6 +320,7 @@ function ActiveSubscriptionVariant({
       })
     } catch (error) {
       console.error('Failed to update payment method', error)
+      throw new Error('Failed to update payment method')
     }
   }
 
@@ -438,6 +441,7 @@ function CanceledSubscriptionVariant({
       })
     } catch (error) {
       console.error('Failed to reactivate subscription', error)
+      throw new Error('Failed to reactivate subscription')
     }
   }
 
@@ -568,6 +572,7 @@ function ExpiredSubscriptionVariant({
       })
     } catch (error) {
       console.error('Failed to renew subscription', error)
+      throw new Error('Failed to renew subscription')
     }
   }
 
