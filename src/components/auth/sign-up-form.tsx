@@ -156,6 +156,7 @@ export function SignUpForm({ onSubmit }: { onSubmit: (payload: SignUpPayloadProp
                 <Input
                   placeholder='(00) 00000-0000'
                   value={field.value}
+                  maxLength={15}
                   onChange={e => {
                     const masked = phoneMask(e.target.value)
                     field.onChange(masked)
