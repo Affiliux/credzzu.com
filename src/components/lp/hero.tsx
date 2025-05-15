@@ -12,10 +12,10 @@ import { WavyBackground } from '@/components/ui/wavy-background'
 
 export default function Hero() {
   return (
-    <div className='lg:mt-44'>
+    <div className='mt-20 md:mt-32 lg:mt-44'>
       <WavyBackground
-        containerClassName='w-full'
-        className='mx-auto w-full max-w-7xl'
+        containerClassName='w-full min-h-[80vh]'
+        className='mx-auto w-full max-w-7xl py-12 md:py-16'
         colors={['rgba(16, 185, 129, 0.4)', 'rgba(16, 185, 129, 0.2)', 'rgba(16, 185, 129, 0.1)']}
         waveWidth={100}
         backgroundFill='black'
